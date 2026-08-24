@@ -42,7 +42,26 @@ public class UpgradeManager : MonoBehaviour
     void Start()
     {
         LoadUpgradesFromJSON();
+
+        GameSaveData saveData = SaveManager.Instance.LoadGame();
+        if (saveData != null && saveData.upgradePurchased.Count == upgradeList.Count)
+        {
+            for (int i = 0; i < upgradeList.Count; i++)
+            {
+                upgradeList[i].isPurchased = saveData.upgradePurchased[i];
+                
+                // YENİ: Eğer bu geliştirme önceden alınmışsa, gücünü GameManager'a ver
+                if (upgradeList[i].isPurchased)
+                {
+                    ApplyUpgradeEffect(upgradeList[i]);
+                }
+            }
+        }
+
         InitializeUpgrades();
+        
+        // YENİ: Tüm güçler eklendikten sonra matematiği tekrar hesapla
+        GameManager.Instance.RecalculateStats();
     }
 
     private void LoadUpgradesFromJSON()
@@ -113,6 +132,25 @@ public class UpgradeManager : MonoBehaviour
             item.isPurchased = true;
             Destroy(item.buttonComponent.gameObject);
             GameManager.Instance.RecalculateStats();
+        }
+    }
+
+    private void ApplyUpgradeEffect(UpgradeItem item)
+    {
+        switch (item.type)
+        {
+            case UpgradeType.ClickPowerAdd:
+                GameManager.Instance.baseClickPower += item.effectAmount;
+                break;
+            case UpgradeType.ClickPowerMultiplier:
+                GameManager.Instance.clickMultiplier *= item.effectAmount;
+                break;
+            case UpgradeType.PassiveProductionAdd:
+                GameManager.Instance.basePassiveProduction += item.effectAmount;
+                break;
+            case UpgradeType.PassiveProductionMultiplier:
+                GameManager.Instance.passiveMultiplier *= item.effectAmount;
+                break;
         }
     }
 }

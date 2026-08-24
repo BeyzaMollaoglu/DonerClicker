@@ -35,7 +35,22 @@ public class WorkerManager : MonoBehaviour
     void Start()
     {
         LoadWorkersFromJSON();
+
+        GameSaveData saveData = SaveManager.Instance.LoadGame();
+        if (saveData != null && saveData.workerLevels.Count == workerList.Count)
+        {
+            for (int i = 0; i < workerList.Count; i++)
+            {
+                workerList[i].level = saveData.workerLevels[i];
+                
+                // YENİ: İşçinin seviyesi kadar üretimi GameManager'a geri ekle
+                GameManager.Instance.basePassiveProduction += (workerList[i].productionBoost * workerList[i].level);
+            }
+        }
+
         InitializeWorkers();
+
+        GameManager.Instance.RecalculateStats();
     }
 
     private void LoadWorkersFromJSON()
@@ -59,7 +74,9 @@ public class WorkerManager : MonoBehaviour
         {
             int index = i;
             WorkerItem worker = workerList[i];
-            worker.currentCost = worker.baseCost; 
+            
+            // YENİ GÜNCELLEME: Yüklenen seviyeye göre güncel fiyatı tekrar hesapla
+            worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level); 
 
             GameObject newBtnObj = Instantiate(workerButtonPrefab, workerContent);
             worker.buttonText = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();

@@ -29,6 +29,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        GameSaveData saveData = SaveManager.Instance.LoadGame();
+        if (saveData != null)
+        {
+            totalDoner = saveData.totalDoner;
+        }
+
         RecalculateStats();
         uiManager.UpdateTotalDonerText(totalDoner);
         StartCoroutine(AutoProductionLoop());
