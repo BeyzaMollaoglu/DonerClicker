@@ -79,13 +79,13 @@ public class DonerManager : MonoBehaviour
 
         panel_upgrades.anchoredPosition = new Vector2(0, -2500);
 
-        panel_upgrades.DOAnchorPos(Vector2.zero, 0.5f).SetEase(Ease.OutBack);
+        panel_upgrades.DOAnchorPos(Vector2.zero, 0.8f).SetEase(Ease.OutBack);
     }
 
     // Paneli yukarıdan aşağı kaydırarak kapatır
     public void CloseUpgradesPanel()
     {
-        panel_upgrades.DOAnchorPos(new Vector2(0, -2500), 0.4f).SetEase(Ease.InBack).OnComplete(() =>
+        panel_upgrades.DOAnchorPos(new Vector2(0, -2500), 0.7f).SetEase(Ease.InBack).OnComplete(() =>
         {
             panel_upgrades.gameObject.SetActive(false);
         });
