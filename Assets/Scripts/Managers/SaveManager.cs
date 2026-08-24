@@ -75,4 +75,15 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Daha önce kayıt yapılmamış, yeni oyun başlıyor.");
         return null; // Kayıt yoksa boş dön
     }
+
+    // YENİ: Kaydı tamamen siler, ileride reset kismi gelistirilecek
+    public void ClearSave()
+    {
+        if (PlayerPrefs.HasKey("DonerSave"))
+        {
+            PlayerPrefs.DeleteKey("DonerSave");
+            PlayerPrefs.Save();
+            Debug.Log("Kayıt tamamen silindi!");
+        }
+    }
 }

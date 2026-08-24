@@ -21,10 +21,18 @@ public class UIManager : MonoBehaviour
     public Button btn_open_workers;
     public Button btn_close_workers;
 
+    [Header("Ekstra Butonlar")]
+    public Button btn_reset;
+
     private void Start()
     {
         // Ana döner tıklaması
         button_icon_doner.onClick.AddListener(GameManager.Instance.OnDonerClicked);
+
+        if (btn_reset != null) 
+        {
+            btn_reset.onClick.AddListener(GameManager.Instance.HardResetGame);
+        }
 
         // Panel butonları
         if (btn_open_upgrades != null) btn_open_upgrades.onClick.AddListener(() => OpenPanel(panel_upgrades));

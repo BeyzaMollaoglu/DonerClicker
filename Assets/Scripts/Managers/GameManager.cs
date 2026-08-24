@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -77,5 +78,15 @@ public class GameManager : MonoBehaviour
                 uiManager.UpdateTotalDonerText(totalDoner);
             }
         }
+    }
+
+    // YENİ: Oyunu tamamen sıfırlar ve sahneyi baştan yükler
+    public void HardResetGame()
+    {
+        // 1. Kaydı sil
+        SaveManager.Instance.ClearSave();
+        
+        // 2. Mevcut sahneyi yeniden yükle (Her şey sıfırdan başlar)
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
