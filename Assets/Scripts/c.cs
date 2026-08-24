@@ -1,3 +1,4 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,6 +28,21 @@ public class UpgradeItem
     [HideInInspector] public TextMeshProUGUI buttonText;
 }
 
+// --- YENİ EKLENEN: İŞÇİ (WORKER) SINIFI ---
+[System.Serializable]
+public class WorkerItem
+{
+    public string workerName;
+    public double baseCost;
+    public double productionBoost; 
+
+    [HideInInspector] public int level = 0;
+    [HideInInspector] public double currentCost;
+    [HideInInspector] public Button buttonComponent;
+    [HideInInspector] public TextMeshProUGUI buttonText;
+}
+// ------------------------------------------
+
 public class DonerManager : MonoBehaviour
 {
     [Header("UI References")]
@@ -37,11 +53,21 @@ public class DonerManager : MonoBehaviour
 
     [Header("UI Panels")]
     public RectTransform panel_upgrades;
+    // --- YENİ EKLENEN: İŞÇİ PANELİ REFERANSI ---
+    public RectTransform panel_workers;
+    // ------------------------------------------
 
     [Header("Upgrade System")]
     public GameObject upgradeButtonPrefab;
     public Transform upgradeContent;
     public List<UpgradeItem> upgradeList;
+
+    // --- YENİ EKLENEN: İŞÇİ SİSTEMİ REFERANSLARI ---
+    [Header("Worker System")]
+    public GameObject workerButtonPrefab;
+    public Transform workerContent;
+    public List<WorkerItem> workerList;
+    // ------------------------------------------
 
     [Header("Game Data")]
     public double totalDoner = 0;
@@ -68,6 +94,10 @@ public class DonerManager : MonoBehaviour
 
         StartCoroutine(AutoProductionLoop());
         InitializeUpgrades();
+        
+        // --- YENİ EKLENEN: İŞÇİLERİ BAŞLAT ---
+        InitializeWorkers();
+        // -------------------------------------
     }
 
     private void InitializeUpgrades()
@@ -97,6 +127,56 @@ public class DonerManager : MonoBehaviour
             else if (item.type == UpgradeType.PassiveProductionMultiplier) { typeText = "Saniye/Üretim"; symbol = "x"; }
 
             item.buttonText.text = $"{item.upgradeName}\n{typeText}: {symbol}{item.effectAmount}\nMaliyet: {item.cost} TL";
+        }
+    }
+
+    // --- YENİ EKLENEN: İŞÇİ METOTLARI ---
+    private void InitializeWorkers()
+    {
+        for (int i = 0; i < workerList.Count; i++)
+        {
+            int index = i;
+            WorkerItem worker = workerList[i];
+            
+            // Başlangıç maliyetini ayarla
+            worker.currentCost = worker.baseCost; 
+
+            GameObject newBtnObj = Instantiate(workerButtonPrefab, workerContent);
+
+            worker.buttonText = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
+            worker.buttonComponent = newBtnObj.GetComponent<Button>();
+
+            worker.buttonComponent.onClick.AddListener(() => BuyWorker(index));
+
+            UpdateWorkerUI(worker);
+        }
+    }
+
+    private void UpdateWorkerUI(WorkerItem worker)
+    {
+        worker.buttonText.text = $"{worker.workerName} (Lvl {worker.level})\nÜretim: +{worker.productionBoost}/sn\nMaliyet: {worker.currentCost.ToString("F0")} TL";
+    }
+
+    private void BuyWorker(int index)
+    {
+        WorkerItem worker = workerList[index];
+
+        if (totalDoner >= worker.currentCost)
+        {
+            totalDoner -= worker.currentCost;
+            worker.level++;
+            
+            // İşçinin üretimini temel pasif üretime ekle
+            basePassiveProduction += worker.productionBoost;
+            
+            // 1.15 üssel artış formülü ile yeni fiyatı belirle
+            worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
+
+            UpdateWorkerUI(worker);
+            
+            // Genel istatistikleri ve UI'ı güncelle
+            RecalculateStats();
+            UpdateUI();
         }
     }
 
@@ -209,6 +289,22 @@ public class DonerManager : MonoBehaviour
         });
     }
 
+    // --- YENİ EKLENEN: İŞÇİ PANELİ ANİMASYONLARI ---
+    public void OpenWorkersPanel()
+    {
+        panel_workers.gameObject.SetActive(true);
+        panel_workers.anchoredPosition = new Vector2(0, -2500);
+        panel_workers.DOAnchorPos(Vector2.zero, 0.8f).SetEase(Ease.OutBack);
+    }
+
+    public void CloseWorkersPanel()
+    {
+        panel_workers.DOAnchorPos(new Vector2(0, -2500), 0.7f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            panel_workers.gameObject.SetActive(false);
+        });
+    }
+
     private void OnDestroy()
     {
         if (button_icon_doner != null)
@@ -217,3 +313,5 @@ public class DonerManager : MonoBehaviour
         }
     }
 }
+
+*/

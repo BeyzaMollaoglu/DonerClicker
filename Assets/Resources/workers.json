@@ -1,0 +1,9 @@
+{
+  "workers": [
+    { "workerName": "Stajyer Çırak", "baseCost": 15, "productionBoost": 0.1 },
+    { "workerName": "Otomatik Bıçak", "baseCost": 100, "productionBoost": 1.0 },
+    { "workerName": "Döner Ustası", "baseCost": 1100, "productionBoost": 8.0 },
+    { "workerName": "Kurye Ağı", "baseCost": 12000, "productionBoost": 47.0 },
+    { "workerName": "Lavaş Makinesi", "baseCost": 130000, "productionBoost": 260.0 }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "upgrades": [
+    { "upgradeName": "Bilenmiş Bıçak", "type": 0, "cost": 50, "effectAmount": 1.0 },
+    { "upgradeName": "Motivasyon Primi", "type": 3, "cost": 750, "effectAmount": 1.5 },
+    { "upgradeName": "Çift Lavaş Sarımı", "type": 1, "cost": 3000, "effectAmount": 2.0 },
+    { "upgradeName": "Sosyal Medya Reklamı", "type": 3, "cost": 25000, "effectAmount": 2.0 },
+    { "upgradeName": "Altın Satır", "type": 1, "cost": 150000, "effectAmount": 3.0 }
+  ]
+}
