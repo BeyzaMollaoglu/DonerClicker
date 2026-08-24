@@ -11,7 +11,10 @@ public class DonerManager : MonoBehaviour
     public Button button_icon_doner; 
     public GameObject floatingTextPrefab;
     public Transform mainCanvas;
-    
+
+    [Header("UI Panels")]
+    public RectTransform panel_upgrades; 
+
     [Header("Game Data")]
     public double totalDoner = 0; 
     public double clickPower = 1;
@@ -69,7 +72,24 @@ public class DonerManager : MonoBehaviour
             }
         }
     }
+    // Paneli aşağıdan yukarı kaydırarak açar
+    public void OpenUpgradesPanel()
+    {
+        panel_upgrades.gameObject.SetActive(true);
 
+        panel_upgrades.anchoredPosition = new Vector2(0, -2500);
+
+        panel_upgrades.DOAnchorPos(Vector2.zero, 0.5f).SetEase(Ease.OutBack);
+    }
+
+    // Paneli yukarıdan aşağı kaydırarak kapatır
+    public void CloseUpgradesPanel()
+    {
+        panel_upgrades.DOAnchorPos(new Vector2(0, -2500), 0.4f).SetEase(Ease.InBack).OnComplete(() =>
+        {
+            panel_upgrades.gameObject.SetActive(false);
+        });
+    }
     private void UpdateUI()
     {
         txt_doner_count.text = totalDoner.ToString("F0"); 
