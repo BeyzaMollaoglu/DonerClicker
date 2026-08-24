@@ -1932,6 +1932,44 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 3214146888599890684, guid: 0512ec2ca15ad454c9488f5b7135bc85, type: 3}
   mainCanvas: {fileID: 1171544819}
   panel_upgrades: {fileID: 1834572462}
+  upgradeButtonPrefab: {fileID: 4650903383566460028, guid: aea7e81f4b601cd4287086155c89f09b, type: 3}
+  upgradeContent: {fileID: 1309368123}
+  upgradeList:
+  - upgradeName: "Bak\u0131r B\u0131\xE7ak"
+    type: 0
+    cost: 50
+    effectAmount: 1
+    isPurchased: 0
+    buttonComponent: {fileID: 0}
+    buttonText: {fileID: 0}
+  - upgradeName: "\u015Eansl\u0131 Sat\u0131\u015Flar"
+    type: 3
+    cost: 200
+    effectAmount: 2
+    isPurchased: 0
+    buttonComponent: {fileID: 0}
+    buttonText: {fileID: 0}
+  - upgradeName: "Demir B\u0131\xE7ak"
+    type: 0
+    cost: 1000
+    effectAmount: 1
+    isPurchased: 0
+    buttonComponent: {fileID: 0}
+    buttonText: {fileID: 0}
+  - upgradeName: "\xD6\u011Frenci \u0130ndirimi"
+    type: 3
+    cost: 5000
+    effectAmount: 2
+    isPurchased: 0
+    buttonComponent: {fileID: 0}
+    buttonText: {fileID: 0}
+  - upgradeName: "Bronz B\u0131\xE7ak"
+    type: 1
+    cost: 10000
+    effectAmount: 2
+    isPurchased: 0
+    buttonComponent: {fileID: 0}
+    buttonText: {fileID: 0}
   totalDoner: 0
   clickPower: 1
   productionPerSecond: 2
