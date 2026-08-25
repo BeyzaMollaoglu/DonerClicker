@@ -1,49 +1,88 @@
 {
   "upgrades": [
     { 
-      "upgradeName": "Bilenmiş Bıçak", 
+      "upgradeName": "Bileytaşı (+1 Tıklama)", 
       "type": 0, 
-      "baseCost": 50, 
-      "costMultiplier": 1.5,
+      "cost": 50, 
       "effectAmount": 1.0, 
-      "requiredUpgradeIndex": -1, 
-      "requiredUpgradeLevel": 0 
+      "targetWorkerIndex": -1
     },
     { 
-      "upgradeName": "Usta Kesim", 
-      "type": 0, 
-      "baseCost": 250,
-      "costMultiplier": 1.8, 
-      "effectAmount": 3.0, 
-      "requiredUpgradeIndex": 0, 
-      "requiredUpgradeLevel": 1
+      "upgradeName": "Çırak Oryantasyonu (Stajyere +5 XP)", 
+      "type": 5, 
+      "cost": 250, 
+      "effectAmount": 5.0, 
+      "targetWorkerIndex": 0
     },
     { 
-      "upgradeName": "Lazer Bıçak", 
+      "upgradeName": "Kasap Bıçağı (Tıklama x2)", 
       "type": 1, 
-      "baseCost": 1500,
-      "costMultiplier": 2.5, 
-      "effectAmount": 1.2, 
-      "requiredUpgradeIndex": 1, 
-      "requiredUpgradeLevel": 1
-    },
-    { 
-      "upgradeName": "Broşür Dağıtımı", 
-      "type": 3, 
-      "baseCost": 5000,
-      "costMultiplier": 2.0, 
-      "effectAmount": 1.25, 
-      "requiredUpgradeIndex": 2, 
-      "requiredUpgradeLevel": 1 
-    },
-    { 
-      "upgradeName": "Gizli Sos Tarifi", 
-      "type": 1, 
-      "baseCost": 25000,
-      "costMultiplier": 3.0, 
+      "cost": 350, 
       "effectAmount": 2.0, 
-      "requiredUpgradeIndex": 3, 
-      "requiredUpgradeLevel": 1 
+      "targetWorkerIndex": -1
+    },
+    { 
+      "upgradeName": "Hızlı Servis (Stajyer Üretimi x1.5)", 
+      "type": 4, 
+      "cost": 500, 
+      "effectAmount": 1.5, 
+      "targetWorkerIndex": 0
+    },
+    { 
+      "upgradeName": "Makine Yağlama (Oto. Bıçağa +10 XP)", 
+      "type": 5, 
+      "cost": 800, 
+      "effectAmount": 10.0, 
+      "targetWorkerIndex": 1
+    },
+    { 
+      "upgradeName": "Lazer Kesim (Oto. Bıçak Üretimi x2)", 
+      "type": 4, 
+      "cost": 2000, 
+      "effectAmount": 2.0, 
+      "targetWorkerIndex": 1
+    },
+    { 
+      "upgradeName": "El İlanı Dağıtımı (Global Üretim x1.2)", 
+      "type": 3, 
+      "cost": 3500, 
+      "effectAmount": 1.2, 
+      "targetWorkerIndex": -1
+    },
+    { 
+      "upgradeName": "Ustalık Belgesi (Döner Ustasına +15 XP)", 
+      "type": 5, 
+      "cost": 7500, 
+      "effectAmount": 15.0, 
+      "targetWorkerIndex": 2
+    },
+    { 
+      "upgradeName": "Gizli Baharat (Döner Ustası x2.5)", 
+      "type": 4, 
+      "cost": 12000, 
+      "effectAmount": 2.5, 
+      "targetWorkerIndex": 2
+    },
+    { 
+      "upgradeName": "Navigasyon Güncellemesi (Kuryeye +20 XP)", 
+      "type": 5, 
+      "cost": 35000, 
+      "effectAmount": 20.0, 
+      "targetWorkerIndex": 3
+    },
+    { 
+      "upgradeName": "Radyo Reklamı (Global Üretim x1.5)", 
+      "type": 3, 
+      "cost": 65000, 
+      "effectAmount": 1.5, 
+      "targetWorkerIndex": -1
+    },
+    { 
+      "upgradeName": "Isı Sensörü (Lavaş Makinesine +20 XP)", 
+      "type": 5, 
+      "cost": 250000, 
+      "effectAmount": 20.0, 
+      "targetWorkerIndex": 4
     }
   ]
 }

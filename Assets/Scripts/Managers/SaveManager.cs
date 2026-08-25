@@ -5,12 +5,11 @@ using System.Collections.Generic;
 public class GameSaveData
 {
     public double totalDoner;
-    public List<bool> workerUnlocked = new List<bool>(); // YENİ: Sadece kilit durumunu tutuyoruz
+    public List<int> workerCounts = new List<int>(); 
     public List<int> workerTiers = new List<int>();  
     public List<int> workerXPs = new List<int>();    
     
-    public List<int> upgradeLevels = new List<int>();       
-    public List<int> workerUpgradeLevels = new List<int>(); 
+    public List<bool> upgradePurchased = new List<bool>(); // YENİ: Upgradeler tek seferlik oldu
 }
 
 public class SaveManager : MonoBehaviour
@@ -23,10 +22,7 @@ public class SaveManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    private void OnApplicationQuit() 
-    {
-        SaveGame();
-    }
+    private void OnApplicationQuit() => SaveGame();
 
     public void SaveGame()
     {
@@ -38,7 +34,7 @@ public class SaveManager : MonoBehaviour
         {
             foreach (var worker in workerMgr.workerList)
             {
-                data.workerUnlocked.Add(worker.isUnlocked);
+                data.workerCounts.Add(worker.purchaseCount);
                 data.workerTiers.Add(worker.tier);
                 data.workerXPs.Add(worker.currentXP);
             }
@@ -49,43 +45,25 @@ public class SaveManager : MonoBehaviour
         {
             foreach (var upgrade in upgradeMgr.upgradeList)
             {
-                data.upgradeLevels.Add(upgrade.level);
+                data.upgradePurchased.Add(upgrade.isPurchased);
             }
         }
         
-        WorkerUpgradeManager workerUpgMgr = FindAnyObjectByType<WorkerUpgradeManager>();
-        if (workerUpgMgr != null)
-        {
-            foreach (var upg in workerUpgMgr.upgradeList)
-            {
-                data.workerUpgradeLevels.Add(upg.level);
-            }
-        }
-
-        string json = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString("DonerSave", json);
+        PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
         PlayerPrefs.Save();
-        
-        Debug.Log("Oyun Kaydedildi: " + json);
     }
 
     public GameSaveData LoadGame()
     {
         if (PlayerPrefs.HasKey("DonerSave"))
         {
-            string json = PlayerPrefs.GetString("DonerSave");
-            return JsonUtility.FromJson<GameSaveData>(json);
+            return JsonUtility.FromJson<GameSaveData>(PlayerPrefs.GetString("DonerSave"));
         }
         return null; 
     }
 
     public void ClearSave()
     {
-        if (PlayerPrefs.HasKey("DonerSave"))
-        {
-            PlayerPrefs.DeleteKey("DonerSave");
-            PlayerPrefs.Save();
-            Debug.Log("Kayıt tamamen silindi!");
-        }
+        PlayerPrefs.DeleteKey("DonerSave");
     }
 }

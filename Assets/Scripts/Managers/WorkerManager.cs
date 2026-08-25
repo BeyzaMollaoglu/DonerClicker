@@ -14,155 +14,71 @@ public class WorkerItem
     public float levelUpPointMultiplier;
     public double levelUpProductionBonus;
 
-    [HideInInspector] public bool isUnlocked = false; 
+    [HideInInspector] public int purchaseCount = 0; 
     [HideInInspector] public int tier = 1;          
     [HideInInspector] public int currentXP = 0;     
+    [HideInInspector] public double currentCost;
     
     [HideInInspector] public Button buttonComponent; 
     [HideInInspector] public TextMeshProUGUI buttonText;
-    [HideInInspector] public Button detailsButtonComponent; 
 }
 
 [System.Serializable]
-public class WorkerDataWrapper
-{
-    public List<WorkerItem> workers;
-}
+public class WorkerDataWrapper { public List<WorkerItem> workers; }
 
 public class WorkerManager : MonoBehaviour
 {
     public static WorkerManager Instance;
 
-    [Header("İşçi Sistemi (Workers)")]
     public GameObject workerButtonPrefab;
     public Transform workerContent;
-    
     [HideInInspector] public List<WorkerItem> workerList;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
-        LoadWorkersFromJSON(); 
+        TextAsset jsonFile = Resources.Load<TextAsset>("workers");
+        if (jsonFile != null) workerList = JsonUtility.FromJson<WorkerDataWrapper>(jsonFile.text).workers;
     }
 
     void Start()
     {
         GameSaveData saveData = SaveManager.Instance.LoadGame();
-        if (saveData != null && saveData.workerUnlocked.Count == workerList.Count)
+        if (saveData != null && saveData.workerCounts.Count == workerList.Count)
         {
             for (int i = 0; i < workerList.Count; i++)
             {
-                workerList[i].isUnlocked = saveData.workerUnlocked[i];
+                workerList[i].purchaseCount = saveData.workerCounts[i];
                 workerList[i].tier = saveData.workerTiers[i];
                 workerList[i].currentXP = saveData.workerXPs[i];
             }
         }
 
-        InitializeWorkers();
-        GameManager.Instance.RecalculateStats();
-    }
-
-    private void LoadWorkersFromJSON()
-    {
-        TextAsset jsonFile = Resources.Load<TextAsset>("workers");
-        if (jsonFile != null)
-        {
-            WorkerDataWrapper wrapper = JsonUtility.FromJson<WorkerDataWrapper>(jsonFile.text);
-            workerList = wrapper.workers;
-        }
-    }
-
-    private void InitializeWorkers()
-    {
         for (int i = 0; i < workerList.Count; i++)
         {
             int index = i;
             WorkerItem worker = workerList[i];
-
-            GameObject newBtnObj = Instantiate(workerButtonPrefab, workerContent);
             
+            GameObject newBtnObj = Instantiate(workerButtonPrefab, workerContent);
             worker.buttonComponent = newBtnObj.GetComponent<Button>();
             worker.buttonText = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
 
-            // ÇOK ÖNEMLİ: Kod, prefabın hemen altındaki "Btn_Details" isimli objeyi arar.
-            Transform detailsTransform = newBtnObj.transform.Find("Btn_Details");
-            if (detailsTransform != null)
-            {
-                worker.detailsButtonComponent = detailsTransform.GetComponent<Button>();
-                worker.detailsButtonComponent.onClick.AddListener(() => 
-                {
-                    WorkerUpgradeManager.Instance.OpenWorkerDetails(index);
-                });
-            }
-
-            worker.buttonComponent.onClick.AddListener(() => OnWorkerButtonClicked(index));
-
+            worker.buttonComponent.onClick.AddListener(() => BuyWorker(index));
             UpdateWorkerUI(worker);
         }
+        GameManager.Instance.RecalculateStats();
     }
 
-    private void OnWorkerButtonClicked(int index)
+    private void BuyWorker(int index)
     {
         WorkerItem worker = workerList[index];
+        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.purchaseCount); 
 
-        if (!worker.isUnlocked) 
+        if (GameManager.Instance.SpendDoner(worker.currentCost))
         {
-            if (GameManager.Instance.SpendDoner(worker.baseCost))
-            {
-                worker.isUnlocked = true;
-                UpdateWorkerUI(worker);
-                
-                // SATIN ALINDIĞI AN BUFF UYGULANIR: 
-                // RecalculateStats() çağrıldığında aşağıdaki GetTotalProduction() çalışır
-                // ve işçinin üretimi toplam (global) üretime eklenir.
-                GameManager.Instance.RecalculateStats();
-                
-                WorkerUpgradeManager.Instance.OpenWorkerDetails(index);
-            }
+            worker.purchaseCount++;
+            AddXP(index, 1); // HER SATIN ALIMDA 1 XP KAZANIR
         }
-        else
-        {
-            // Zaten açıksa ana butona basılsa da detayları açar
-            WorkerUpgradeManager.Instance.OpenWorkerDetails(index);
-        }
-    }
-
-    // ARAYÜZ YÖNETİMİ: TAM İSTEDİĞİN GİBİ SADELEŞTİRİLDİ
-    public void UpdateWorkerUI(WorkerItem worker)
-    {
-        if (!worker.isUnlocked)
-        {
-            // 1. Kilitliyken: Adı, Fiyatı ve Vereceği Buff Yazar
-            worker.buttonText.text = $"{worker.workerName}\nÜretim: +{worker.productionBoost.ToString("F1")}/sn\nFiyat: {worker.baseCost.ToString("F0")} TL";
-            
-            // 2. Detay Butonu GİZLENİR
-            if (worker.detailsButtonComponent != null) worker.detailsButtonComponent.gameObject.SetActive(false);
-        }
-        else
-        {
-            // 1. Kilidi açılınca (Satın alınınca): Bütün diğer yazılar silinir, SADECE ADI YAZAR
-            worker.buttonText.text = worker.workerName;
-            
-            // 2. Detay Butonu GÖRÜNÜR OLUR
-            if (worker.detailsButtonComponent != null) worker.detailsButtonComponent.gameObject.SetActive(true);
-        }
-    }
-
-    // İŞÇİ ÜRETİMİ HESAPLAMASI
-    public double GetTotalProduction()
-    {
-        double total = 0;
-        foreach (var w in workerList)
-        {
-            if (w.isUnlocked) // İşçi satın alındıysa (kilidi açıksa) üretimi toplam güce eklenir
-            {
-                double tierMultiplier = Mathf.Pow((float)w.levelUpProductionBonus, w.tier - 1);
-                double buffMultiplier = WorkerUpgradeManager.Instance != null ? WorkerUpgradeManager.Instance.GetWorkerBuffMultiplier(w.workerId) : 1.0;
-                
-                total += w.productionBoost * tierMultiplier * buffMultiplier;
-            }
-        }
-        return total;
     }
 
     public void AddXP(int workerIndex, int xpAmount)
@@ -173,19 +89,39 @@ public class WorkerManager : MonoBehaviour
         while (true)
         {
             int requiredXP = Mathf.FloorToInt(w.basePointsToLevelUp * Mathf.Pow(w.levelUpPointMultiplier, w.tier - 1));
-            
             if (w.currentXP >= requiredXP)
             {
                 w.currentXP -= requiredXP;
                 w.tier++;
             }
-            else
-            {
-                break;
-            }
+            else break;
         }
 
         UpdateWorkerUI(w);
         GameManager.Instance.RecalculateStats();
+    }
+
+    public void UpdateWorkerUI(WorkerItem worker)
+    {
+        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.purchaseCount);
+        int requiredXP = Mathf.FloorToInt(worker.basePointsToLevelUp * Mathf.Pow(worker.levelUpPointMultiplier, worker.tier - 1));
+        
+        double tierMultiplier = Mathf.Pow((float)worker.levelUpProductionBonus, worker.tier - 1);
+        double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(worker.workerId) : 1.0;
+        double actualBoost = worker.productionBoost * tierMultiplier * upgradeMultiplier;
+
+        worker.buttonText.text = $"{worker.workerName} (Adet: {worker.purchaseCount})\nSeviye: {worker.tier} (XP: {worker.currentXP}/{requiredXP})\nÜretim: +{actualBoost.ToString("F1")}/sn\nFiyat: {worker.currentCost.ToString("F0")} TL";
+    }
+
+    public double GetTotalProduction()
+    {
+        double total = 0;
+        foreach (var w in workerList)
+        {
+            double tierMultiplier = Mathf.Pow((float)w.levelUpProductionBonus, w.tier - 1);
+            double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(w.workerId) : 1.0;
+            total += (w.productionBoost * tierMultiplier * upgradeMultiplier) * w.purchaseCount;
+        }
+        return total;
     }
 }
