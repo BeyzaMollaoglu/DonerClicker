@@ -6,17 +6,23 @@ using TMPro;
 [System.Serializable]
 public class WorkerItem
 {
+    public int workerId;
     public string workerName;
     public double baseCost;
-    public double productionBoost; 
+    public double productionBoost;
+    public int basePointsToLevelUp;
+    public float levelUpPointMultiplier;
+    public double levelUpProductionBonus;
 
-    [HideInInspector] public int level = 0;
-    [HideInInspector] public double currentCost;
-    [HideInInspector] public Button buttonComponent;
+    [HideInInspector] public bool isUnlocked = false; 
+    [HideInInspector] public int tier = 1;          
+    [HideInInspector] public int currentXP = 0;     
+    
+    [HideInInspector] public Button buttonComponent; 
     [HideInInspector] public TextMeshProUGUI buttonText;
+    [HideInInspector] public Button detailsButtonComponent; 
 }
 
-// JSON'daki 'workers' dizisini tutacak sarmalayıcı
 [System.Serializable]
 public class WorkerDataWrapper
 {
@@ -25,31 +31,34 @@ public class WorkerDataWrapper
 
 public class WorkerManager : MonoBehaviour
 {
+    public static WorkerManager Instance;
+
     [Header("İşçi Sistemi (Workers)")]
     public GameObject workerButtonPrefab;
     public Transform workerContent;
     
-    // Artık inspector'dan gizleyebiliriz çünkü JSON'dan dolacak
     [HideInInspector] public List<WorkerItem> workerList;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        LoadWorkersFromJSON(); 
+    }
 
     void Start()
     {
-        LoadWorkersFromJSON();
-
         GameSaveData saveData = SaveManager.Instance.LoadGame();
-        if (saveData != null && saveData.workerLevels.Count == workerList.Count)
+        if (saveData != null && saveData.workerUnlocked.Count == workerList.Count)
         {
             for (int i = 0; i < workerList.Count; i++)
             {
-                workerList[i].level = saveData.workerLevels[i];
-                
-                // YENİ: İşçinin seviyesi kadar üretimi GameManager'a geri ekle
-                GameManager.Instance.basePassiveProduction += (workerList[i].productionBoost * workerList[i].level);
+                workerList[i].isUnlocked = saveData.workerUnlocked[i];
+                workerList[i].tier = saveData.workerTiers[i];
+                workerList[i].currentXP = saveData.workerXPs[i];
             }
         }
 
         InitializeWorkers();
-
         GameManager.Instance.RecalculateStats();
     }
 
@@ -60,11 +69,6 @@ public class WorkerManager : MonoBehaviour
         {
             WorkerDataWrapper wrapper = JsonUtility.FromJson<WorkerDataWrapper>(jsonFile.text);
             workerList = wrapper.workers;
-            Debug.Log("İşçi verileri JSON'dan başarıyla yüklendi.");
-        }
-        else
-        {
-            Debug.LogError("workers.json dosyası Resources klasöründe bulunamadı!");
         }
     }
 
@@ -74,37 +78,114 @@ public class WorkerManager : MonoBehaviour
         {
             int index = i;
             WorkerItem worker = workerList[i];
-            
-            // YENİ GÜNCELLEME: Yüklenen seviyeye göre güncel fiyatı tekrar hesapla
-            worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level); 
 
             GameObject newBtnObj = Instantiate(workerButtonPrefab, workerContent);
-            worker.buttonText = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
+            
             worker.buttonComponent = newBtnObj.GetComponent<Button>();
+            worker.buttonText = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
 
-            worker.buttonComponent.onClick.AddListener(() => BuyWorker(index));
+            // ÇOK ÖNEMLİ: Kod, prefabın hemen altındaki "Btn_Details" isimli objeyi arar.
+            Transform detailsTransform = newBtnObj.transform.Find("Btn_Details");
+            if (detailsTransform != null)
+            {
+                worker.detailsButtonComponent = detailsTransform.GetComponent<Button>();
+                worker.detailsButtonComponent.onClick.AddListener(() => 
+                {
+                    WorkerUpgradeManager.Instance.OpenWorkerDetails(index);
+                });
+            }
+
+            worker.buttonComponent.onClick.AddListener(() => OnWorkerButtonClicked(index));
 
             UpdateWorkerUI(worker);
         }
     }
 
-    private void UpdateWorkerUI(WorkerItem worker)
-    {
-        worker.buttonText.text = $"{worker.workerName} (Lvl {worker.level})\nÜretim: +{worker.productionBoost}/sn\nMaliyet: {worker.currentCost.ToString("F0")} TL";
-    }
-
-    private void BuyWorker(int index)
+    private void OnWorkerButtonClicked(int index)
     {
         WorkerItem worker = workerList[index];
 
-        if (GameManager.Instance.SpendDoner(worker.currentCost))
+        if (!worker.isUnlocked) 
         {
-            worker.level++;
-            GameManager.Instance.basePassiveProduction += worker.productionBoost;
-            worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
-
-            UpdateWorkerUI(worker);
-            GameManager.Instance.RecalculateStats();
+            if (GameManager.Instance.SpendDoner(worker.baseCost))
+            {
+                worker.isUnlocked = true;
+                UpdateWorkerUI(worker);
+                
+                // SATIN ALINDIĞI AN BUFF UYGULANIR: 
+                // RecalculateStats() çağrıldığında aşağıdaki GetTotalProduction() çalışır
+                // ve işçinin üretimi toplam (global) üretime eklenir.
+                GameManager.Instance.RecalculateStats();
+                
+                WorkerUpgradeManager.Instance.OpenWorkerDetails(index);
+            }
         }
+        else
+        {
+            // Zaten açıksa ana butona basılsa da detayları açar
+            WorkerUpgradeManager.Instance.OpenWorkerDetails(index);
+        }
+    }
+
+    // ARAYÜZ YÖNETİMİ: TAM İSTEDİĞİN GİBİ SADELEŞTİRİLDİ
+    public void UpdateWorkerUI(WorkerItem worker)
+    {
+        if (!worker.isUnlocked)
+        {
+            // 1. Kilitliyken: Adı, Fiyatı ve Vereceği Buff Yazar
+            worker.buttonText.text = $"{worker.workerName}\nÜretim: +{worker.productionBoost.ToString("F1")}/sn\nFiyat: {worker.baseCost.ToString("F0")} TL";
+            
+            // 2. Detay Butonu GİZLENİR
+            if (worker.detailsButtonComponent != null) worker.detailsButtonComponent.gameObject.SetActive(false);
+        }
+        else
+        {
+            // 1. Kilidi açılınca (Satın alınınca): Bütün diğer yazılar silinir, SADECE ADI YAZAR
+            worker.buttonText.text = worker.workerName;
+            
+            // 2. Detay Butonu GÖRÜNÜR OLUR
+            if (worker.detailsButtonComponent != null) worker.detailsButtonComponent.gameObject.SetActive(true);
+        }
+    }
+
+    // İŞÇİ ÜRETİMİ HESAPLAMASI
+    public double GetTotalProduction()
+    {
+        double total = 0;
+        foreach (var w in workerList)
+        {
+            if (w.isUnlocked) // İşçi satın alındıysa (kilidi açıksa) üretimi toplam güce eklenir
+            {
+                double tierMultiplier = Mathf.Pow((float)w.levelUpProductionBonus, w.tier - 1);
+                double buffMultiplier = WorkerUpgradeManager.Instance != null ? WorkerUpgradeManager.Instance.GetWorkerBuffMultiplier(w.workerId) : 1.0;
+                
+                total += w.productionBoost * tierMultiplier * buffMultiplier;
+            }
+        }
+        return total;
+    }
+
+    public void AddXP(int workerIndex, int xpAmount)
+    {
+        WorkerItem w = workerList[workerIndex];
+        w.currentXP += xpAmount;
+
+        while (true)
+        {
+            int requiredXP = Mathf.FloorToInt(w.basePointsToLevelUp * Mathf.Pow(w.levelUpPointMultiplier, w.tier - 1));
+            
+            if (w.currentXP >= requiredXP)
+            {
+                w.currentXP -= requiredXP;
+                w.tier++;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        UpdateWorkerUI(w);
+        GameManager.Instance.RecalculateStats();
     }
 }

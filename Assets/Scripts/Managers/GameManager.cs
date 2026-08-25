@@ -52,7 +52,16 @@ public class GameManager : MonoBehaviour
     public void RecalculateStats()
     {
         clickPower = baseClickPower * clickMultiplier;
-        productionPerSecond = basePassiveProduction * passiveMultiplier;
+        
+        // YENİ: İşçilerin toplam üretimini alıyoruz
+        double workerProduction = 0;
+        if (WorkerManager.Instance != null) 
+        {
+            workerProduction = WorkerManager.Instance.GetTotalProduction();
+        }
+        
+        // İşçi üretimini ana üretime ekliyoruz
+        productionPerSecond = (basePassiveProduction + workerProduction) * passiveMultiplier;
     }
 
     // Harcama yapma fonksiyonu (Upgrade ve Worker scriptleri burayı çağıracak)

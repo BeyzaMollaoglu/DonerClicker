@@ -1,9 +1,76 @@
 {
   "workers": [
-    { "workerName": "Stajyer Çırak", "baseCost": 15, "productionBoost": 0.1 },
-    { "workerName": "Otomatik Bıçak", "baseCost": 100, "productionBoost": 1.0 },
-    { "workerName": "Döner Ustası", "baseCost": 1100, "productionBoost": 8.0 },
-    { "workerName": "Kurye Ağı", "baseCost": 12000, "productionBoost": 47.0 },
-    { "workerName": "Lavaş Makinesi", "baseCost": 130000, "productionBoost": 260.0 }
+    { 
+      "workerId": 0, 
+      "workerName": "Stajyer Çırak", 
+      "baseCost": 15, 
+      "productionBoost": 1.0, 
+      "basePointsToLevelUp": 10, 
+      "levelUpPointMultiplier": 1.5, 
+      "levelUpProductionBonus": 2.0 
+    },
+    { 
+      "workerId": 1, 
+      "workerName": "Otomatik Bıçak", 
+      "baseCost": 150, 
+      "productionBoost": 8.0, 
+      "basePointsToLevelUp": 15, 
+      "levelUpPointMultiplier": 1.5, 
+      "levelUpProductionBonus": 2.0 
+    },
+    { 
+      "workerId": 2, 
+      "workerName": "Döner Ustası", 
+      "baseCost": 1200, 
+      "productionBoost": 45.0, 
+      "basePointsToLevelUp": 20, 
+      "levelUpPointMultiplier": 1.6, 
+      "levelUpProductionBonus": 2.2 
+    },
+    { 
+      "workerId": 3, 
+      "workerName": "Motorlu Kurye", 
+      "baseCost": 15000, 
+      "productionBoost": 300.0, 
+      "basePointsToLevelUp": 30, 
+      "levelUpPointMultiplier": 1.6, 
+      "levelUpProductionBonus": 2.2 
+    },
+    { 
+      "workerId": 4, 
+      "workerName": "Lavaş Makinesi", 
+      "baseCost": 180000, 
+      "productionBoost": 1500.0, 
+      "basePointsToLevelUp": 40, 
+      "levelUpPointMultiplier": 1.7, 
+      "levelUpProductionBonus": 2.5 
+    },
+    { 
+      "workerId": 5, 
+      "workerName": "Şube Müdürü", 
+      "baseCost": 2200000, 
+      "productionBoost": 9000.0, 
+      "basePointsToLevelUp": 50, 
+      "levelUpPointMultiplier": 1.8, 
+      "levelUpProductionBonus": 3.0 
+    },
+    { 
+      "workerId": 6, 
+      "workerName": "Franchise Ağı", 
+      "baseCost": 30000000, 
+      "productionBoost": 65000.0, 
+      "basePointsToLevelUp": 75, 
+      "levelUpPointMultiplier": 1.9, 
+      "levelUpProductionBonus": 3.5 
+    },
+    { 
+      "workerId": 7, 
+      "workerName": "Döner Fabrikası", 
+      "baseCost": 450000000, 
+      "productionBoost": 500000.0, 
+      "basePointsToLevelUp": 100, 
+      "levelUpPointMultiplier": 2.0, 
+      "levelUpProductionBonus": 4.0 
+    }
   ]
 }

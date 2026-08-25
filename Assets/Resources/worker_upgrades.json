@@ -1,0 +1,43 @@
+{
+  "workerUpgrades": [
+    
+    { "upgradeName": "Bıçak Hızı", "targetWorkerIndex": 0, "baseCost": 50, "costMultiplier": 1.2, "effectAmount": 1.1, "workerPointsGranted": 1 },
+    { "upgradeName": "Lavaş Kalitesi", "targetWorkerIndex": 0, "baseCost": 150, "costMultiplier": 1.5, "effectAmount": 1.5, "workerPointsGranted": 2 },
+    { "upgradeName": "Güleryüzlü Servis", "targetWorkerIndex": 0, "baseCost": 500, "costMultiplier": 2.0, "effectAmount": 2.5, "workerPointsGranted": 5 },
+    
+    
+    { "upgradeName": "Motor Devri", "targetWorkerIndex": 1, "baseCost": 200, "costMultiplier": 1.2, "effectAmount": 1.1, "workerPointsGranted": 1 },
+    { "upgradeName": "Bıçak Keskinliği", "targetWorkerIndex": 1, "baseCost": 600, "costMultiplier": 1.5, "effectAmount": 1.5, "workerPointsGranted": 2 },
+    { "upgradeName": "Sensör Hassasiyeti", "targetWorkerIndex": 1, "baseCost": 2000, "costMultiplier": 2.0, "effectAmount": 2.5, "workerPointsGranted": 5 },
+    
+    
+    { "upgradeName": "Çift Bıçak Tekniği", "targetWorkerIndex": 2, "baseCost": 2500, "costMultiplier": 1.3, "effectAmount": 1.15, "workerPointsGranted": 2 },
+    { "upgradeName": "Özel Marine Sırrı", "targetWorkerIndex": 2, "baseCost": 7500, "costMultiplier": 1.6, "effectAmount": 1.6, "workerPointsGranted": 4 },
+    { "upgradeName": "Ustalık Karizması", "targetWorkerIndex": 2, "baseCost": 25000, "costMultiplier": 2.1, "effectAmount": 3.0, "workerPointsGranted": 8 },
+
+    
+    { "upgradeName": "Navigasyon Güncellemesi", "targetWorkerIndex": 3, "baseCost": 25000, "costMultiplier": 1.3, "effectAmount": 1.15, "workerPointsGranted": 2 },
+    { "upgradeName": "Motor Modifiyesi", "targetWorkerIndex": 3, "baseCost": 80000, "costMultiplier": 1.6, "effectAmount": 1.6, "workerPointsGranted": 4 },
+    { "upgradeName": "Termal Çanta Yalıtımı", "targetWorkerIndex": 3, "baseCost": 250000, "costMultiplier": 2.1, "effectAmount": 3.0, "workerPointsGranted": 8 },
+
+    
+    { "upgradeName": "Hamur Yoğurma Hızı", "targetWorkerIndex": 4, "baseCost": 300000, "costMultiplier": 1.4, "effectAmount": 1.2, "workerPointsGranted": 3 },
+    { "upgradeName": "Fırın İzolasyonu", "targetWorkerIndex": 4, "baseCost": 900000, "costMultiplier": 1.7, "effectAmount": 1.8, "workerPointsGranted": 6 },
+    { "upgradeName": "Seri Üretim Bandı", "targetWorkerIndex": 4, "baseCost": 3000000, "costMultiplier": 2.3, "effectAmount": 3.5, "workerPointsGranted": 12 },
+
+    
+    { "upgradeName": "Personel Eğitimi", "targetWorkerIndex": 5, "baseCost": 3500000, "costMultiplier": 1.4, "effectAmount": 1.2, "workerPointsGranted": 3 },
+    { "upgradeName": "Satış Hedefi Primi", "targetWorkerIndex": 5, "baseCost": 10000000, "costMultiplier": 1.7, "effectAmount": 1.8, "workerPointsGranted": 6 },
+    { "upgradeName": "Lokal Reklam Bütçesi", "targetWorkerIndex": 5, "baseCost": 35000000, "costMultiplier": 2.3, "effectAmount": 3.5, "workerPointsGranted": 12 },
+
+    
+    { "upgradeName": "Lojistik Optimizasyonu", "targetWorkerIndex": 6, "baseCost": 50000000, "costMultiplier": 1.5, "effectAmount": 1.25, "workerPointsGranted": 5 },
+    { "upgradeName": "Kalite Standartları", "targetWorkerIndex": 6, "baseCost": 150000000, "costMultiplier": 1.8, "effectAmount": 2.0, "workerPointsGranted": 10 },
+    { "upgradeName": "Global Markalaşma", "targetWorkerIndex": 6, "baseCost": 500000000, "costMultiplier": 2.5, "effectAmount": 4.0, "workerPointsGranted": 20 },
+
+    
+    { "upgradeName": "Robotik Kollar", "targetWorkerIndex": 7, "baseCost": 800000000, "costMultiplier": 1.5, "effectAmount": 1.25, "workerPointsGranted": 5 },
+    { "upgradeName": "Yapay Zeka Tedarik", "targetWorkerIndex": 7, "baseCost": 2500000000, "costMultiplier": 1.8, "effectAmount": 2.0, "workerPointsGranted": 10 },
+    { "upgradeName": "Endüstriyel Soğutma", "targetWorkerIndex": 7, "baseCost": 8000000000, "costMultiplier": 2.5, "effectAmount": 4.0, "workerPointsGranted": 20 }
+  ]
+}
