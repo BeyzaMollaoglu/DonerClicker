@@ -1,52 +1,76 @@
 {
   "workers": [
-    { 
-      "workerId": 0, 
-      "workerName": "Stajyer Çırak", 
-      "baseCost": 15, 
-      "productionBoost": 1.0 
+    {
+      "workerId": 0,
+      "workerName": "Stajyer Çırak",
+      "baseCost": 15,
+      "productionBoost": 0.1
     },
-    { 
-      "workerId": 1, 
-      "workerName": "Otomatik Bıçak", 
-      "baseCost": 150, 
-      "productionBoost": 8.0 
+    {
+      "workerId": 1,
+      "workerName": "Otomatik Bıçak",
+      "baseCost": 150,
+      "productionBoost": 1.5
     },
-    { 
-      "workerId": 2, 
-      "workerName": "Döner Ustası", 
-      "baseCost": 1200, 
-      "productionBoost": 45.0 
+    {
+      "workerId": 2,
+      "workerName": "Döner Ustası",
+      "baseCost": 1500,
+      "productionBoost": 12.0
     },
-    { 
-      "workerId": 3, 
-      "workerName": "Motorlu Kurye", 
-      "baseCost": 15000, 
-      "productionBoost": 300.0 
+    {
+      "workerId": 3,
+      "workerName": "Motorlu Kurye",
+      "baseCost": 15000,
+      "productionBoost": 95.0
     },
-    { 
-      "workerId": 4, 
-      "workerName": "Lavaş Makinesi", 
-      "baseCost": 180000, 
-      "productionBoost": 1500.0 
+    {
+      "workerId": 4,
+      "workerName": "Lavaş Makinesi",
+      "baseCost": 200000,
+      "productionBoost": 800.0
     },
-    { 
-      "workerId": 5, 
-      "workerName": "Şube Müdürü", 
-      "baseCost": 2200000, 
-      "productionBoost": 9000.0 
+    {
+      "workerId": 5,
+      "workerName": "Şube Müdürü",
+      "baseCost": 2500000,
+      "productionBoost": 7500.0
     },
-    { 
-      "workerId": 6, 
-      "workerName": "Franchise Ağı", 
-      "baseCost": 30000000, 
-      "productionBoost": 65000.0 
+    {
+      "workerId": 6,
+      "workerName": "Franchise Ağı",
+      "baseCost": 35000000,
+      "productionBoost": 85000.0
     },
-    { 
-      "workerId": 7, 
-      "workerName": "Döner Fabrikası", 
-      "baseCost": 450000000, 
-      "productionBoost": 500000.0 
+    {
+      "workerId": 7,
+      "workerName": "Döner Fabrikası",
+      "baseCost": 500000000,
+      "productionBoost": 1000000.0
+    },
+    {
+      "workerId": 8,
+      "workerName": "Yapay Zeka Usta",
+      "baseCost": 8000000000,
+      "productionBoost": 15000000.0
+    },
+    {
+      "workerId": 9,
+      "workerName": "Gezegenler Arası Kargo",
+      "baseCost": 1e11,
+      "productionBoost": 200000000.0
+    },
+    {
+      "workerId": 10,
+      "workerName": "Kuantum Döner Sentezleyici",
+      "baseCost": 2e14,
+      "productionBoost": 400000000000.0
+    },
+    {
+      "workerId": 11,
+      "workerName": "Çoklu Evren Şubesi",
+      "baseCost": 5e18,
+      "productionBoost": 1e16
     }
   ]
 }

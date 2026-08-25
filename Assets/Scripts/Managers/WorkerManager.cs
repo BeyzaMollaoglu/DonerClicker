@@ -78,11 +78,19 @@ public class WorkerManager : MonoBehaviour
     public void UpdateWorkerUI(WorkerItem worker)
     {
         worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
-        
-        double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(worker.workerId) : 1.0;
-        double actualBoost = worker.productionBoost * worker.level * upgradeMultiplier;
 
-        worker.buttonText.text = $"{worker.workerName}\nSeviye: {worker.level}\nÜretim: +{actualBoost.ToString("F1")}/sn\nFiyat: {worker.currentCost.ToString("F0")} TL";
+        // Sadece 1 işçinin ne kadar ürettiğini buluyoruz
+        double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(worker.workerId) : 1.0;
+        double boostPerWorker = worker.productionBoost * upgradeMultiplier;
+
+        // YENİ: Oyuncunun ŞU ANKİ seviyesiyle aldığı toplam üretim
+        double currentTotalBoost = worker.level * boostPerWorker;
+
+        // YENİ: Oyuncu 1 TANE DAHA ALIRSA üretimin ulaşacağı yeni değer
+        double nextTotalBoost = (worker.level + 1) * boostPerWorker;
+
+        // Unity'nin Rich Text (Renk) özelliğini kullanarak o harika ok işaretini ekliyoruz
+        worker.buttonText.text = $"{worker.workerName}\nSeviye: {worker.level}\nÜretim: {UIManager.FormatNumber(currentTotalBoost)}/sn <color=#00FF00>-> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>\nFiyat: {UIManager.FormatNumber(worker.currentCost)} TL";
     }
 
     public double GetTotalProduction()

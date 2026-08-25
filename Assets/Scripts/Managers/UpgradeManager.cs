@@ -82,8 +82,11 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            item.buttonText.text = $"{item.upgradeName}\nGüç: x{item.effectAmount}\nMaliyet: {item.cost.ToString("F0")} TL";
-            item.buttonComponent.interactable = true; 
+            // Etki çarpanı (x2, x5 vb.) küçük olduğu için ona format gerekmez, maliyete format ekledik
+            string effectSymbol = item.type == UpgradeType.ClickPowerAdd || item.type == UpgradeType.PassiveProductionAdd ? "+" : "x";
+
+            item.buttonText.text = $"{item.upgradeName}\nGüç: {effectSymbol}{item.effectAmount}\nMaliyet: {UIManager.FormatNumber(item.cost)} TL";
+            item.buttonComponent.interactable = true;
         }
     }
 

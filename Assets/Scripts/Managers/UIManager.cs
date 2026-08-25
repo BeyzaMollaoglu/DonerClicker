@@ -22,23 +22,39 @@ public class UIManager : MonoBehaviour
     public Button btn_close_workers;
 
     [Header("Blocker (Arka Plan Kapatıcı)")]
-    public Button btn_blocker; 
+    public Button btn_blocker;
 
     [Header("Prestige (Reset) Sistemi")]
-    public Button btn_reset; 
-    public TextMeshProUGUI txt_prestige_info; // YENİ: Oyuncuya kaç melek kazanacağını gösterecek yazı
+    public Button btn_reset;
+    public TextMeshProUGUI txt_prestige_info;
 
-    private RectTransform activePanel; 
+    private RectTransform activePanel;
+
+
+    public static string FormatNumber(double value)
+    {
+        // Math.Floor(value) kısmını sildik! 
+        // Yerine ToString("0.##") yazdık ki 0.1, 0.5 gibi sayılar ekranda virgülden sonraki haliyle düzgünce görünsün.
+        if (value < 1000) return value.ToString("0.##");
+
+        string[] suffixes = { "", "K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No", "Dc" };
+        int suffixIndex = 0;
+
+        while (value >= 1000 && suffixIndex < suffixes.Length - 1)
+        {
+            value /= 1000;
+            suffixIndex++;
+        }
+
+        return value.ToString("0.##") + suffixes[suffixIndex];
+    }
 
     private void Start()
     {
         button_icon_doner.onClick.AddListener(GameManager.Instance.OnDonerClicked);
 
-        // YENİ: Reset butonunu Hard Reset yerine Prestige (Melek) sistemine bağladık
-        if (btn_reset != null)
-        {
-            btn_reset.onClick.AddListener(GameManager.Instance.PrestigeAscension);
-        }
+        // Prestige (Melek) Reset butonu
+        if (btn_reset != null) btn_reset.onClick.AddListener(GameManager.Instance.PrestigeAscension);
 
         if (btn_open_upgrades != null) btn_open_upgrades.onClick.AddListener(() => OpenPanel(panel_upgrades));
         if (btn_close_upgrades != null) btn_close_upgrades.onClick.AddListener(() => ClosePanel(panel_upgrades));
@@ -49,21 +65,20 @@ public class UIManager : MonoBehaviour
         if (btn_blocker != null)
         {
             btn_blocker.onClick.AddListener(CloseActivePanel);
-            btn_blocker.gameObject.SetActive(false); 
+            btn_blocker.gameObject.SetActive(false);
         }
     }
 
     public void UpdateTotalDonerText(double amount)
     {
-        txt_doner_count.text = amount.ToString("F0");
+        txt_doner_count.text = FormatNumber(System.Math.Floor(amount));
     }
 
-    // YENİ: GameManager'dan gelen verilerle Reset butonunun üstündeki yazıyı günceller
     public void UpdatePrestigeUI(int currentGolden, int pendingGolden)
     {
         if (txt_prestige_info != null)
         {
-            txt_prestige_info.text = $"Sahip Olunan: {currentGolden} Altın Döner\n<color=#FFD700>Reset Atarsan: +{pendingGolden} Kazanacaksın</color>";
+            txt_prestige_info.text = $"Sahip Olunan: {FormatNumber(currentGolden)} Altın Döner\n<color=#FFD700>Reset Atarsan: +{FormatNumber(pendingGolden)} Kazanacaksın</color>";
         }
     }
 
@@ -83,7 +98,7 @@ public class UIManager : MonoBehaviour
         floatingObj.transform.position = spawnPosition;
 
         TextMeshProUGUI floatText = floatingObj.GetComponent<TextMeshProUGUI>();
-        floatText.text = "+" + amount.ToString("F0");
+        floatText.text = "+" + FormatNumber(amount);
 
         float randomX = Random.Range(-50f, 50f);
         Vector3 targetPos = floatingObj.transform.position + new Vector3(randomX, 150f, 0f);
@@ -94,8 +109,8 @@ public class UIManager : MonoBehaviour
 
     private void OpenPanel(RectTransform panel)
     {
-        activePanel = panel; 
-        if (btn_blocker != null) btn_blocker.gameObject.SetActive(true); 
+        activePanel = panel;
+        if (btn_blocker != null) btn_blocker.gameObject.SetActive(true);
 
         panel.gameObject.SetActive(true);
         panel.anchoredPosition = new Vector2(0, -2500);
@@ -104,21 +119,18 @@ public class UIManager : MonoBehaviour
 
     private void ClosePanel(RectTransform panel)
     {
-        if (btn_blocker != null) btn_blocker.gameObject.SetActive(false); 
+        if (btn_blocker != null) btn_blocker.gameObject.SetActive(false);
 
         panel.DOAnchorPos(new Vector2(0, -2500), 0.5f).SetEase(Ease.InBack).OnComplete(() =>
         {
             panel.gameObject.SetActive(false);
-            if (activePanel == panel) activePanel = null; 
+            if (activePanel == panel) activePanel = null;
         });
     }
 
     private void CloseActivePanel()
     {
-        if (activePanel != null)
-        {
-            ClosePanel(activePanel);
-        }
+        if (activePanel != null) ClosePanel(activePanel);
     }
 
     private void OnDestroy()

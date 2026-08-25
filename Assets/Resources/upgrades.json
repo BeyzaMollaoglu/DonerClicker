@@ -1,59 +1,248 @@
 {
   "upgrades": [
-    { 
-      "upgradeName": "Bilenmiş Bıçak (Tıklama x2)", 
-      "type": 1, 
-      "cost": 100, 
-      "effectAmount": 2.0, 
+    {
+      "upgradeName": "Bilenmiş Bıçak (Tıklama x2)",
+      "type": 1,
+      "cost": 50,
+      "effectAmount": 2.0,
       "targetWorkerIndex": -1
     },
-    { 
-      "upgradeName": "Stajyer Eğitimi (Stajyer %50 Buff)", 
-      "type": 4, 
-      "cost": 500, 
-      "effectAmount": 1.5, 
+    {
+      "upgradeName": "Stajyer Eğitimi (Çırak x2)",
+      "type": 4,
+      "cost": 150,
+      "effectAmount": 2.0,
       "targetWorkerIndex": 0
     },
-    { 
-      "upgradeName": "Kaliteli Motor (Oto. Bıçak %100 Buff)", 
-      "type": 4, 
-      "cost": 2500, 
-      "effectAmount": 2.0, 
+    {
+      "upgradeName": "Plastik Eldiven (Tıklama x2)",
+      "type": 1,
+      "cost": 500,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Yağlı Motor (Oto. Bıçak x2)",
+      "type": 4,
+      "cost": 1000,
+      "effectAmount": 2.0,
       "targetWorkerIndex": 1
     },
-    { 
-      "upgradeName": "Gizli Sos Formülü (Global Üretim x1.5)", 
-      "type": 3, 
-      "cost": 10000, 
-      "effectAmount": 1.5, 
+    {
+      "upgradeName": "Maaş Zammı (Çırak x5)",
+      "type": 4,
+      "cost": 2500,
+      "effectAmount": 5.0,
+      "targetWorkerIndex": 0
+    },
+    {
+      "upgradeName": "Ergonomik Sap (Tıklama x5)",
+      "type": 1,
+      "cost": 10000,
+      "effectAmount": 5.0,
       "targetWorkerIndex": -1
     },
-    { 
-      "upgradeName": "Ustalık Belgesi (Döner Ustası x2)", 
-      "type": 4, 
-      "cost": 25000, 
-      "effectAmount": 2.0, 
+    {
+      "upgradeName": "Ustalık Belgesi (Usta x2)",
+      "type": 4,
+      "cost": 15000,
+      "effectAmount": 2.0,
       "targetWorkerIndex": 2
     },
-    { 
-      "upgradeName": "Ergonomik Sap (+5 Tıklama Gücü)", 
-      "type": 0, 
-      "cost": 50000, 
-      "effectAmount": 5.0, 
-      "targetWorkerIndex": -1
-    },
-    { 
-      "upgradeName": "Termal Çanta (Kurye x3 Buff)", 
-      "type": 4, 
-      "cost": 150000, 
-      "effectAmount": 3.0, 
+    {
+      "upgradeName": "Termal Çanta (Kurye x2)",
+      "type": 4,
+      "cost": 120000,
+      "effectAmount": 2.0,
       "targetWorkerIndex": 3
     },
-    { 
-      "upgradeName": "Ulusal Reklam Kampanyası (Global Üretim x2.5)", 
-      "type": 3, 
-      "cost": 1000000, 
-      "effectAmount": 2.5, 
+    {
+      "upgradeName": "Gizli Sos Formülü (Global x1.5)",
+      "type": 3,
+      "cost": 250000,
+      "effectAmount": 1.5,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Taş Fırın (Lavaş x2)",
+      "type": 4,
+      "cost": 1300000,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4
+    },
+    {
+      "upgradeName": "Stajyer Sendikası (Çırak x100)",
+      "type": 4,
+      "cost": 2500000,
+      "effectAmount": 100.0,
+      "targetWorkerIndex": 0
+    },
+    {
+      "upgradeName": "Kuantum Tıklama (Tıklama x10)",
+      "type": 1,
+      "cost": 5000000,
+      "effectAmount": 10.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Liderlik Semineri (Müdür x2)",
+      "type": 4,
+      "cost": 15000000,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5
+    },
+    {
+      "upgradeName": "Ulusal Reklam (Global x2)",
+      "type": 3,
+      "cost": 50000000,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Global Yatırımcı (Franchise x2)",
+      "type": 4,
+      "cost": 250000000,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6
+    },
+    {
+      "upgradeName": "Kozmik Parmak (Tıklama x25)",
+      "type": 1,
+      "cost": 1000000000,
+      "effectAmount": 25.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Endüstri 4.0 (Fabrika x2)",
+      "type": 4,
+      "cost": 4000000000,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7
+    },
+    {
+      "upgradeName": "Şirket Halka Arzı (Global x3)",
+      "type": 3,
+      "cost": 20000000000,
+      "effectAmount": 3.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Sentetik Et (Yapay Zeka x2)",
+      "type": 4,
+      "cost": 75000000000,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8
+    },
+    {
+      "upgradeName": "Retro Akımı (Usta x500)",
+      "type": 4,
+      "cost": 250000000000,
+      "effectAmount": 500.0,
+      "targetWorkerIndex": 2
+    },
+    {
+      "upgradeName": "Işınlanma Ağı (Kargo x2)",
+      "type": 4,
+      "cost": 1e12,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9
+    },
+    {
+      "upgradeName": "Siber Tıklama (Tıklama x100)",
+      "type": 1,
+      "cost": 5e12,
+      "effectAmount": 100.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Mars Şubesi (Global x5)",
+      "type": 3,
+      "cost": 2e13,
+      "effectAmount": 5.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Karanlık Madde Sosu (Sentezleyici x2)",
+      "type": 4,
+      "cost": 2e15,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10
+    },
+    {
+      "upgradeName": "Telepatik Sipariş (Kurye x1000)",
+      "type": 4,
+      "cost": 5e15,
+      "effectAmount": 1000.0,
+      "targetWorkerIndex": 3
+    },
+    {
+      "upgradeName": "Tanrısal Parmak (Tıklama x500)",
+      "type": 1,
+      "cost": 1e16,
+      "effectAmount": 500.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Solucan Deliği Kuryesi (Kargo x10)",
+      "type": 4,
+      "cost": 8e16,
+      "effectAmount": 10.0,
+      "targetWorkerIndex": 9
+    },
+    {
+      "upgradeName": "Boyutlar Arası Döner (Evren Şubesi x2)",
+      "type": 4,
+      "cost": 5e19,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11
+    },
+    {
+      "upgradeName": "Galaktik Federasyon (Global x10)",
+      "type": 3,
+      "cost": 1e21,
+      "effectAmount": 10.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Zaman Yolculuğu (Sentezleyici x100)",
+      "type": 4,
+      "cost": 5e22,
+      "effectAmount": 100.0,
+      "targetWorkerIndex": 10
+    },
+    {
+      "upgradeName": "Multiverse Tıklaması (Tıklama x10000)",
+      "type": 1,
+      "cost": 1e24,
+      "effectAmount": 10000.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Evrensel Barış (Global x50)",
+      "type": 3,
+      "cost": 1e26,
+      "effectAmount": 50.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "Sicim Teorisi Lavaşları (Evren Şubesi x100)",
+      "type": 4,
+      "cost": 5e27,
+      "effectAmount": 100.0,
+      "targetWorkerIndex": 11
+    },
+    {
+      "upgradeName": "Büyük Patlama Tıklaması (Tıklama x100000)",
+      "type": 1,
+      "cost": 1e29,
+      "effectAmount": 100000.0,
+      "targetWorkerIndex": -1
+    },
+    {
+      "upgradeName": "SONSUZLUK SOSU (Global x1000)",
+      "type": 3,
+      "cost": 1e31,
+      "effectAmount": 1000.0,
       "targetWorkerIndex": -1
     }
   ]
