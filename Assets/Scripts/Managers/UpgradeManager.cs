@@ -16,15 +16,20 @@ public class UpgradeItem
 {
     public string upgradeName;
     public UpgradeType type;
-    public double cost;
+    public double baseCost;          
+    public float costMultiplier;     
     public double effectAmount;
 
-    [HideInInspector] public bool isPurchased = false;
+    public int requiredUpgradeIndex; 
+    public int requiredUpgradeLevel; 
+
+    [HideInInspector] public int level = 0; 
+    [HideInInspector] public double currentCost;
+    [HideInInspector] public bool isUnlocked = false;
     [HideInInspector] public Button buttonComponent;
     [HideInInspector] public TextMeshProUGUI buttonText;
 }
 
-// JSON'daki 'upgrades' dizisini tutacak sarmalayıcı
 [System.Serializable]
 public class UpgradeDataWrapper
 {
@@ -44,14 +49,13 @@ public class UpgradeManager : MonoBehaviour
         LoadUpgradesFromJSON();
 
         GameSaveData saveData = SaveManager.Instance.LoadGame();
-        if (saveData != null && saveData.upgradePurchased.Count == upgradeList.Count)
+        if (saveData != null && saveData.upgradeLevels.Count == upgradeList.Count)
         {
             for (int i = 0; i < upgradeList.Count; i++)
             {
-                upgradeList[i].isPurchased = saveData.upgradePurchased[i];
+                upgradeList[i].level = saveData.upgradeLevels[i];
                 
-                // YENİ: Eğer bu geliştirme önceden alınmışsa, gücünü GameManager'a ver
-                if (upgradeList[i].isPurchased)
+                for (int j = 0; j < upgradeList[i].level; j++)
                 {
                     ApplyUpgradeEffect(upgradeList[i]);
                 }
@@ -59,8 +63,7 @@ public class UpgradeManager : MonoBehaviour
         }
 
         InitializeUpgrades();
-        
-        // YENİ: Tüm güçler eklendikten sonra matematiği tekrar hesapla
+        CheckUnlocks(); // Başlangıçta kilitleri kontrol et ve tıklanabilirlikleri aç
         GameManager.Instance.RecalculateStats();
     }
 
@@ -71,11 +74,6 @@ public class UpgradeManager : MonoBehaviour
         {
             UpgradeDataWrapper wrapper = JsonUtility.FromJson<UpgradeDataWrapper>(jsonFile.text);
             upgradeList = wrapper.upgrades;
-            Debug.Log("Geliştirme verileri JSON'dan başarıyla yüklendi.");
-        }
-        else
-        {
-            Debug.LogError("upgrades.json dosyası Resources klasöründe bulunamadı!");
         }
     }
 
@@ -86,24 +84,47 @@ public class UpgradeManager : MonoBehaviour
             int index = i;
             UpgradeItem item = upgradeList[i];
 
-            if (item.isPurchased) continue;
+            item.currentCost = item.baseCost * Mathf.Pow(item.costMultiplier, item.level);
 
             GameObject newBtnObj = Instantiate(upgradeButtonPrefab, upgradeContent);
-
             item.buttonText = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
             item.buttonComponent = newBtnObj.GetComponent<Button>();
 
             item.buttonComponent.onClick.AddListener(() => BuyUpgrade(index));
+            
+            // Başlangıçta butonu tıklanamaz (soluk) yap
+            item.buttonComponent.interactable = false; 
 
-            string typeText = "";
-            string symbol = "";
+            UpdateUpgradeUI(item);
+        }
+    }
 
-            if (item.type == UpgradeType.ClickPowerAdd) { typeText = "Tıklama"; symbol = "+"; }
-            else if (item.type == UpgradeType.ClickPowerMultiplier) { typeText = "Tıklama"; symbol = "x"; }
-            else if (item.type == UpgradeType.PassiveProductionAdd) { typeText = "Saniye/Üretim"; symbol = "+"; }
-            else if (item.type == UpgradeType.PassiveProductionMultiplier) { typeText = "Saniye/Üretim"; symbol = "x"; }
+    // Arayüzü her zaman normal fiyat ve statlarla günceller
+    private void UpdateUpgradeUI(UpgradeItem item)
+    {
+        string typeText = item.type == UpgradeType.ClickPowerAdd || item.type == UpgradeType.ClickPowerMultiplier ? "Tıklama" : "Üretim";
+        string symbol = item.type == UpgradeType.ClickPowerAdd || item.type == UpgradeType.PassiveProductionAdd ? "+" : "x";
 
-            item.buttonText.text = $"{item.upgradeName}\n{typeText}: {symbol}{item.effectAmount}\nMaliyet: {item.cost} TL";
+        item.buttonText.text = $"{item.upgradeName} (Lvl {item.level})\n{typeText}: {symbol}{item.effectAmount}\nMaliyet: {item.currentCost.ToString("F0")} TL";
+    }
+
+    public void CheckUnlocks()
+    {
+        foreach (var item in upgradeList)
+        {
+            // Şart yoksa (-1) VEYA gereken upgrade yeterli seviyedeyse tıklanabilirliği aç
+            if (item.requiredUpgradeIndex == -1 || 
+               (item.requiredUpgradeIndex < upgradeList.Count && upgradeList[item.requiredUpgradeIndex].level >= item.requiredUpgradeLevel))
+            {
+                if (!item.isUnlocked)
+                {
+                    item.isUnlocked = true;
+                    if (item.buttonComponent != null) 
+                    {
+                        item.buttonComponent.interactable = true; // Butonu aktif hale getir
+                    }
+                }
+            }
         }
     }
 
@@ -111,27 +132,16 @@ public class UpgradeManager : MonoBehaviour
     {
         UpgradeItem item = upgradeList[index];
 
-        if (!item.isPurchased && GameManager.Instance.SpendDoner(item.cost))
+        if (GameManager.Instance.SpendDoner(item.currentCost))
         {
-            switch (item.type)
-            {
-                case UpgradeType.ClickPowerAdd:
-                    GameManager.Instance.baseClickPower += item.effectAmount;
-                    break;
-                case UpgradeType.ClickPowerMultiplier:
-                    GameManager.Instance.clickMultiplier *= item.effectAmount;
-                    break;
-                case UpgradeType.PassiveProductionAdd:
-                    GameManager.Instance.basePassiveProduction += item.effectAmount;
-                    break;
-                case UpgradeType.PassiveProductionMultiplier:
-                    GameManager.Instance.passiveMultiplier *= item.effectAmount;
-                    break;
-            }
-
-            item.isPurchased = true;
-            Destroy(item.buttonComponent.gameObject);
+            item.level++;
+            item.currentCost = item.baseCost * Mathf.Pow(item.costMultiplier, item.level);
+            
+            ApplyUpgradeEffect(item);
+            UpdateUpgradeUI(item);
+            
             GameManager.Instance.RecalculateStats();
+            CheckUnlocks(); // Alım yapıldıktan sonra alttaki açıldı mı diye kontrol et
         }
     }
 
@@ -139,18 +149,10 @@ public class UpgradeManager : MonoBehaviour
     {
         switch (item.type)
         {
-            case UpgradeType.ClickPowerAdd:
-                GameManager.Instance.baseClickPower += item.effectAmount;
-                break;
-            case UpgradeType.ClickPowerMultiplier:
-                GameManager.Instance.clickMultiplier *= item.effectAmount;
-                break;
-            case UpgradeType.PassiveProductionAdd:
-                GameManager.Instance.basePassiveProduction += item.effectAmount;
-                break;
-            case UpgradeType.PassiveProductionMultiplier:
-                GameManager.Instance.passiveMultiplier *= item.effectAmount;
-                break;
+            case UpgradeType.ClickPowerAdd: GameManager.Instance.baseClickPower += item.effectAmount; break;
+            case UpgradeType.ClickPowerMultiplier: GameManager.Instance.clickMultiplier *= item.effectAmount; break;
+            case UpgradeType.PassiveProductionAdd: GameManager.Instance.basePassiveProduction += item.effectAmount; break;
+            case UpgradeType.PassiveProductionMultiplier: GameManager.Instance.passiveMultiplier *= item.effectAmount; break;
         }
     }
 }

@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// Kaydedilecek verilerin paketleneceği şablon sınıf
 [System.Serializable]
 public class GameSaveData
 {
     public double totalDoner;
     public List<int> workerLevels = new List<int>();
-    public List<bool> upgradePurchased = new List<bool>();
+    // YENİ: Artık geliştirmelerin bool (alındı) durumunu değil, int (seviye) değerini tutuyoruz
+    public List<int> upgradeLevels = new List<int>(); 
 }
 
 public class SaveManager : MonoBehaviour
@@ -20,7 +20,6 @@ public class SaveManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    // OYUNDAN ÇIKARKEN ÇALIŞIR
     private void OnApplicationQuit() 
     {
         SaveGame();
@@ -30,10 +29,8 @@ public class SaveManager : MonoBehaviour
     {
         GameSaveData data = new GameSaveData();
         
-        // 1. Ana Parayı Kaydet
         data.totalDoner = GameManager.Instance.totalDoner;
 
-        // 2. İşçi Seviyelerini Kaydet
         WorkerManager workerMgr = FindAnyObjectByType<WorkerManager>();
         if (workerMgr != null)
         {
@@ -43,17 +40,16 @@ public class SaveManager : MonoBehaviour
             }
         }
 
-        // 3. Geliştirme Durumlarını Kaydet
         UpgradeManager upgradeMgr = FindAnyObjectByType<UpgradeManager>();
         if (upgradeMgr != null)
         {
+            // YENİ: Geliştirmelerin seviyelerini kaydediyoruz
             foreach (var upgrade in upgradeMgr.upgradeList)
             {
-                data.upgradePurchased.Add(upgrade.isPurchased);
+                data.upgradeLevels.Add(upgrade.level);
             }
         }
 
-        // Veriyi JSON formatına çevirip cihaza kaydet
         string json = JsonUtility.ToJson(data);
         PlayerPrefs.SetString("DonerSave", json);
         PlayerPrefs.Save();
@@ -61,7 +57,6 @@ public class SaveManager : MonoBehaviour
         Debug.Log("Oyun Kaydedildi: " + json);
     }
 
-    // DİĞER MANAGER'LAR VERİLERİ OKURKEN BU FONKSİYONU ÇAĞIRACAK
     public GameSaveData LoadGame()
     {
         if (PlayerPrefs.HasKey("DonerSave"))
@@ -73,10 +68,9 @@ public class SaveManager : MonoBehaviour
         }
         
         Debug.Log("Daha önce kayıt yapılmamış, yeni oyun başlıyor.");
-        return null; // Kayıt yoksa boş dön
+        return null; 
     }
 
-    // YENİ: Kaydı tamamen siler, ileride reset kismi gelistirilecek
     public void ClearSave()
     {
         if (PlayerPrefs.HasKey("DonerSave"))
