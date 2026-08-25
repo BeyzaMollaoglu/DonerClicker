@@ -21,36 +21,35 @@ public class UIManager : MonoBehaviour
     public Button btn_open_workers;
     public Button btn_close_workers;
 
-    [Header("Ekstra Butonlar")]
-    public Button btn_reset;
-
     [Header("Blocker (Arka Plan Kapatıcı)")]
-    public Button btn_blocker; // <-- YENİ EKLENDİ
+    public Button btn_blocker; 
 
-    private RectTransform activePanel; // <-- O an ekranda hangi panelin açık olduğunu tutacak
+    [Header("Prestige (Reset) Sistemi")]
+    public Button btn_reset; 
+    public TextMeshProUGUI txt_prestige_info; // YENİ: Oyuncuya kaç melek kazanacağını gösterecek yazı
+
+    private RectTransform activePanel; 
 
     private void Start()
     {
-        // Ana döner tıklaması
         button_icon_doner.onClick.AddListener(GameManager.Instance.OnDonerClicked);
 
+        // YENİ: Reset butonunu Hard Reset yerine Prestige (Melek) sistemine bağladık
         if (btn_reset != null)
         {
-            btn_reset.onClick.AddListener(GameManager.Instance.HardResetGame);
+            btn_reset.onClick.AddListener(GameManager.Instance.PrestigeAscension);
         }
 
-        // Panel butonları
         if (btn_open_upgrades != null) btn_open_upgrades.onClick.AddListener(() => OpenPanel(panel_upgrades));
         if (btn_close_upgrades != null) btn_close_upgrades.onClick.AddListener(() => ClosePanel(panel_upgrades));
 
         if (btn_open_workers != null) btn_open_workers.onClick.AddListener(() => OpenPanel(panel_workers));
         if (btn_close_workers != null) btn_close_workers.onClick.AddListener(() => ClosePanel(panel_workers));
 
-        // Blocker (Arka plan) butonu ayarı
         if (btn_blocker != null)
         {
             btn_blocker.onClick.AddListener(CloseActivePanel);
-            btn_blocker.gameObject.SetActive(false); // Oyun başlarken görünmez olsun
+            btn_blocker.gameObject.SetActive(false); 
         }
     }
 
@@ -59,7 +58,15 @@ public class UIManager : MonoBehaviour
         txt_doner_count.text = amount.ToString("F0");
     }
 
-    // Tıklama animasyonu (Juice)
+    // YENİ: GameManager'dan gelen verilerle Reset butonunun üstündeki yazıyı günceller
+    public void UpdatePrestigeUI(int currentGolden, int pendingGolden)
+    {
+        if (txt_prestige_info != null)
+        {
+            txt_prestige_info.text = $"Sahip Olunan: {currentGolden} Altın Döner\n<color=#FFD700>Reset Atarsan: +{pendingGolden} Kazanacaksın</color>";
+        }
+    }
+
     public void PlayClickFeedback(double clickAmount)
     {
         button_icon_doner.transform.DOKill(true);
@@ -87,8 +94,8 @@ public class UIManager : MonoBehaviour
 
     private void OpenPanel(RectTransform panel)
     {
-        activePanel = panel; // Hangi panelin açıldığını kaydet
-        if (btn_blocker != null) btn_blocker.gameObject.SetActive(true); // Blocker'ı görünür yap
+        activePanel = panel; 
+        if (btn_blocker != null) btn_blocker.gameObject.SetActive(true); 
 
         panel.gameObject.SetActive(true);
         panel.anchoredPosition = new Vector2(0, -2500);
@@ -97,16 +104,15 @@ public class UIManager : MonoBehaviour
 
     private void ClosePanel(RectTransform panel)
     {
-        if (btn_blocker != null) btn_blocker.gameObject.SetActive(false); // Blocker'ı kapat
+        if (btn_blocker != null) btn_blocker.gameObject.SetActive(false); 
 
         panel.DOAnchorPos(new Vector2(0, -2500), 0.5f).SetEase(Ease.InBack).OnComplete(() =>
         {
             panel.gameObject.SetActive(false);
-            if (activePanel == panel) activePanel = null; // Kapanan panel buysa hafızayı temizle
+            if (activePanel == panel) activePanel = null; 
         });
     }
 
-    // Blocker'a (arka plana) tıklandığında çalışacak olan YENİ FONKSİYON
     private void CloseActivePanel()
     {
         if (activePanel != null)
@@ -123,5 +129,6 @@ public class UIManager : MonoBehaviour
         if (btn_open_workers != null) btn_open_workers.onClick.RemoveAllListeners();
         if (btn_close_workers != null) btn_close_workers.onClick.RemoveAllListeners();
         if (btn_blocker != null) btn_blocker.onClick.RemoveAllListeners();
+        if (btn_reset != null) btn_reset.onClick.RemoveAllListeners();
     }
 }
