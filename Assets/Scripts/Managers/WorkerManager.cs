@@ -10,13 +10,8 @@ public class WorkerItem
     public string workerName;
     public double baseCost;
     public double productionBoost;
-    public int basePointsToLevelUp;
-    public float levelUpPointMultiplier;
-    public double levelUpProductionBonus;
 
-    [HideInInspector] public int purchaseCount = 0; 
-    [HideInInspector] public int tier = 1;          
-    [HideInInspector] public int currentXP = 0;     
+    [HideInInspector] public int level = 0; 
     [HideInInspector] public double currentCost;
     
     [HideInInspector] public Button buttonComponent; 
@@ -44,13 +39,11 @@ public class WorkerManager : MonoBehaviour
     void Start()
     {
         GameSaveData saveData = SaveManager.Instance.LoadGame();
-        if (saveData != null && saveData.workerCounts.Count == workerList.Count)
+        if (saveData != null && saveData.workerLevels.Count == workerList.Count)
         {
             for (int i = 0; i < workerList.Count; i++)
             {
-                workerList[i].purchaseCount = saveData.workerCounts[i];
-                workerList[i].tier = saveData.workerTiers[i];
-                workerList[i].currentXP = saveData.workerXPs[i];
+                workerList[i].level = saveData.workerLevels[i];
             }
         }
 
@@ -72,45 +65,24 @@ public class WorkerManager : MonoBehaviour
     private void BuyWorker(int index)
     {
         WorkerItem worker = workerList[index];
-        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.purchaseCount); 
+        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level); 
 
         if (GameManager.Instance.SpendDoner(worker.currentCost))
         {
-            worker.purchaseCount++;
-            AddXP(index, 1); // HER SATIN ALIMDA 1 XP KAZANIR
+            worker.level++;
+            UpdateWorkerUI(worker);
+            GameManager.Instance.RecalculateStats();
         }
-    }
-
-    public void AddXP(int workerIndex, int xpAmount)
-    {
-        WorkerItem w = workerList[workerIndex];
-        w.currentXP += xpAmount;
-
-        while (true)
-        {
-            int requiredXP = Mathf.FloorToInt(w.basePointsToLevelUp * Mathf.Pow(w.levelUpPointMultiplier, w.tier - 1));
-            if (w.currentXP >= requiredXP)
-            {
-                w.currentXP -= requiredXP;
-                w.tier++;
-            }
-            else break;
-        }
-
-        UpdateWorkerUI(w);
-        GameManager.Instance.RecalculateStats();
     }
 
     public void UpdateWorkerUI(WorkerItem worker)
     {
-        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.purchaseCount);
-        int requiredXP = Mathf.FloorToInt(worker.basePointsToLevelUp * Mathf.Pow(worker.levelUpPointMultiplier, worker.tier - 1));
+        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
         
-        double tierMultiplier = Mathf.Pow((float)worker.levelUpProductionBonus, worker.tier - 1);
         double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(worker.workerId) : 1.0;
-        double actualBoost = worker.productionBoost * tierMultiplier * upgradeMultiplier;
+        double actualBoost = worker.productionBoost * worker.level * upgradeMultiplier;
 
-        worker.buttonText.text = $"{worker.workerName} (Adet: {worker.purchaseCount})\nSeviye: {worker.tier} (XP: {worker.currentXP}/{requiredXP})\nÜretim: +{actualBoost.ToString("F1")}/sn\nFiyat: {worker.currentCost.ToString("F0")} TL";
+        worker.buttonText.text = $"{worker.workerName}\nSeviye: {worker.level}\nÜretim: +{actualBoost.ToString("F1")}/sn\nFiyat: {worker.currentCost.ToString("F0")} TL";
     }
 
     public double GetTotalProduction()
@@ -118,9 +90,8 @@ public class WorkerManager : MonoBehaviour
         double total = 0;
         foreach (var w in workerList)
         {
-            double tierMultiplier = Mathf.Pow((float)w.levelUpProductionBonus, w.tier - 1);
             double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(w.workerId) : 1.0;
-            total += (w.productionBoost * tierMultiplier * upgradeMultiplier) * w.purchaseCount;
+            total += (w.productionBoost * w.level) * upgradeMultiplier;
         }
         return total;
     }

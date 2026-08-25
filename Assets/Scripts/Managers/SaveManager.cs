@@ -5,11 +5,8 @@ using System.Collections.Generic;
 public class GameSaveData
 {
     public double totalDoner;
-    public List<int> workerCounts = new List<int>(); 
-    public List<int> workerTiers = new List<int>();  
-    public List<int> workerXPs = new List<int>();    
-    
-    public List<bool> upgradePurchased = new List<bool>(); // YENİ: Upgradeler tek seferlik oldu
+    public List<int> workerLevels = new List<int>(); 
+    public List<bool> upgradePurchased = new List<bool>(); 
 }
 
 public class SaveManager : MonoBehaviour
@@ -33,20 +30,14 @@ public class SaveManager : MonoBehaviour
         if (workerMgr != null)
         {
             foreach (var worker in workerMgr.workerList)
-            {
-                data.workerCounts.Add(worker.purchaseCount);
-                data.workerTiers.Add(worker.tier);
-                data.workerXPs.Add(worker.currentXP);
-            }
+                data.workerLevels.Add(worker.level);
         }
 
         UpgradeManager upgradeMgr = FindAnyObjectByType<UpgradeManager>();
         if (upgradeMgr != null)
         {
             foreach (var upgrade in upgradeMgr.upgradeList)
-            {
                 data.upgradePurchased.Add(upgrade.isPurchased);
-            }
         }
         
         PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
@@ -56,9 +47,7 @@ public class SaveManager : MonoBehaviour
     public GameSaveData LoadGame()
     {
         if (PlayerPrefs.HasKey("DonerSave"))
-        {
             return JsonUtility.FromJson<GameSaveData>(PlayerPrefs.GetString("DonerSave"));
-        }
         return null; 
     }
 
