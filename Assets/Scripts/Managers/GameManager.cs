@@ -11,13 +11,14 @@ public class GameManager : MonoBehaviour
     public double clickPower = 1;
     public double productionPerSecond = 0;
 
-    [Header("Prestige Sistemi (Melek Yatirimci)")]
+    [Header("Prestij: ALTIN MASA (kalici para)")]
     public double lifetimeDoner = 0;
-    public int    goldenDoner = 0;
-    public int    pendingGoldenDoner = 0;
-    [Tooltip("Her Altin Doner kac carpan versin. 0.03 = +%3")]
-    public float  prestigeBonus = 0.03f;
-    [Tooltip("Puan = kupkok(lifetime / bu deger)")]
+    [Tooltip("Harcanabilir Altin Masa. Prestij magazasinda harcanir.")]
+    public int    prestigePoints = 0;
+    [Tooltip("Magazada harcanmis toplam Altin Masa - bekleyen puan hesabi icin.")]
+    public int    prestigeSpent = 0;
+    public int    pendingPrestige = 0;
+    [Tooltip("Altin Masa = kupkok(lifetime / bu deger)")]
     public double prestigeDivisor = 1e12;
 
     [Header("Offline Kazanc")]
@@ -30,10 +31,16 @@ public class GameManager : MonoBehaviour
     [Tooltip("Boostun bitis zamani (Unix saniye, UTC).")]
     public long   boostEndsAtUnix = 0;
 
+    [Header("Altin Doner Olayi (ekranda beliren, gecici odul)")]
+    [Tooltip("Altin Donerden gelen gecici carpan. Reklam boostuyla CARPILIR.")]
+    public double eventMultiplier = 1.0;
+    public long   eventEndsAtUnix = 0;
+
     [HideInInspector] public double baseClickPower = 1;
     [HideInInspector] public double clickMultiplier = 1;
     [HideInInspector] public double basePassiveProduction = 0;
     [HideInInspector] public double passiveMultiplier = 1;
+    [HideInInspector] public double clickPercentOfProduction = 0;
 
     public UIManager uiManager;
 
@@ -43,8 +50,14 @@ public class GameManager : MonoBehaviour
     public static long NowUnix() => System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
     public bool   BoostActive      => boostMultiplier > 1.0 && NowUnix() < boostEndsAtUnix;
-    public double ActiveBoost      => BoostActive ? boostMultiplier : 1.0;
     public int    BoostSecondsLeft => BoostActive ? (int)(boostEndsAtUnix - NowUnix()) : 0;
+
+    public bool   EventActive      => eventMultiplier > 1.0 && NowUnix() < eventEndsAtUnix;
+    public int    EventSecondsLeft => EventActive ? (int)(eventEndsAtUnix - NowUnix()) : 0;
+
+    /// <summary>Reklam boostu ve Altin Doner olayi carpilarak uygulanir.</summary>
+    public double ActiveBoost => (BoostActive ? boostMultiplier : 1.0)
+                               * (EventActive ? eventMultiplier : 1.0);
 
     private void Awake()
     {
@@ -60,7 +73,8 @@ public class GameManager : MonoBehaviour
         {
             totalDoner      = saveData.totalDoner;
             lifetimeDoner   = saveData.lifetimeDoner;
-            goldenDoner     = saveData.goldenDoner;
+            prestigePoints     = saveData.prestigePoints;
+            prestigeSpent     = saveData.prestigeSpent;
             boostMultiplier = saveData.boostMultiplier > 1.0 ? saveData.boostMultiplier : 1.0;
             boostEndsAtUnix = saveData.boostEndsAtUnix;
             lastTicks       = saveData.lastSaveTicks;
@@ -91,7 +105,7 @@ public class GameManager : MonoBehaviour
         if (uiTick < 0.2f) return;
         uiTick = 0f;
 
-        bool boosted = BoostActive;
+        bool boosted = BoostActive || EventActive;
         if (boosted != lastBoostState) { lastBoostState = boosted; RecalculateStats(); }
 
         UpdatePrestigeCalculations();
@@ -111,10 +125,10 @@ public class GameManager : MonoBehaviour
         double away = (System.DateTime.UtcNow - last).TotalSeconds;
         if (away < 60) yield break;                       // 1 dakikadan azsa rahatsiz etme
 
-        double capSeconds = offlineCapHours * 3600.0;
+        double capSeconds = (offlineCapHours + PrestigeManager.OfflineHours()) * 3600.0;
         bool   capped     = away > capSeconds;
         double counted    = System.Math.Min(away, capSeconds);
-        double earned     = productionPerSecond * counted;   // tam hizda calisir
+        double earned     = productionPerSecond * counted * PrestigeManager.OfflineMult();   // tam hizda calisir
 
         if (earned <= 0) yield break;
 
@@ -139,15 +153,23 @@ public class GameManager : MonoBehaviour
     }
 
 
+    /// <summary>Prestij magazasi ve HUD sayaclarini tazeler.</summary>
+    public void RefreshPrestigeUI()
+    {
+        if (uiManager != null) uiManager.UpdatePrestigeUI(prestigePoints, pendingPrestige);
+        if (PrestigeManager.Instance != null) PrestigeManager.Instance.RefreshAffordability();
+    }
+
     private void UpdatePrestigeCalculations()
     {
         // Kup kok: karekokten daha yavas buyur, boylece prestij gec oyunda da anlamli kalir
-        double totalGoldenEarnedEver = lifetimeDoner <= 0 ? 0
+        double totalPrestigeEver = lifetimeDoner <= 0 ? 0
             : System.Math.Floor(System.Math.Pow(lifetimeDoner / prestigeDivisor, 1.0 / 3.0));
-        pendingGoldenDoner = (int)totalGoldenEarnedEver - goldenDoner;
-        if (pendingGoldenDoner < 0) pendingGoldenDoner = 0;
+        // Kesedeki + harcanmis = bugune kadar kazanilan. Harcamak yeni puan kazandirmaz.
+        pendingPrestige = (int)totalPrestigeEver - (prestigePoints + prestigeSpent);
+        if (pendingPrestige < 0) pendingPrestige = 0;
 
-        if (uiManager != null) uiManager.UpdatePrestigeUI(goldenDoner, pendingGoldenDoner);
+        RefreshPrestigeUI();
     }
 
     public void RecalculateStats()
@@ -155,11 +177,17 @@ public class GameManager : MonoBehaviour
         double workerProduction = 0;
         if (WorkerManager.Instance != null) workerProduction = WorkerManager.Instance.GetTotalProduction();
 
-        double globalPrestigeMultiplier = 1.0 + (goldenDoner * prestigeBonus);
+        // Prestij bonusu artik puan sayisindan degil, magazada ALINANLARDAN geliyor.
+        double globalPrestigeMultiplier = PrestigeManager.GlobalMult();
 
-        clickPower = baseClickPower * clickMultiplier * globalPrestigeMultiplier;
         productionPerSecond = (basePassiveProduction + workerProduction)
                             * passiveMultiplier * globalPrestigeMultiplier * ActiveBoost;
+
+        // Tiklama gucu = sabit taban (carpanlarla buyur) + uretimin bir yuzdesi.
+        // YUZDE TERIMI clickMultiplier ILE CARPILMAZ - ikisi carpilirsa tek tiklama
+        // saniyelik uretimin yuz binlerce katini verir ve oyun dakikalar icinde biter.
+        clickPower = baseClickPower * clickMultiplier * PrestigeManager.ClickMult()
+                   + productionPerSecond * (clickPercentOfProduction + PrestigeManager.ClickPercent());
 
         if (uiManager != null) uiManager.UpdateRateText(productionPerSecond);
     }
@@ -172,6 +200,21 @@ public class GameManager : MonoBehaviour
         lastBoostState  = true;
         RecalculateStats();
         if (SaveManager.Instance != null) SaveManager.Instance.SaveGame();
+    }
+
+    /// <summary>Altin Doner odulu: kisa sureli guclu carpan.</summary>
+    public void GrantEventBoost(double multiplier, float seconds)
+    {
+        eventMultiplier = multiplier;
+        eventEndsAtUnix = NowUnix() + (long)seconds;
+        lastBoostState  = true;
+        RecalculateStats();
+    }
+
+    /// <summary>Altin Doner odulu: pesin dilim (saniye cinsinden uretim).</summary>
+    public void GrantInstantSeconds(double seconds)
+    {
+        AddDoner(productionPerSecond * seconds);
     }
 
     private void RefreshShopUI()
@@ -194,10 +237,10 @@ public class GameManager : MonoBehaviour
 
     public void PrestigeAscension()
     {
-        if (pendingGoldenDoner > 0)
+        if (pendingPrestige > 0)
         {
-            goldenDoner += pendingGoldenDoner;
-            SaveManager.Instance.PrestigeSave(goldenDoner, lifetimeDoner);
+            prestigePoints += pendingPrestige;
+            SaveManager.Instance.PrestigeSave();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
         else

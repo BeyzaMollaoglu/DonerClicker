@@ -20,6 +20,49 @@ public class UIRainEffect : MonoBehaviour
     [Tooltip("Düşerken kendi etrafında yavaşça dönsün mü?")]
     public bool addRotation = true; 
 
+    [Header("EN SEYREK hal (oyunun basi)")]
+    [Tooltip("Damlalar arasi bekleme. Buyuk = daha seyrek.")]
+    public float slowMinSpawnDelay = 7f;
+    public float slowMaxSpawnDelay = 15f;
+    [Tooltip("Dusus suresi. Buyuk = daha agir.")]
+    public float slowMinFallDuration = 12f;
+    public float slowMaxFallDuration = 20f;
+
+    [Header("EN YOGUN hal (oyunun sonu)")]
+    public float fastMinSpawnDelay = 0.07f;
+    public float fastMaxSpawnDelay = 0.16f;
+    public float fastMinFallDuration = 1.4f;
+    public float fastMaxFallDuration = 2.6f;
+
+    [Tooltip("Ayni anda ekranda en fazla kac damla olsun (performans siniri).")]
+    public int maxAlive = 90;
+
+    int alive;
+
+    void Awake()
+    {
+        // Sahnedeki eski degerler ne olursa olsun en seyrek halden basla
+        SetIntensity(0f);
+    }
+
+    /// <summary>
+    /// 0 = oyunun basi (tek tuk, agir), 1 = oyunun sonu (saganak).
+    /// Bekleme suresi USSEL olarak kisalir - dogrusal lerp ile artis
+    /// baslarda hic hissedilmiyor, cunku 15sn ile 7sn arasi goze ayni geliyor.
+    /// </summary>
+    public void SetIntensity(float t)
+    {
+        t = Mathf.Clamp01(t);
+        minSpawnDelay   = Mathf.Lerp(Mathf.Log(slowMinSpawnDelay),   Mathf.Log(fastMinSpawnDelay),   t);
+        maxSpawnDelay   = Mathf.Lerp(Mathf.Log(slowMaxSpawnDelay),   Mathf.Log(fastMaxSpawnDelay),   t);
+        minFallDuration = Mathf.Lerp(Mathf.Log(slowMinFallDuration), Mathf.Log(fastMinFallDuration), t);
+        maxFallDuration = Mathf.Lerp(Mathf.Log(slowMaxFallDuration), Mathf.Log(fastMaxFallDuration), t);
+        minSpawnDelay   = Mathf.Exp(minSpawnDelay);
+        maxSpawnDelay   = Mathf.Exp(maxSpawnDelay);
+        minFallDuration = Mathf.Exp(minFallDuration);
+        maxFallDuration = Mathf.Exp(maxFallDuration);
+    }
+
     void Start()
     {
         StartCoroutine(RainLoop());
@@ -39,7 +82,9 @@ public class UIRainEffect : MonoBehaviour
     private void SpawnRainDrop()
     {
         if (rainPrefab == null || rainContainer == null) return;
+        if (alive >= maxAlive) return;          // performans siniri
 
+        alive++;
         GameObject drop = Instantiate(rainPrefab, rainContainer);
         drop.transform.SetAsFirstSibling();
         RectTransform rect = drop.GetComponent<RectTransform>();
@@ -58,6 +103,7 @@ public class UIRainEffect : MonoBehaviour
 
         rect.DOAnchorPosY(endY, fallSpeed).SetEase(Ease.Linear).OnComplete(() => 
         {
+            alive--;
             drop.transform.DOKill();
             Destroy(drop);
         });

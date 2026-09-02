@@ -89,10 +89,15 @@ public class UIManager : MonoBehaviour
 
         string s = "+" + FormatNumber(perSecond) + "/sn";
 
-        // Boost aktifse carpani ve kalan sureyi ayni satirda goster
+        // Aktif carpanlari ayni satirda goster
         var gm = GameManager.Instance;
-        if (gm != null && gm.BoostActive)
-            s += "   <color=#E8622C>" + gm.boostMultiplier.ToString("0.#") + "x " + ShortTime(gm.BoostSecondsLeft) + "</color>";
+        if (gm != null)
+        {
+            if (gm.EventActive)
+                s += "   <color=#F0B441>" + gm.eventMultiplier.ToString("0.#") + "x " + ShortTime(gm.EventSecondsLeft) + "</color>";
+            if (gm.BoostActive)
+                s += "   <color=#E8622C>" + gm.boostMultiplier.ToString("0.#") + "x " + ShortTime(gm.BoostSecondsLeft) + "</color>";
+        }
 
         txt_doner_rate.text = s;
     }
@@ -137,6 +142,35 @@ public class UIManager : MonoBehaviour
         offline_panel.DOScale(Vector3.one, 0.35f).SetEase(Ease.OutBack);
     }
 
+    /// <summary>Altin Doner odulu / kademe atlama gibi anlik bildirimler icin buyuk yazi.</summary>
+    public void ShowEventToast(string message, Vector2 anchoredPos)
+    {
+        if (floatingTextPrefab == null || mainCanvas == null) return;
+
+        GameObject obj = Instantiate(floatingTextPrefab, mainCanvas);
+        RectTransform rt = obj.GetComponent<RectTransform>();
+        rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
+        rt.pivot = new Vector2(0.5f, 0.5f);
+        rt.anchoredPosition = anchoredPos;
+        rt.sizeDelta = new Vector2(700f, 220f);
+
+        TextMeshProUGUI txt = obj.GetComponent<TextMeshProUGUI>();
+        if (txt != null)
+        {
+            txt.text = message;
+            txt.enableAutoSizing = false;
+            txt.fontSize = 62f;
+            txt.alignment = TextAlignmentOptions.Center;
+            txt.color = Color.white;
+            txt.DOFade(0f, 1.1f).SetDelay(0.7f);
+        }
+
+        rt.localScale = Vector3.one * 0.6f;
+        rt.DOScale(Vector3.one, 0.35f).SetEase(Ease.OutBack);
+        rt.DOAnchorPosY(anchoredPos.y + 230f, 1.8f).SetEase(Ease.OutQuad)
+          .OnComplete(() => { if (obj != null) Destroy(obj); });
+    }
+
     public void HideOfflineReward()
     {
         if (offline_panel == null) return;
@@ -145,13 +179,18 @@ public class UIManager : MonoBehaviour
             .OnComplete(() => offline_panel.gameObject.SetActive(false));
     }
 
-    public void UpdatePrestigeUI(int currentGolden, int pendingGolden)
+    public void UpdatePrestigeUI(int currentGolden, int pendingGolden)   // Altin Masa
     {
         if (txt_prestige_chip != null)
             txt_prestige_chip.text = FormatNumber(currentGolden);
 
+        // Puan yoksa buton sonuk dursun - bosuna basip "neden olmadi" dedirtmesin
+        if (btn_reset != null) btn_reset.interactable = pendingGolden > 0;
+
         if (txt_prestige_info != null)
-            txt_prestige_info.text = $"Sahip Olunan: {FormatNumber(currentGolden)} Altın Döner\n<color=#F0B441>Reset Atarsan: +{FormatNumber(pendingGolden)} Kazanacaksın</color>";
+            txt_prestige_info.text = pendingGolden > 0
+                ? $"Reset atarsan <color=#F0B441>+{FormatNumber(pendingGolden)} Altın Maşa</color> kazanırsın.\n<color=#A38A6E>Dilimler, işçiler ve geliştirmeler sıfırlanır;\naşağıdaki kalıcı yükseltmeler kalır.</color>"
+                : $"<color=#A38A6E>Reset için henüz yeterli üretim yok.\nToplam ürettiğin dilim arttıkça Altın Maşa kazanırsın.</color>";
     }
     
     public void PlayClickFeedback(double clickAmount)

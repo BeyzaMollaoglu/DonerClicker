@@ -38,7 +38,7 @@ public class WorkerManager : MonoBehaviour
     /// <summary>Mevcut seviyeden itibaren N seviyenin TOPLAM maliyeti (geometrik seri).</summary>
     public static double CostFor(WorkerItem w, int count)
     {
-        double first = w.baseCost * System.Math.Pow(GROWTH, w.level);
+        double first = w.baseCost * System.Math.Pow(GROWTH, w.level) * PrestigeManager.WorkerCost();
         if (count <= 1) return first;
         return first * (System.Math.Pow(GROWTH, count) - 1) / (GROWTH - 1);
     }
@@ -74,6 +74,17 @@ public class WorkerManager : MonoBehaviour
         {
             for (int i = 0; i < workerList.Count; i++)
                 workerList[i].level = saveData.workerLevels[i];
+        }
+        else
+        {
+            // Yeni tur (ilk acilis ya da prestij sonrasi):
+            // "Miras Kalan Tezgah" alinmissa ilk isciler bedava seviyeyle baslar.
+            int free = PrestigeManager.StartLevels();
+            if (free > 0)
+            {
+                int n = Mathf.Min(PrestigeManager.START_WORKER_COUNT, workerList.Count);
+                for (int i = 0; i < n; i++) workerList[i].level = free;
+            }
         }
 
         for (int i = 0; i < workerList.Count; i++)

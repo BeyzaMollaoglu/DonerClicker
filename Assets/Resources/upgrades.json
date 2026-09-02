@@ -91,10 +91,10 @@
       "unlockValue": 10
     },
     {
-      "upgradeName": "Çift Bıçak (Tıklama x4)",
-      "type": 1,
+      "upgradeName": "Çift Bıçak (Tıklama = üretimin %0.4'i)",
+      "type": 5,
       "cost": 36000.0,
-      "effectAmount": 4.0,
+      "effectAmount": 0.004,
       "targetWorkerIndex": -1,
       "unlockKind": 0,
       "unlockWorker": -1,
@@ -141,10 +141,10 @@
       "unlockValue": 10
     },
     {
-      "upgradeName": "Kuantum Tıklama (Tıklama x6)",
-      "type": 1,
-      "cost": 330000.0,
-      "effectAmount": 6.0,
+      "upgradeName": "Usta Eli (Tıklama = üretimin %1'i)",
+      "type": 5,
+      "cost": 200000.0,
+      "effectAmount": 0.006,
       "targetWorkerIndex": -1,
       "unlockKind": 0,
       "unlockWorker": -1,
@@ -201,10 +201,10 @@
       "unlockValue": 10
     },
     {
-      "upgradeName": "Kozmik Parmak (Tıklama x10)",
-      "type": 1,
-      "cost": 3000000.0,
-      "effectAmount": 10.0,
+      "upgradeName": "Kuantum Tıklama (Tıklama = üretimin %1.8'i)",
+      "type": 5,
+      "cost": 3300000.0,
+      "effectAmount": 0.008,
       "targetWorkerIndex": -1,
       "unlockKind": 0,
       "unlockWorker": -1,
@@ -251,16 +251,6 @@
       "unlockValue": 0
     },
     {
-      "upgradeName": "Tanrısal Parmak (Tıklama x25)",
-      "type": 1,
-      "cost": 27000000.0,
-      "effectAmount": 25.0,
-      "targetWorkerIndex": -1,
-      "unlockKind": 0,
-      "unlockWorker": -1,
-      "unlockValue": 0
-    },
-    {
       "upgradeName": "Rota Optimizasyonu (Motorlu Kurye x2)",
       "type": 4,
       "cost": 30000000.0,
@@ -279,6 +269,16 @@
       "unlockKind": 1,
       "unlockWorker": 4,
       "unlockValue": 10
+    },
+    {
+      "upgradeName": "Bıçak Sanatı (Tıklama = üretimin %2.8'i)",
+      "type": 5,
+      "cost": 40000000.0,
+      "effectAmount": 0.01,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
       "upgradeName": "İlçe Zinciri (Global x1.3)",
@@ -311,16 +311,6 @@
       "unlockValue": 5
     },
     {
-      "upgradeName": "Multiverse Tıklaması (Tıklama x100)",
-      "type": 1,
-      "cost": 240000000.0,
-      "effectAmount": 100.0,
-      "targetWorkerIndex": -1,
-      "unlockKind": 0,
-      "unlockWorker": -1,
-      "unlockValue": 0
-    },
-    {
       "upgradeName": "Borsaya Açılma (Global x2.0)",
       "type": 3,
       "cost": 320000000.0,
@@ -339,6 +329,16 @@
       "unlockKind": 1,
       "unlockWorker": 4,
       "unlockValue": 25
+    },
+    {
+      "upgradeName": "Kozmik Parmak (Tıklama = üretimin %4'i)",
+      "type": 5,
+      "cost": 500000000.0,
+      "effectAmount": 0.012,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
       "upgradeName": "Performans Primi (Şube Müdürü x2)",
@@ -441,6 +441,16 @@
       "unlockValue": 100
     },
     {
+      "upgradeName": "Döner Büyücüsü (Tıklama = üretimin %5.4'i)",
+      "type": 5,
+      "cost": 20000000000.0,
+      "effectAmount": 0.014,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
       "upgradeName": "Sonsuz Un (Lavaş Makinesi x2)",
       "type": 4,
       "cost": 21000000000.0,
@@ -531,6 +541,16 @@
       "unlockValue": 5
     },
     {
+      "upgradeName": "Tanrısal Parmak (Tıklama = üretimin %7'i)",
+      "type": 5,
+      "cost": 800000000000.0,
+      "effectAmount": 0.016,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
       "upgradeName": "Evrensel Barış (Global x2.2)",
       "type": 3,
       "cost": 880000000000.0,
@@ -609,6 +629,16 @@
       "unlockKind": 1,
       "unlockWorker": 9,
       "unlockValue": 5
+    },
+    {
+      "upgradeName": "Kader Parmağı (Tıklama = üretimin %8.8'i)",
+      "type": 5,
+      "cost": 8000000000000.0,
+      "effectAmount": 0.018,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
       "upgradeName": "SONSUZLUK SOSU (Global x2.5)",
@@ -691,6 +721,16 @@
       "unlockValue": 5
     },
     {
+      "upgradeName": "Multiverse Tıklaması (Tıklama = üretimin %10.8'i)",
+      "type": 5,
+      "cost": 200000000000000.0,
+      "effectAmount": 0.02,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
       "upgradeName": "Kendi Kendine Öğrenme (Yapay Zeka Usta x2)",
       "type": 4,
       "cost": 220000000000000.0,
@@ -769,6 +809,16 @@
       "unlockKind": 1,
       "unlockWorker": 0,
       "unlockValue": 200
+    },
+    {
+      "upgradeName": "Sonsuz El (Tıklama = üretimin %13'i)",
+      "type": 5,
+      "cost": 3000000000000000.0,
+      "effectAmount": 0.022,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
       "upgradeName": "Warp Konvoyu (Gezegenler Arası Kargo x2)",

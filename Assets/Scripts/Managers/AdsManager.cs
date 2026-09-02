@@ -34,9 +34,18 @@ public class AdsManager : MonoBehaviour
     private void Start()
     {
         if (btn_watch_ad != null) btn_watch_ad.onClick.AddListener(WatchAd);
-        if (txt_ad_offer != null)
-            txt_ad_offer.text = $"{boostHours:0.#} saat boyunca\n<color=#F0B441>{boostMultiplier:0.#}x pasif uretim</color>";
+        RefreshOffer();
         Refresh();
+    }
+
+    /// <summary>Prestij magazasindaki "Reklam Anlasmasi" dahil guncel odul.</summary>
+    public double CurrentMultiplier => boostMultiplier + PrestigeManager.AdBoostAdd();
+
+    /// <summary>Teklif metnini tazeler - prestij kalemi alindiginda cagrilir.</summary>
+    public void RefreshOffer()
+    {
+        if (txt_ad_offer != null)
+            txt_ad_offer.text = $"{boostHours:0.#} saat boyunca\n<color=#F0B441>{CurrentMultiplier:0.#}x pasif uretim</color>";
     }
 
     private void Update()
@@ -64,7 +73,7 @@ public class AdsManager : MonoBehaviour
     private void GrantReward()
     {
         if (GameManager.Instance == null) return;
-        GameManager.Instance.GrantBoost(boostMultiplier, boostHours);
+        GameManager.Instance.GrantBoost(CurrentMultiplier, boostHours);
         Refresh();
     }
 

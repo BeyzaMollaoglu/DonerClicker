@@ -10,7 +10,9 @@ public enum UpgradeType
     ClickPowerMultiplier,
     PassiveProductionAdd,
     PassiveProductionMultiplier,
-    SpecificWorkerMultiplier
+    SpecificWorkerMultiplier,
+    /// <summary>Tiklama, saniyelik uretimin bu kadar yuzdesini de kazandirir (toplanir).</summary>
+    ClickPercentOfProduction
 }
 
 [System.Serializable]
@@ -190,12 +192,15 @@ public class UpgradeManager : MonoBehaviour
 
     private string EffectLabel(UpgradeItem item)
     {
+        if (item.type == UpgradeType.ClickPercentOfProduction)
+            return $"Tıklama: üretimin +%{item.effectAmount * 100:0.##}'i";
         string sym = (item.type == UpgradeType.ClickPowerAdd || item.type == UpgradeType.PassiveProductionAdd) ? "+" : "x";
         return $"Güç: {sym}{item.effectAmount:0.##}";
     }
 
     private string TargetLabel(UpgradeItem item)
     {
+        if (item.type == UpgradeType.ClickPercentOfProduction) return "Tıklama gücü";
         if (item.type == UpgradeType.ClickPowerMultiplier || item.type == UpgradeType.ClickPowerAdd) return "Tıklama gücü";
         if (item.type == UpgradeType.PassiveProductionMultiplier) return "Tüm üretim";
         if (item.targetWorkerIndex < 0) return "";
@@ -253,6 +258,7 @@ public class UpgradeManager : MonoBehaviour
             case UpgradeType.ClickPowerMultiplier:        GameManager.Instance.clickMultiplier      *= item.effectAmount; break;
             case UpgradeType.PassiveProductionAdd:        GameManager.Instance.basePassiveProduction+= item.effectAmount; break;
             case UpgradeType.PassiveProductionMultiplier: GameManager.Instance.passiveMultiplier    *= item.effectAmount; break;
+            case UpgradeType.ClickPercentOfProduction:    GameManager.Instance.clickPercentOfProduction += item.effectAmount; break;
         }
     }
 

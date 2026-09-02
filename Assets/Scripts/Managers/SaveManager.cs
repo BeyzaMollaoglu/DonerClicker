@@ -6,10 +6,13 @@ public class GameSaveData
 {
     public double totalDoner;
     public double lifetimeDoner;
-    public int goldenDoner;
+    public int prestigePoints;
+    /// <summary>Magazada harcanmis toplam Altin Masa - bekleyen puan hesabi icin.</summary>
+    public int prestigeSpent;
 
     public List<int> workerLevels = new List<int>();
     public List<bool> upgradePurchased = new List<bool>();
+    public List<int>  prestigeLevels   = new List<int>();
 
     // Cikis zamani - offline kazanc icin (UTC tick)
     public long lastSaveTicks;
@@ -27,7 +30,7 @@ public class SaveManager : MonoBehaviour
     public static SaveManager Instance;
 
     /// <summary>workers.json / upgrades.json degistiginde artir - eski kayitlar temizlenir.</summary>
-    public const int SAVE_VERSION = 2;
+    public const int SAVE_VERSION = 5;
 
     [Tooltip("Kac saniyede bir otomatik kayit alinsin.")]
     public float autoSaveInterval = 20f;
@@ -64,7 +67,8 @@ public class SaveManager : MonoBehaviour
 
         data.totalDoner    = GameManager.Instance.totalDoner;
         data.lifetimeDoner = GameManager.Instance.lifetimeDoner;
-        data.goldenDoner   = GameManager.Instance.goldenDoner;
+        data.prestigePoints   = GameManager.Instance.prestigePoints;
+        data.prestigeSpent   = GameManager.Instance.prestigeSpent;
         data.lastSaveTicks   = System.DateTime.UtcNow.Ticks;
         data.boostMultiplier = GameManager.Instance.boostMultiplier;
         data.boostEndsAtUnix = GameManager.Instance.boostEndsAtUnix;
@@ -78,11 +82,15 @@ public class SaveManager : MonoBehaviour
             foreach (var upgrade in UpgradeManager.Instance.upgradeList)
                 data.upgradePurchased.Add(upgrade.isPurchased);
 
+        if (PrestigeManager.Instance != null)
+            data.prestigeLevels = PrestigeManager.Instance.Levels();
+
         PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
         PlayerPrefs.Save();
     }
 
-    public GameSaveData LoadGame()
+    /// <summary>Instance hazir olmadan da okunabilsin diye statik. (PrestigeManager Awake'te cagiriyor.)</summary>
+    public static GameSaveData LoadData()
     {
         if (!PlayerPrefs.HasKey("DonerSave")) return null;
 
@@ -92,27 +100,39 @@ public class SaveManager : MonoBehaviour
         if (data.version != SAVE_VERSION)
         {
             Debug.LogWarning($"Eski kayit surumu ({data.version}), ekonomi degistigi icin sifirlaniyor.");
-            ClearSave();
+            ClearData();
             return null;
         }
         return data;
     }
 
-    public void PrestigeSave(int currentGoldenDoner, double currentLifetimeDoner)
+    public GameSaveData LoadGame() { return LoadData(); }
+
+    /// <summary>
+    /// Prestij: dilim / isci / gelistirme sifirlanir,
+    /// Altin Masa ve magazada alinanlar KALIR.
+    /// </summary>
+    public void PrestigeSave()
     {
         GameSaveData data = new GameSaveData();
-        data.lifetimeDoner = currentLifetimeDoner;
-        data.goldenDoner   = currentGoldenDoner;
+        data.lifetimeDoner = GameManager.Instance.lifetimeDoner;
+        data.prestigePoints   = GameManager.Instance.prestigePoints;
+        data.prestigeSpent   = GameManager.Instance.prestigeSpent;
         data.totalDoner    = 0;
         data.lastSaveTicks = System.DateTime.UtcNow.Ticks;
         data.version       = SAVE_VERSION;
+
+        if (PrestigeManager.Instance != null)
+            data.prestigeLevels = PrestigeManager.Instance.Levels();
 
         PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
         PlayerPrefs.Save();
         Debug.Log("Prestige atildi, yeni kayit olusturuldu.");
     }
 
-    public void ClearSave()
+    public void ClearSave() { ClearData(); }
+
+    public static void ClearData()
     {
         if (PlayerPrefs.HasKey("DonerSave"))
         {

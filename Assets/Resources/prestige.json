@@ -1,0 +1,16 @@
+{
+  "prestige": [
+    { "pname": "Bereketli Ocak",      "pdesc": "Tüm üretim x1.10",                  "type": 0, "effect": 1.10, "baseCost": 2,    "costGrowth": 1.15, "maxLevel": 100 },
+    { "pname": "Keskin Bıçak",        "pdesc": "Tıklama gücü x1.15",                "type": 1, "effect": 1.15, "baseCost": 3,   "costGrowth": 1.60, "maxLevel": 15 },
+    { "pname": "Miras Kalan Tezgah",  "pdesc": "Resetten sonra ilk 8 işçi +3 sv.",  "type": 2, "effect": 3.0,  "baseCost": 5,   "costGrowth": 1.70, "maxLevel": 20 },
+    { "pname": "Uzun Mesai",          "pdesc": "Çevrimdışı süre +2 saat",           "type": 3, "effect": 2.0,  "baseCost": 4,   "costGrowth": 2.00, "maxLevel": 8  },
+    { "pname": "Gece Vardiyası",      "pdesc": "Çevrimdışı kazanç x1.06",           "type": 4, "effect": 1.06, "baseCost": 6,   "costGrowth": 1.80, "maxLevel": 10 },
+    { "pname": "Altın Koku",          "pdesc": "Ekrandaki Altın Döner %6 sık gelir",           "type": 5, "effect": 0.94, "baseCost": 8,   "costGrowth": 1.90, "maxLevel": 10 },
+    { "pname": "Cömert Usta",         "pdesc": "Altın Döner ödülü x1.20 güçlenir",           "type": 6, "effect": 1.20, "baseCost": 8,   "costGrowth": 1.85, "maxLevel": 10 },
+    { "pname": "Reklam Anlaşması",    "pdesc": "Reklam boostu +0.5x",               "type": 7, "effect": 0.5,  "baseCost": 10,  "costGrowth": 2.20, "maxLevel": 6  },
+    { "pname": "Parmak Kası",         "pdesc": "Tıklama: üretimin +%1'i",           "type": 8, "effect": 0.01, "baseCost": 12,  "costGrowth": 1.90, "maxLevel": 10 },
+    { "pname": "Toptancı Dostu",      "pdesc": "İşçi maliyeti -%4",                 "type": 9, "effect": 0.96, "baseCost": 9,   "costGrowth": 1.75, "maxLevel": 15 },
+    { "pname": "Baharat Sırrı",       "pdesc": "Tüm üretim x1.5",                   "type": 0, "effect": 1.5,  "baseCost": 200,  "costGrowth": 1.90, "maxLevel": 25  },
+    { "pname": "Efsanevi Şiş",        "pdesc": "Tüm üretim x3",                     "type": 0, "effect": 3.0,  "baseCost": 5000, "costGrowth": 2.40, "maxLevel": 20  }
+  ]
+}
