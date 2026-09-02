@@ -92,13 +92,13 @@ public class WorkerManager : MonoBehaviour
                 worker.workerName,
                 $"Seviye {worker.level}",
                 $"{UIManager.FormatNumber(currentTotalBoost)}/sn   <color=#9CB84A>> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>",
-                $"{UIManager.FormatNumber(worker.currentCost)} TL");
+                $"{UIManager.FormatNumber(worker.currentCost)} dilim");
         }
         else if (worker.buttonText != null)
         {
             worker.buttonText.text = $"{worker.workerName}\nSeviye: {worker.level}\n" +
                 $"Üretim: {UIManager.FormatNumber(currentTotalBoost)}/sn\n" +
-                $"Fiyat: {UIManager.FormatNumber(worker.currentCost)} TL";
+                $"Fiyat: {UIManager.FormatNumber(worker.currentCost)} dilim";
         }
     }
 

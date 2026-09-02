@@ -103,7 +103,7 @@ public class UpgradeManager : MonoBehaviour
             else
             {
                 item.card.Set(item.upgradeName, EffectLabel(item), TargetLabel(item),
-                              $"{UIManager.FormatNumber(item.cost)} TL");
+                              $"{UIManager.FormatNumber(item.cost)} dilim");
                 item.buttonComponent.interactable = true;
             }
             return;
@@ -118,7 +118,7 @@ public class UpgradeManager : MonoBehaviour
         }
         else
         {
-            item.buttonText.text = $"{item.upgradeName}\n{EffectLabel(item)}\nMaliyet: {UIManager.FormatNumber(item.cost)} TL";
+            item.buttonText.text = $"{item.upgradeName}\n{EffectLabel(item)}\nMaliyet: {UIManager.FormatNumber(item.cost)} dilim";
             item.buttonComponent.interactable = true;
         }
     }

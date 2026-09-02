@@ -11,8 +11,12 @@ public class GameSaveData
     public List<int> workerLevels = new List<int>();
     public List<bool> upgradePurchased = new List<bool>();
 
-    // Cikis zamani - offline kazanc icin gerekecek (UTC tick)
+    // Cikis zamani - offline kazanc icin (UTC tick)
     public long lastSaveTicks;
+
+    // Reklam boostu - uygulama kapansa da devam etsin
+    public double boostMultiplier;
+    public long   boostEndsAtUnix;
 }
 
 public class SaveManager : MonoBehaviour
@@ -55,7 +59,9 @@ public class SaveManager : MonoBehaviour
         data.totalDoner    = GameManager.Instance.totalDoner;
         data.lifetimeDoner = GameManager.Instance.lifetimeDoner;
         data.goldenDoner   = GameManager.Instance.goldenDoner;
-        data.lastSaveTicks = System.DateTime.UtcNow.Ticks;
+        data.lastSaveTicks   = System.DateTime.UtcNow.Ticks;
+        data.boostMultiplier = GameManager.Instance.boostMultiplier;
+        data.boostEndsAtUnix = GameManager.Instance.boostEndsAtUnix;
 
         if (WorkerManager.Instance != null && WorkerManager.Instance.workerList != null)
             foreach (var worker in WorkerManager.Instance.workerList)
