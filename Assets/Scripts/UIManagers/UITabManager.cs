@@ -93,10 +93,33 @@ public class UITabManager : MonoBehaviour
         activePanel = panel;
         if (btn_blocker != null) btn_blocker.gameObject.SetActive(true);
         panel.gameObject.SetActive(true);
-        
+
+        // Panel her acildiginda liste en basa donsun
+        StartCoroutine(ResetScrollRoutine(panel));
+
         panel.DOKill(); // Panel animasyonlarını çakışmaya karşı korur
         panel.anchoredPosition = new Vector2(0, -2500);
         panel.DOAnchorPos(Vector2.zero, 0.6f).SetEase(Ease.OutBack);
+    }
+
+    // Panelin icindeki ScrollRect'i en uste alir.
+    // Iki asamali: once hemen, sonra layout oturduktan sonra tekrar -
+    // cunku panel yeni aktif edildiginde Content henuz olculmemis oluyor.
+    private IEnumerator ResetScrollRoutine(RectTransform panel)
+    {
+        ScrollRect sr = panel.GetComponentInChildren<ScrollRect>(true);
+        if (sr == null) yield break;
+
+        sr.StopMovement();
+        sr.verticalNormalizedPosition = 1f;
+
+        yield return null;
+
+        if (sr != null)
+        {
+            sr.StopMovement();
+            sr.verticalNormalizedPosition = 1f;
+        }
     }
 
     private void ClosePanel(RectTransform panel)

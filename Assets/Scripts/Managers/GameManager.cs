@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         
         UpdatePrestigeCalculations();
         uiManager.UpdateTotalDonerText(totalDoner);
+        RefreshShopUI();
     }
 
     public void OnDonerClicked()
@@ -107,12 +108,21 @@ public class GameManager : MonoBehaviour
         productionPerSecond = (basePassiveProduction + workerProduction) * passiveMultiplier * globalPrestigeMultiplier;
     }
 
+    // Magazadaki kartlarin "alinabilir mi" gorunumunu tazeler.
+    // CardView durum degismediyse hicbir sey yapmaz, o yuzden sik cagrilmasi sorun degil.
+    private void RefreshShopUI()
+    {
+        if (WorkerManager.Instance  != null) WorkerManager.Instance.RefreshAffordability();
+        if (UpgradeManager.Instance != null) UpgradeManager.Instance.RefreshAffordability();
+    }
+
     public bool SpendDoner(double amount)
     {
         if (totalDoner >= amount)
         {
             totalDoner -= amount;
             uiManager.UpdateTotalDonerText(totalDoner);
+            RefreshShopUI();
             return true; 
         }
         return false; 

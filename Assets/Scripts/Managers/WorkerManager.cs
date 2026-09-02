@@ -11,11 +11,12 @@ public class WorkerItem
     public double baseCost;
     public double productionBoost;
 
-    [HideInInspector] public int level = 0; 
+    [HideInInspector] public int level = 0;
     [HideInInspector] public double currentCost;
-    
-    [HideInInspector] public Button buttonComponent; 
+
+    [HideInInspector] public Button buttonComponent;
     [HideInInspector] public TextMeshProUGUI buttonText;
+    [HideInInspector] public CardView card;
 }
 
 [System.Serializable]
@@ -42,30 +43,30 @@ public class WorkerManager : MonoBehaviour
         if (saveData != null && saveData.workerLevels.Count == workerList.Count)
         {
             for (int i = 0; i < workerList.Count; i++)
-            {
                 workerList[i].level = saveData.workerLevels[i];
-            }
         }
 
         for (int i = 0; i < workerList.Count; i++)
         {
             int index = i;
             WorkerItem worker = workerList[i];
-            
+
             GameObject newBtnObj = Instantiate(workerButtonPrefab, workerContent);
             worker.buttonComponent = newBtnObj.GetComponent<Button>();
-            worker.buttonText = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
+            worker.card            = newBtnObj.GetComponent<CardView>();
+            worker.buttonText      = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
 
             worker.buttonComponent.onClick.AddListener(() => BuyWorker(index));
             UpdateWorkerUI(worker);
         }
         GameManager.Instance.RecalculateStats();
+        RefreshAffordability();
     }
 
     private void BuyWorker(int index)
     {
         WorkerItem worker = workerList[index];
-        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level); 
+        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
 
         if (GameManager.Instance.SpendDoner(worker.currentCost))
         {
@@ -79,18 +80,35 @@ public class WorkerManager : MonoBehaviour
     {
         worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
 
-        // Sadece 1 işçinin ne kadar ürettiğini buluyoruz
-        double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(worker.workerId) : 1.0;
-        double boostPerWorker = worker.productionBoost * upgradeMultiplier;
-
-        // YENİ: Oyuncunun ŞU ANKİ seviyesiyle aldığı toplam üretim
+        double upgradeMultiplier = UpgradeManager.Instance != null
+            ? UpgradeManager.Instance.GetWorkerMultiplier(worker.workerId) : 1.0;
+        double boostPerWorker    = worker.productionBoost * upgradeMultiplier;
         double currentTotalBoost = worker.level * boostPerWorker;
+        double nextTotalBoost    = (worker.level + 1) * boostPerWorker;
 
-        // YENİ: Oyuncu 1 TANE DAHA ALIRSA üretimin ulaşacağı yeni değer
-        double nextTotalBoost = (worker.level + 1) * boostPerWorker;
+        if (worker.card != null)
+        {
+            worker.card.Set(
+                worker.workerName,
+                $"Seviye {worker.level}",
+                $"{UIManager.FormatNumber(currentTotalBoost)}/sn   <color=#7CB342>> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>",
+                $"{UIManager.FormatNumber(worker.currentCost)} TL");
+        }
+        else if (worker.buttonText != null)
+        {
+            worker.buttonText.text = $"{worker.workerName}\nSeviye: {worker.level}\n" +
+                $"Üretim: {UIManager.FormatNumber(currentTotalBoost)}/sn\n" +
+                $"Fiyat: {UIManager.FormatNumber(worker.currentCost)} TL";
+        }
+    }
 
-        // Unity'nin Rich Text (Renk) özelliğini kullanarak o harika ok işaretini ekliyoruz
-        worker.buttonText.text = $"{worker.workerName}\nSeviye: {worker.level}\nÜretim: {UIManager.FormatNumber(currentTotalBoost)}/sn <color=#00FF00>-> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>\nFiyat: {UIManager.FormatNumber(worker.currentCost)} TL";
+    /// <summary>Para degistikce cagrilir. CardView durum degismediyse hicbir sey yapmaz.</summary>
+    public void RefreshAffordability()
+    {
+        if (workerList == null || GameManager.Instance == null) return;
+        double money = GameManager.Instance.totalDoner;
+        foreach (var w in workerList)
+            if (w.card != null) w.card.SetAffordable(money >= w.currentCost);
     }
 
     public double GetTotalProduction()
@@ -98,7 +116,8 @@ public class WorkerManager : MonoBehaviour
         double total = 0;
         foreach (var w in workerList)
         {
-            double upgradeMultiplier = UpgradeManager.Instance != null ? UpgradeManager.Instance.GetWorkerMultiplier(w.workerId) : 1.0;
+            double upgradeMultiplier = UpgradeManager.Instance != null
+                ? UpgradeManager.Instance.GetWorkerMultiplier(w.workerId) : 1.0;
             total += (w.productionBoost * w.level) * upgradeMultiplier;
         }
         return total;
