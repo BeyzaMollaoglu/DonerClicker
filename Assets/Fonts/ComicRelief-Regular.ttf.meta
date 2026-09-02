@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a03a11bf31c3aab4c85e6c8e8fb7693a
+guid: 459e5117e4a185343a85b03e1037300f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Fredoka
+  - Comic Relief
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
