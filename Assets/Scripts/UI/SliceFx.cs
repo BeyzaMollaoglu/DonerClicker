@@ -12,7 +12,9 @@ public class SliceFx : MonoBehaviour
 
     [Header("Kaynak")]
     public RectTransform spawnRoot;      // dilimlerin ekleneceği kok (Canvas altinda bir obje)
-    public Sprite        sliceSprite;
+    
+    [Tooltip("Fırlayacak 6 döner parçasını buraya sürükleyin")]
+    public Sprite[] sliceSprites;        // TEK SPRITE YERINE DIZI KULLANIYORUZ
 
     [Header("Ayarlar")]
     [Tooltip("Her tiklamada kac dilim ucsun.")]
@@ -46,7 +48,7 @@ public class SliceFx : MonoBehaviour
 
     void Start()
     {
-        if (spawnRoot == null || sliceSprite == null) return;
+        if (spawnRoot == null || sliceSprites.Length == 0) return;
         for (int i = 0; i < poolSize; i++) pool.Add(Create());
     }
 
@@ -59,7 +61,11 @@ public class SliceFx : MonoBehaviour
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 0.5f);
         rt.pivot = new Vector2(0.5f, 0.5f);
         var img = go.GetComponent<Image>();
-        img.sprite = sliceSprite;
+        
+        // Başlangıçta dizideki ilk görseli ata (Burst fonksiyonunda rastgele değişecek)
+        if (sliceSprites.Length > 0)
+            img.sprite = sliceSprites[0];
+            
         img.raycastTarget = false;
         img.preserveAspect = true;
         go.SetActive(false);
@@ -69,7 +75,7 @@ public class SliceFx : MonoBehaviour
     /// <summary>Verilen ekran noktasindan dilim patlatir.</summary>
     public void Burst(Vector2 screenPos)
     {
-        if (pool.Count == 0) return;
+        if (pool.Count == 0 || sliceSprites.Length == 0) return;
 
         Vector2 local;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
@@ -78,6 +84,10 @@ public class SliceFx : MonoBehaviour
         for (int i = 0; i < perClick; i++)
         {
             var s = pool[next]; next = (next + 1) % pool.Count;
+
+            // UÇAN PARÇAYA RASTGELE GÖRSEL ATAMA KISMI
+            int randomIndex = Random.Range(0, sliceSprites.Length);
+            s.img.sprite = sliceSprites[randomIndex];
 
             float size = Random.Range(sizeMin, sizeMax);
             s.rt.sizeDelta = new Vector2(size, size * 80f / 170f);

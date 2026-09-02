@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UI; // Image bileşeni için gerekli
 using DG.Tweening;
 
 public class UIRainEffect : MonoBehaviour
@@ -8,6 +8,10 @@ public class UIRainEffect : MonoBehaviour
     [Header("Yağmur Ayarları")]
     public GameObject rainPrefab;
     public RectTransform rainContainer;
+    
+    [Header("Döner Görselleri")]
+    [Tooltip("Düşecek rastgele döner parçalarını buraya sürükleyin")]
+    public Sprite[] donerSprites; // Döner array'ini buraya taşıdık
 
     [Header("Zamanlama (Az az yağması için)")]
     public float minSpawnDelay = 1.5f;
@@ -41,15 +45,9 @@ public class UIRainEffect : MonoBehaviour
 
     void Awake()
     {
-        // Sahnedeki eski degerler ne olursa olsun en seyrek halden basla
         SetIntensity(0f);
     }
 
-    /// <summary>
-    /// 0 = oyunun basi (tek tuk, agir), 1 = oyunun sonu (saganak).
-    /// Bekleme suresi USSEL olarak kisalir - dogrusal lerp ile artis
-    /// baslarda hic hissedilmiyor, cunku 15sn ile 7sn arasi goze ayni geliyor.
-    /// </summary>
     public void SetIntensity(float t)
     {
         t = Mathf.Clamp01(t);
@@ -82,11 +80,23 @@ public class UIRainEffect : MonoBehaviour
     private void SpawnRainDrop()
     {
         if (rainPrefab == null || rainContainer == null) return;
-        if (alive >= maxAlive) return;          // performans siniri
+        if (alive >= maxAlive) return;          
 
         alive++;
         GameObject drop = Instantiate(rainPrefab, rainContainer);
         drop.transform.SetAsFirstSibling();
+        
+        // Rastgele döner görselini ata
+        if (donerSprites.Length > 0)
+        {
+            Image dropImage = drop.GetComponent<Image>();
+            if (dropImage != null)
+            {
+                int randomIndex = Random.Range(0, donerSprites.Length);
+                dropImage.sprite = donerSprites[randomIndex];
+            }
+        }
+
         RectTransform rect = drop.GetComponent<RectTransform>();
 
         float containerWidth = rainContainer.rect.width;
