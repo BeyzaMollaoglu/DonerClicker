@@ -1,113 +1,100 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-// Kaydedilecek verilerin paketleneceği şablon sınıf
 [System.Serializable]
 public class GameSaveData
 {
     public double totalDoner;
-    public double lifetimeDoner; // YENİ: Tüm zamanların kazancı (Prestige için)
-    public int goldenDoner;      // YENİ: Sahip olunan Altın Döner / Melek (Prestige Puanı)
-    
-    public List<int> workerLevels = new List<int>(); 
-    public List<bool> upgradePurchased = new List<bool>(); 
+    public double lifetimeDoner;
+    public int goldenDoner;
+
+    public List<int> workerLevels = new List<int>();
+    public List<bool> upgradePurchased = new List<bool>();
+
+    // Cikis zamani - offline kazanc icin gerekecek (UTC tick)
+    public long lastSaveTicks;
 }
 
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance;
 
+    [Tooltip("Kac saniyede bir otomatik kayit alinsin.")]
+    public float autoSaveInterval = 20f;
+
+    private float autoSaveTimer;
+
     private void Awake()
     {
-        // Singleton Kurulumu
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
-    // OYUNDAN ÇIKARKEN ÇALIŞIR
-    private void OnApplicationQuit() 
+    private void Update()
     {
-        SaveGame();
+        autoSaveTimer += Time.unscaledDeltaTime;
+        if (autoSaveTimer >= autoSaveInterval)
+        {
+            autoSaveTimer = 0f;
+            SaveGame();
+        }
     }
+
+    // Mobilde asil guvenilir olan bu ikisi.
+    // OnApplicationQuit Android'de cogu zaman hic calismaz.
+    private void OnApplicationPause(bool paused) { if (paused) SaveGame(); }
+    private void OnApplicationFocus(bool focused) { if (!focused) SaveGame(); }
+    private void OnApplicationQuit() { SaveGame(); }
 
     public void SaveGame()
     {
+        if (GameManager.Instance == null) return;   // sahne daha kurulmadiysa kaydetme
+
         GameSaveData data = new GameSaveData();
-        
-        // 1. Ana Paraları ve Prestij Verilerini Kaydet
-        data.totalDoner = GameManager.Instance.totalDoner;
+
+        data.totalDoner    = GameManager.Instance.totalDoner;
         data.lifetimeDoner = GameManager.Instance.lifetimeDoner;
-        data.goldenDoner = GameManager.Instance.goldenDoner;
+        data.goldenDoner   = GameManager.Instance.goldenDoner;
+        data.lastSaveTicks = System.DateTime.UtcNow.Ticks;
 
-        // 2. İşçi Seviyelerini Kaydet
-        WorkerManager workerMgr = FindAnyObjectByType<WorkerManager>();
-        if (workerMgr != null)
-        {
-            foreach (var worker in workerMgr.workerList)
-            {
+        if (WorkerManager.Instance != null && WorkerManager.Instance.workerList != null)
+            foreach (var worker in WorkerManager.Instance.workerList)
                 data.workerLevels.Add(worker.level);
-            }
-        }
 
-        // 3. Geliştirme Durumlarını Kaydet
-        UpgradeManager upgradeMgr = FindAnyObjectByType<UpgradeManager>();
-        if (upgradeMgr != null)
-        {
-            foreach (var upgrade in upgradeMgr.upgradeList)
-            {
+        if (UpgradeManager.Instance != null && UpgradeManager.Instance.upgradeList != null)
+            foreach (var upgrade in UpgradeManager.Instance.upgradeList)
                 data.upgradePurchased.Add(upgrade.isPurchased);
-            }
-        }
 
-        // Veriyi JSON formatına çevirip cihaza kaydet
-        string json = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString("DonerSave", json);
+        PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
         PlayerPrefs.Save();
-        
-        Debug.Log("Oyun Kaydedildi: " + json);
     }
 
-    // DİĞER MANAGER'LAR VERİLERİ OKURKEN BU FONKSİYONU ÇAĞIRACAK
     public GameSaveData LoadGame()
     {
-        if (PlayerPrefs.HasKey("DonerSave"))
-        {
-            string json = PlayerPrefs.GetString("DonerSave");
-            GameSaveData data = JsonUtility.FromJson<GameSaveData>(json);
-            Debug.Log("Kayıt Bulundu ve Yüklendi!");
-            return data;
-        }
-        
-        Debug.Log("Daha önce kayıt yapılmamış, yeni oyun başlıyor.");
-        return null; 
+        if (!PlayerPrefs.HasKey("DonerSave")) return null;
+        return JsonUtility.FromJson<GameSaveData>(PlayerPrefs.GetString("DonerSave"));
     }
 
-    // OYUNCU PRESTIGE (ASCENSION) ATTIĞINDA ÇALIŞACAK ÖZEL KAYIT
     public void PrestigeSave(int currentGoldenDoner, double currentLifetimeDoner)
     {
         GameSaveData data = new GameSaveData();
-        
-        // İşçiler, upgradeler ve totalDoner SIFIR olarak bırakılır (listeler boş kalır).
-        // Sadece tüm zamanların kazancı ve Altın Dönerler yeni oyuna aktarılır!
         data.lifetimeDoner = currentLifetimeDoner;
-        data.goldenDoner = currentGoldenDoner;
-        data.totalDoner = 0;
-        
-        string json = JsonUtility.ToJson(data);
-        PlayerPrefs.SetString("DonerSave", json);
+        data.goldenDoner   = currentGoldenDoner;
+        data.totalDoner    = 0;
+        data.lastSaveTicks = System.DateTime.UtcNow.Ticks;
+
+        PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
         PlayerPrefs.Save();
-        
-        Debug.Log("Prestige Atıldı! Yeni Kayıt Oluşturuldu: " + json);
+        Debug.Log("Prestige atildi, yeni kayit olusturuldu.");
     }
 
-    // AYARLAR MENÜSÜNDEN HARD RESET ATILIRSA ÇALIŞIR
     public void ClearSave()
     {
         if (PlayerPrefs.HasKey("DonerSave"))
         {
             PlayerPrefs.DeleteKey("DonerSave");
             PlayerPrefs.Save();
-            Debug.Log("Kayıt tamamen silindi!");
+            Debug.Log("Kayit tamamen silindi.");
         }
     }
 }

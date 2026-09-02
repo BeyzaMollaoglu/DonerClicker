@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
 {
     [Header("Ana Arayüz")]
     public TextMeshProUGUI txt_doner_count;
+    public TextMeshProUGUI txt_doner_rate;
+    public TextMeshProUGUI txt_prestige_chip;
     public Button button_icon_doner;
     public GameObject floatingTextPrefab;
     public Transform mainCanvas;
@@ -40,10 +42,19 @@ public class UIManager : MonoBehaviour
         if (txt_doner_count != null) txt_doner_count.text = FormatNumber(System.Math.Floor(amount));
     }
 
+    public void UpdateRateText(double perSecond)
+    {
+        if (txt_doner_rate == null) return;
+        txt_doner_rate.text = perSecond > 0 ? "+" + FormatNumber(perSecond) + "/sn" : "";
+    }
+
     public void UpdatePrestigeUI(int currentGolden, int pendingGolden)
     {
+        if (txt_prestige_chip != null)
+            txt_prestige_chip.text = FormatNumber(currentGolden);
+
         if (txt_prestige_info != null)
-            txt_prestige_info.text = $"Sahip Olunan: {FormatNumber(currentGolden)} Altın Döner\n<color=#FFD700>Reset Atarsan: +{FormatNumber(pendingGolden)} Kazanacaksın</color>";
+            txt_prestige_info.text = $"Sahip Olunan: {FormatNumber(currentGolden)} Altın Döner\n<color=#F0B441>Reset Atarsan: +{FormatNumber(pendingGolden)} Kazanacaksın</color>";
     }
     
     public void PlayClickFeedback(double clickAmount)

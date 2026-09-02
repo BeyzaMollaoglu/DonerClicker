@@ -20,15 +20,15 @@ public class CardView : MonoBehaviour
     public TextMeshProUGUI txtDetail;  // "0,4/sn > 0,5/sn"
     public TextMeshProUGUI txtPrice;
 
-    static readonly Color BorderOn  = new Color(0.960f, 0.772f, 0.258f);
-    static readonly Color BorderOff = new Color(0.313f, 0.235f, 0.188f);
-    static readonly Color FillOn    = new Color(0.290f, 0.180f, 0.109f);
-    static readonly Color FillOff   = new Color(0.203f, 0.141f, 0.109f);
-    static readonly Color IconOn    = new Color(0.909f, 0.384f, 0.172f);
-    static readonly Color IconOff   = new Color(0.352f, 0.258f, 0.196f);
-    static readonly Color TextOn    = new Color(1.000f, 0.952f, 0.878f);
-    static readonly Color TextOff   = new Color(0.588f, 0.486f, 0.411f);
-    static readonly Color SubColor  = new Color(0.588f, 0.486f, 0.411f);
+    static readonly Color BorderOn  = new Color(0.941f, 0.706f, 0.255f);   // #F0B441 altin
+    static readonly Color BorderOff = new Color(0.306f, 0.200f, 0.125f);   // #4E3320 sonuk cerceve
+    static readonly Color FillOn    = new Color(0.259f, 0.153f, 0.078f);   // #422714 kart zemini
+    static readonly Color FillOff   = new Color(0.165f, 0.102f, 0.071f);   // #2A1A12
+    static readonly Color IconOn    = new Color(0.851f, 0.380f, 0.169f);   // #D9612B ates
+    static readonly Color IconOff   = new Color(0.298f, 0.204f, 0.141f);   // #4C3424
+    static readonly Color TextOn    = new Color(0.969f, 0.906f, 0.808f);   // #F7E7CE krem
+    static readonly Color TextOff   = new Color(0.639f, 0.541f, 0.431f);   // #A38A6E
+    static readonly Color SubColor  = new Color(0.639f, 0.541f, 0.431f);
 
     int lastState = -1;   // -1 hic ayarlanmadi, 0 alinamaz, 1 alinabilir
 

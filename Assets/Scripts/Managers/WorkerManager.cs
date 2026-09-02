@@ -91,7 +91,7 @@ public class WorkerManager : MonoBehaviour
             worker.card.Set(
                 worker.workerName,
                 $"Seviye {worker.level}",
-                $"{UIManager.FormatNumber(currentTotalBoost)}/sn   <color=#7CB342>> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>",
+                $"{UIManager.FormatNumber(currentTotalBoost)}/sn   <color=#9CB84A>> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>",
                 $"{UIManager.FormatNumber(worker.currentCost)} TL");
         }
         else if (worker.buttonText != null)

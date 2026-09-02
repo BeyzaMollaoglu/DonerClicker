@@ -106,6 +106,8 @@ public class GameManager : MonoBehaviour
         // Hem tıklama gücünü hem pasif üretimi bu devasa çarpanla genişlet
         clickPower = baseClickPower * clickMultiplier * globalPrestigeMultiplier;
         productionPerSecond = (basePassiveProduction + workerProduction) * passiveMultiplier * globalPrestigeMultiplier;
+
+        if (uiManager != null) uiManager.UpdateRateText(productionPerSecond);
     }
 
     // Magazadaki kartlarin "alinabilir mi" gorunumunu tazeler.

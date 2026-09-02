@@ -158,7 +158,7 @@ public class UpgradeManager : MonoBehaviour
         item.buttonComponent.interactable = false;
 
         if (item.card != null && item.card.txtDetail != null)
-            item.card.txtDetail.text = "<color=#FF5555>Önce işçiyi satın al!</color>";
+            item.card.txtDetail.text = "<color=#E8553A>Önce işçiyi satın al!</color>";
         else if (item.buttonText != null)
             item.buttonText.text = "<color=red>ÖNCE İŞÇİYİ SATIN AL!</color>";
 

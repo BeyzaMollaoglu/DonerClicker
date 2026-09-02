@@ -49,6 +49,13 @@ public class UITabManager : MonoBehaviour
             int index = i; 
             if (tabs[i].tabButton != null)
                 tabs[i].tabButton.onClick.AddListener(() => SelectTab(index));
+
+            // Panel basligindaki X butonunu bul ve bagla
+            if (tabs[i].linkedPanel != null)
+            {
+                foreach (var b in tabs[i].linkedPanel.GetComponentsInChildren<Button>(true))
+                    if (b.name == "btn_panel_close") b.onClick.AddListener(CloseActivePanel);
+            }
         }
 
         yield return null; 
