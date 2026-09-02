@@ -15,7 +15,10 @@ public class GameManager : MonoBehaviour
     public double lifetimeDoner = 0;
     public int    goldenDoner = 0;
     public int    pendingGoldenDoner = 0;
-    public float  prestigeBonus = 0.02f;
+    [Tooltip("Her Altin Doner kac carpan versin. 0.03 = +%3")]
+    public float  prestigeBonus = 0.03f;
+    [Tooltip("Puan = kupkok(lifetime / bu deger)")]
+    public double prestigeDivisor = 1e12;
 
     [Header("Offline Kazanc")]
     [Tooltip("Oyuncu yokken en fazla kac saat uretim islesin.")]
@@ -138,7 +141,9 @@ public class GameManager : MonoBehaviour
 
     private void UpdatePrestigeCalculations()
     {
-        double totalGoldenEarnedEver = System.Math.Floor(System.Math.Sqrt(lifetimeDoner / 1000000000f));
+        // Kup kok: karekokten daha yavas buyur, boylece prestij gec oyunda da anlamli kalir
+        double totalGoldenEarnedEver = lifetimeDoner <= 0 ? 0
+            : System.Math.Floor(System.Math.Pow(lifetimeDoner / prestigeDivisor, 1.0 / 3.0));
         pendingGoldenDoner = (int)totalGoldenEarnedEver - goldenDoner;
         if (pendingGoldenDoner < 0) pendingGoldenDoner = 0;
 

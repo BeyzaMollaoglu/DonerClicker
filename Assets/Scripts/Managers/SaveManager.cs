@@ -17,11 +17,17 @@ public class GameSaveData
     // Reklam boostu - uygulama kapansa da devam etsin
     public double boostMultiplier;
     public long   boostEndsAtUnix;
+
+    // Ekonomi degistiginde eski kayit gecersiz olsun
+    public int version;
 }
 
 public class SaveManager : MonoBehaviour
 {
     public static SaveManager Instance;
+
+    /// <summary>workers.json / upgrades.json degistiginde artir - eski kayitlar temizlenir.</summary>
+    public const int SAVE_VERSION = 2;
 
     [Tooltip("Kac saniyede bir otomatik kayit alinsin.")]
     public float autoSaveInterval = 20f;
@@ -62,6 +68,7 @@ public class SaveManager : MonoBehaviour
         data.lastSaveTicks   = System.DateTime.UtcNow.Ticks;
         data.boostMultiplier = GameManager.Instance.boostMultiplier;
         data.boostEndsAtUnix = GameManager.Instance.boostEndsAtUnix;
+        data.version         = SAVE_VERSION;
 
         if (WorkerManager.Instance != null && WorkerManager.Instance.workerList != null)
             foreach (var worker in WorkerManager.Instance.workerList)
@@ -78,7 +85,17 @@ public class SaveManager : MonoBehaviour
     public GameSaveData LoadGame()
     {
         if (!PlayerPrefs.HasKey("DonerSave")) return null;
-        return JsonUtility.FromJson<GameSaveData>(PlayerPrefs.GetString("DonerSave"));
+
+        GameSaveData data = JsonUtility.FromJson<GameSaveData>(PlayerPrefs.GetString("DonerSave"));
+        if (data == null) return null;
+
+        if (data.version != SAVE_VERSION)
+        {
+            Debug.LogWarning($"Eski kayit surumu ({data.version}), ekonomi degistigi icin sifirlaniyor.");
+            ClearSave();
+            return null;
+        }
+        return data;
     }
 
     public void PrestigeSave(int currentGoldenDoner, double currentLifetimeDoner)
@@ -88,6 +105,7 @@ public class SaveManager : MonoBehaviour
         data.goldenDoner   = currentGoldenDoner;
         data.totalDoner    = 0;
         data.lastSaveTicks = System.DateTime.UtcNow.Ticks;
+        data.version       = SAVE_VERSION;
 
         PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
         PlayerPrefs.Save();

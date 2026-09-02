@@ -3,247 +3,1712 @@
     {
       "upgradeName": "Bilenmiş Bıçak (Tıklama x2)",
       "type": 1,
-      "cost": 50,
+      "cost": 50.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": -1
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Stajyer Eğitimi (Çırak x2)",
+      "upgradeName": "Servis Tepsisi (Stajyer Çırak x2)",
       "type": 4,
-      "cost": 150,
+      "cost": 360.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 0
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 5
     },
     {
       "upgradeName": "Plastik Eldiven (Tıklama x2)",
       "type": 1,
-      "cost": 500,
+      "cost": 450.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": -1
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Yağlı Motor (Oto. Bıçak x2)",
+      "upgradeName": "Vardiya Çizelgesi (Stajyer Çırak x2)",
       "type": 4,
-      "cost": 1000,
+      "cost": 970.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 1
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 10
     },
     {
-      "upgradeName": "Maaş Zammı (Çırak x5)",
-      "type": 4,
-      "cost": 2500,
-      "effectAmount": 5.0,
-      "targetWorkerIndex": 0
-    },
-    {
-      "upgradeName": "Ergonomik Sap (Tıklama x5)",
+      "upgradeName": "Ergonomik Sap (Tıklama x3)",
       "type": 1,
-      "cost": 10000,
-      "effectAmount": 5.0,
-      "targetWorkerIndex": -1
+      "cost": 4000.0,
+      "effectAmount": 3.0,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Ustalık Belgesi (Usta x2)",
+      "upgradeName": "Bileme Taşı (Otomatik Bıçak x2)",
       "type": 4,
-      "cost": 15000,
+      "cost": 5100.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 2
-    },
-    {
-      "upgradeName": "Termal Çanta (Kurye x2)",
-      "type": 4,
-      "cost": 120000,
-      "effectAmount": 2.0,
-      "targetWorkerIndex": 3
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 5
     },
     {
       "upgradeName": "Gizli Sos Formülü (Global x1.5)",
       "type": 3,
-      "cost": 250000,
+      "cost": 8400.0,
       "effectAmount": 1.5,
-      "targetWorkerIndex": -1
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Taş Fırın (Lavaş x2)",
+      "upgradeName": "Çırak Akademisi (Stajyer Çırak x2)",
       "type": 4,
-      "cost": 1300000,
+      "cost": 11000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 4
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 25
     },
     {
-      "upgradeName": "Stajyer Sendikası (Çırak x100)",
+      "upgradeName": "Titanyum Ağız (Otomatik Bıçak x2)",
       "type": 4,
-      "cost": 2500000,
-      "effectAmount": 100.0,
-      "targetWorkerIndex": 0
+      "cost": 14000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 10
     },
     {
-      "upgradeName": "Kuantum Tıklama (Tıklama x10)",
+      "upgradeName": "Çift Bıçak (Tıklama x4)",
       "type": 1,
-      "cost": 5000000,
-      "effectAmount": 10.0,
-      "targetWorkerIndex": -1
+      "cost": 36000.0,
+      "effectAmount": 4.0,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Liderlik Semineri (Müdür x2)",
+      "upgradeName": "Ustalık Belgesi (Döner Ustası x2)",
       "type": 4,
-      "cost": 15000000,
+      "cost": 70000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 5
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 5
     },
     {
-      "upgradeName": "Ulusal Reklam (Global x2)",
+      "upgradeName": "Bol Malzeme (Global x1.5)",
       "type": 3,
-      "cost": 50000000,
-      "effectAmount": 2.0,
-      "targetWorkerIndex": -1
+      "cost": 120000.0,
+      "effectAmount": 1.5,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Global Yatırımcı (Franchise x2)",
+      "upgradeName": "Otomatik Yağlama (Otomatik Bıçak x2)",
       "type": 4,
-      "cost": 250000000,
+      "cost": 150000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 6
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 25
     },
     {
-      "upgradeName": "Kozmik Parmak (Tıklama x25)",
+      "upgradeName": "Şef Önlüğü (Döner Ustası x2)",
+      "type": 4,
+      "cost": 190000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Kuantum Tıklama (Tıklama x6)",
       "type": 1,
-      "cost": 1000000000,
+      "cost": 330000.0,
+      "effectAmount": 6.0,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Maaş Zammı (Stajyer Çırak x2)",
+      "type": 4,
+      "cost": 550000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Termal Çanta (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 990000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Ulusal Reklam (Global x1.8)",
+      "type": 3,
+      "cost": 1600000.0,
+      "effectAmount": 1.8,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Gizli Baharat (Döner Ustası x2)",
+      "type": 4,
+      "cost": 2100000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Turbo Motor (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 2700000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Kozmik Parmak (Tıklama x10)",
+      "type": 1,
+      "cost": 3000000.0,
+      "effectAmount": 10.0,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Mahalle Esnafı (Global x1.25)",
+      "type": 3,
+      "cost": 4900000.0,
+      "effectAmount": 1.25,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 60
+    },
+    {
+      "upgradeName": "Çift Motor (Otomatik Bıçak x2)",
+      "type": 4,
+      "cost": 7700000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Taş Fırın (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 14000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Zincir Anlaşması (Global x1.8)",
+      "type": 3,
+      "cost": 23000000.0,
+      "effectAmount": 1.8,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Tanrısal Parmak (Tıklama x25)",
+      "type": 1,
+      "cost": 27000000.0,
       "effectAmount": 25.0,
-      "targetWorkerIndex": -1
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Endüstri 4.0 (Fabrika x2)",
+      "upgradeName": "Rota Optimizasyonu (Motorlu Kurye x2)",
       "type": 4,
-      "cost": 4000000000,
+      "cost": 30000000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 7
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 25
     },
     {
-      "upgradeName": "Şirket Halka Arzı (Global x3)",
+      "upgradeName": "Çift Hazne (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 38000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "İlçe Zinciri (Global x1.3)",
       "type": 3,
-      "cost": 20000000000,
-      "effectAmount": 3.0,
-      "targetWorkerIndex": -1
+      "cost": 70000000.0,
+      "effectAmount": 1.3,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 140
     },
     {
-      "upgradeName": "Sentetik Et (Yapay Zeka x2)",
+      "upgradeName": "Kör Tadım (Döner Ustası x2)",
       "type": 4,
-      "cost": 75000000000,
+      "cost": 110000000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 8
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 50
     },
     {
-      "upgradeName": "Retro Akımı (Usta x500)",
+      "upgradeName": "Liderlik Semineri (Şube Müdürü x2)",
       "type": 4,
-      "cost": 250000000000,
-      "effectAmount": 500.0,
-      "targetWorkerIndex": 2
-    },
-    {
-      "upgradeName": "Işınlanma Ağı (Kargo x2)",
-      "type": 4,
-      "cost": 1e12,
+      "cost": 200000000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 9
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 5
     },
     {
-      "upgradeName": "Siber Tıklama (Tıklama x100)",
+      "upgradeName": "Multiverse Tıklaması (Tıklama x100)",
       "type": 1,
-      "cost": 5e12,
+      "cost": 240000000.0,
       "effectAmount": 100.0,
-      "targetWorkerIndex": -1
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Mars Şubesi (Global x5)",
+      "upgradeName": "Borsaya Açılma (Global x2.0)",
       "type": 3,
-      "cost": 2e13,
-      "effectAmount": 5.0,
-      "targetWorkerIndex": -1
-    },
-    {
-      "upgradeName": "Karanlık Madde Sosu (Sentezleyici x2)",
-      "type": 4,
-      "cost": 2e15,
+      "cost": 320000000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 10
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
     },
     {
-      "upgradeName": "Telepatik Sipariş (Kurye x1000)",
+      "upgradeName": "Otomatik Hamur (Lavaş Makinesi x2)",
       "type": 4,
-      "cost": 5e15,
-      "effectAmount": 1000.0,
-      "targetWorkerIndex": 3
-    },
-    {
-      "upgradeName": "Tanrısal Parmak (Tıklama x500)",
-      "type": 1,
-      "cost": 1e16,
-      "effectAmount": 500.0,
-      "targetWorkerIndex": -1
-    },
-    {
-      "upgradeName": "Solucan Deliği Kuryesi (Kargo x10)",
-      "type": 4,
-      "cost": 8e16,
-      "effectAmount": 10.0,
-      "targetWorkerIndex": 9
-    },
-    {
-      "upgradeName": "Boyutlar Arası Döner (Evren Şubesi x2)",
-      "type": 4,
-      "cost": 5e19,
+      "cost": 420000000.0,
       "effectAmount": 2.0,
-      "targetWorkerIndex": 11
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 25
     },
     {
-      "upgradeName": "Galaktik Federasyon (Global x10)",
-      "type": 3,
-      "cost": 1e21,
-      "effectAmount": 10.0,
-      "targetWorkerIndex": -1
-    },
-    {
-      "upgradeName": "Zaman Yolculuğu (Sentezleyici x100)",
+      "upgradeName": "Performans Primi (Şube Müdürü x2)",
       "type": 4,
-      "cost": 5e22,
-      "effectAmount": 100.0,
-      "targetWorkerIndex": 10
+      "cost": 520000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 10
     },
     {
-      "upgradeName": "Multiverse Tıklaması (Tıklama x10000)",
-      "type": 1,
-      "cost": 1e24,
-      "effectAmount": 10000.0,
-      "targetWorkerIndex": -1
-    },
-    {
-      "upgradeName": "Evrensel Barış (Global x50)",
+      "upgradeName": "Şehir Markası (Global x1.3)",
       "type": 3,
-      "cost": 1e26,
-      "effectAmount": 50.0,
-      "targetWorkerIndex": -1
+      "cost": 970000000.0,
+      "effectAmount": 1.3,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 260
     },
     {
-      "upgradeName": "Sicim Teorisi Lavaşları (Evren Şubesi x100)",
+      "upgradeName": "Çırak Sendikası (Stajyer Çırak x2)",
       "type": 4,
-      "cost": 5e27,
-      "effectAmount": 100.0,
-      "targetWorkerIndex": 11
+      "cost": 1100000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 100
     },
     {
-      "upgradeName": "Büyük Patlama Tıklaması (Tıklama x100000)",
-      "type": 1,
-      "cost": 1e29,
-      "effectAmount": 100000.0,
-      "targetWorkerIndex": -1
+      "upgradeName": "Gece Vardiyası (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 1500000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 50
     },
     {
-      "upgradeName": "SONSUZLUK SOSU (Global x1000)",
+      "upgradeName": "Ortak Mutfak (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 2700000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Mars Şubesi (Global x2.0)",
       "type": 3,
-      "cost": 1e31,
-      "effectAmount": 1000.0,
-      "targetWorkerIndex": -1
+      "cost": 4400000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Bölge Müdürlüğü (Şube Müdürü x2)",
+      "type": 4,
+      "cost": 5900000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Marka Kılavuzu (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 7100000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Bölge Devi (Global x1.35)",
+      "type": 3,
+      "cost": 13000000000.0,
+      "effectAmount": 1.35,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 420
+    },
+    {
+      "upgradeName": "Lazer Kesim (Otomatik Bıçak x2)",
+      "type": 4,
+      "cost": 15000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Sonsuz Un (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 21000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Montaj Hattı (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 39000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Galaktik Federasyon (Global x2.2)",
+      "type": 3,
+      "cost": 64000000000.0,
+      "effectAmount": 2.2,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Ulusal Tedarik (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 80000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Gece Üretimi (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 100000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Ulusal Zincir (Global x1.35)",
+      "type": 3,
+      "cost": 190000000000.0,
+      "effectAmount": 1.35,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 620
+    },
+    {
+      "upgradeName": "Usta Loncası (Döner Ustası x2)",
+      "type": 4,
+      "cost": 200000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Kurumsal Kültür (Şube Müdürü x2)",
+      "type": 4,
+      "cost": 300000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Soğuk Zincir (Merkez Depo x2)",
+      "type": 4,
+      "cost": 530000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Evrensel Barış (Global x2.2)",
+      "type": 3,
+      "cost": 880000000000.0,
+      "effectAmount": 2.2,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Robot Kollar (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 1200000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Otomatik Sayım (Merkez Depo x2)",
+      "type": 4,
+      "cost": 1400000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Ustalık Yolu (Stajyer Çırak x2)",
+      "type": 4,
+      "cost": 1700000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Kıtalar Arası (Global x1.4)",
+      "type": 3,
+      "cost": 2600000000000.0,
+      "effectAmount": 1.4,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 860
+    },
+    {
+      "upgradeName": "Kurye Filosu (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 2900000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Bayilik Ağı (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 4100000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Tarif Öğrenmesi (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 7500000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "SONSUZLUK SOSU (Global x2.5)",
+      "type": 3,
+      "cost": 12000000000000.0,
+      "effectAmount": 2.5,
+      "targetWorkerIndex": -1,
+      "unlockKind": 0,
+      "unlockWorker": -1,
+      "unlockValue": 0
+    },
+    {
+      "upgradeName": "Dev Silo (Merkez Depo x2)",
+      "type": 4,
+      "cost": 16000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Sinir Ağı v2 (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 20000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Plazma Ağzı (Otomatik Bıçak x2)",
+      "type": 4,
+      "cost": 24000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Dünya Markası (Global x1.4)",
+      "type": 3,
+      "cost": 37000000000000.0,
+      "effectAmount": 1.4,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 1150
+    },
+    {
+      "upgradeName": "Lavaş Hattı (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 41000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Sıfır Fire (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 59000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "İyon Motoru (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 100000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Kendi Kendine Öğrenme (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 220000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Solucan Deliği Rotası (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 280000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Şef Yıldızı (Döner Ustası x2)",
+      "type": 4,
+      "cost": 330000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Yıldızlar Arası (Global x1.5)",
+      "type": 3,
+      "cost": 520000000000000.0,
+      "effectAmount": 1.5,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 1500
+    },
+    {
+      "upgradeName": "Yönetim Kurulu (Şube Müdürü x2)",
+      "type": 4,
+      "cost": 570000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Akıllı Raf (Merkez Depo x2)",
+      "type": 4,
+      "cost": 810000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Yerçekimsiz Mutfak (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 1500000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Efsanevi Çırak (Stajyer Çırak x2)",
+      "type": 4,
+      "cost": 2900000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Warp Konvoyu (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 3100000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Panoramik Salon (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 3900000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Şehir Ağı (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 4700000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Galaktik Franchise (Global x1.5)",
+      "type": 3,
+      "cost": 7300000000000000.0,
+      "effectAmount": 1.5,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 1900
+    },
+    {
+      "upgradeName": "Küresel Ağ (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 7800000000000000.0,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Duygusal Tat (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 1.1e+16,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Kararlı Alan (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 2.1e+16,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Nano Keskinlik (Otomatik Bıçak x2)",
+      "type": 4,
+      "cost": 4.1e+16,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Meteor Izgarası (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 4.4e+16,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Parçacık Hızlandırıcı (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 5.5e+16,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Endüstriyel Fırın (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 6.6e+16,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Evrensel Tekel (Global x1.6)",
+      "type": 3,
+      "cost": 1e+17,
+      "effectAmount": 1.6,
+      "targetWorkerIndex": -1,
+      "unlockKind": 2,
+      "unlockWorker": -1,
+      "unlockValue": 2400
+    },
+    {
+      "upgradeName": "Karanlık Fabrika (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 1.1e+17,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Antimadde Yakıtı (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 1.6e+17,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Yıldız Ocağı (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 2.9e+17,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Efsane Tarif (Döner Ustası x2)",
+      "type": 4,
+      "cost": 5.6e+17,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Süperpozisyon Fırını (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 6.2e+17,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Nötron Bıçağı (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 7.8e+17,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Strateji Ofisi (Şube Müdürü x2)",
+      "type": 4,
+      "cost": 9.3e+17,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Anlık Sevkiyat (Merkez Depo x2)",
+      "type": 4,
+      "cost": 1.6e+18,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Güneş Fırını (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 2.2e+18,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Boyut Kapısı (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 4.1e+18,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Çırak Ordusu (Stajyer Çırak x2)",
+      "type": 4,
+      "cost": 4.5e+18,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Drone Teslimat (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 7.9e+18,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Süpernova Marine (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 8.7e+18,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Paralel Mutfaklar (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 1.1e+19,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Marka Tescili (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 1.3e+19,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Yapay Bilinç (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 2.2e+19,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Dolanık Tarif (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 3.1e+19,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "İlk Ateş (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 5.6e+19,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 5
+    },
+    {
+      "upgradeName": "Kendi Kendini Bileyen (Otomatik Bıçak x2)",
+      "type": 4,
+      "cost": 6.3e+19,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Hamur Zekası (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 1.1e+20,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Sonsuz Şube (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 1.2e+20,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Zaman Dışı Fırın (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 1.5e+20,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 10
+    },
+    {
+      "upgradeName": "Kendi Kendini Onaran (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 1.8e+20,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Galaktik Lojistik (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 3e+20,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Kara Delik Fırını (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 4.4e+20,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Ustalar Ustası (Döner Ustası x2)",
+      "type": 4,
+      "cost": 8.7e+20,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Görünmez Patron (Şube Müdürü x2)",
+      "type": 4,
+      "cost": 1.6e+21,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Mutlak Tarif (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 1.7e+21,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 25
+    },
+    {
+      "upgradeName": "Sonsuz Depo (Merkez Depo x2)",
+      "type": 4,
+      "cost": 2.5e+21,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Yörünge Zinciri (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 4.3e+21,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Ayna Evren (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 6.3e+21,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Sonsuz Vardiya (Stajyer Çırak x2)",
+      "type": 4,
+      "cost": 7.3e+21,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 0,
+      "unlockKind": 1,
+      "unlockWorker": 0,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Anlık Sevkiyat (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 1.2e+22,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Sokak Hakimiyeti (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 2.1e+22,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Süper Zeka (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 3.6e+22,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Sıfır Nokta Enerjisi (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 6e+22,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Yaratılış Közü (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 8.5e+22,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 50
+    },
+    {
+      "upgradeName": "Kesmeyen Kesik (Otomatik Bıçak x2)",
+      "type": 4,
+      "cost": 1e+23,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 1,
+      "unlockKind": 1,
+      "unlockWorker": 1,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Lavaş Şelalesi (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 1.7e+23,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Tam Otomasyon (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 3.1e+23,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Yıldız Haritası (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 4.9e+23,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Takımyıldız Menüsü (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 8.5e+23,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Döner Piri (Döner Ustası x2)",
+      "type": 4,
+      "cost": 1.4e+24,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 2,
+      "unlockKind": 1,
+      "unlockWorker": 2,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Kendi Kendini Yöneten (Şube Müdürü x2)",
+      "type": 4,
+      "cost": 2.4e+24,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Bükülmüş Alan Deposu (Merkez Depo x2)",
+      "type": 4,
+      "cost": 4.2e+24,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Halka İstasyon (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 7e+24,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Evren Tekeli (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 1.2e+25,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Zamansız Teslimat (Motorlu Kurye x2)",
+      "type": 4,
+      "cost": 2e+25,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 3,
+      "unlockKind": 1,
+      "unlockWorker": 3,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Her Köşede Şube (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 3.3e+25,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Tekillik Mutfağı (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 6e+25,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Kuantum Köpüğü (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 9.7e+25,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Sonsuzluk (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 1.6e+26,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 100
+    },
+    {
+      "upgradeName": "Ekmek Çağı (Lavaş Makinesi x2)",
+      "type": 4,
+      "cost": 2.8e+26,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 4,
+      "unlockKind": 1,
+      "unlockWorker": 4,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Fabrika Sürüsü (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 4.8e+26,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Işık Ötesi (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 8.3e+26,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Galaktik Şölen (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 1.4e+27,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Mükemmel Hiyerarşi (Şube Müdürü x2)",
+      "type": 4,
+      "cost": 3.9e+27,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 5,
+      "unlockKind": 1,
+      "unlockWorker": 5,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Stok Kehaneti (Merkez Depo x2)",
+      "type": 4,
+      "cost": 6.6e+27,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Gezegen Manzarası (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 1.2e+28,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Boyutlar Arası Menü (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 1.9e+28,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Franchise İmparatorluğu (Franchise Ağı x2)",
+      "type": 4,
+      "cost": 5.3e+28,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 6,
+      "unlockKind": 1,
+      "unlockWorker": 6,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Dijital Usta (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 9.3e+28,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Olasılık Motoru (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 1.6e+29,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Başlangıç ve Son (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 2.6e+29,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 150
+    },
+    {
+      "upgradeName": "Üretim Tanrısı (Döner Fabrikası x2)",
+      "type": 4,
+      "cost": 7.8e+29,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 7,
+      "unlockKind": 1,
+      "unlockWorker": 7,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Anlık Işınlama (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 1.3e+30,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Yıldız Hasadı (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 2.3e+30,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Tükenmeyen Ambar (Merkez Depo x2)",
+      "type": 4,
+      "cost": 1.1e+31,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 8,
+      "unlockKind": 1,
+      "unlockWorker": 8,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Yörünge İmparatorluğu (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 1.8e+31,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Sonsuz Olasılık (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 3.3e+31,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Makine Rüyası (Yapay Zeka Usta x2)",
+      "type": 4,
+      "cost": 1.5e+32,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 9,
+      "unlockKind": 1,
+      "unlockWorker": 9,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Gerçeklik Düzenleyici (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 2.5e+32,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Var Oluş Sosu (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 4.4e+32,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 200
+    },
+    {
+      "upgradeName": "Uzay Kervanı (Gezegenler Arası Kargo x2)",
+      "type": 4,
+      "cost": 2.1e+33,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 10,
+      "unlockKind": 1,
+      "unlockWorker": 10,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Samanyolu Zinciri (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 3.6e+33,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Gökyüzü Tekeli (Yörünge Lokantası x2)",
+      "type": 4,
+      "cost": 3e+34,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 11,
+      "unlockKind": 1,
+      "unlockWorker": 11,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Her Evrende Şube (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 5.1e+34,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Mutlak Sentez (Kuantum Sentezleyici x2)",
+      "type": 4,
+      "cost": 4.1e+35,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 12,
+      "unlockKind": 1,
+      "unlockWorker": 12,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Tanrısal Ocak (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 6.9e+35,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 250
+    },
+    {
+      "upgradeName": "Kozmik Ziyafet (Yıldız Sistemi Zinciri x2)",
+      "type": 4,
+      "cost": 5.8e+36,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 13,
+      "unlockKind": 1,
+      "unlockWorker": 13,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "Çokluk Efendisi (Çoklu Evren Şubesi x2)",
+      "type": 4,
+      "cost": 8.3e+37,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 14,
+      "unlockKind": 1,
+      "unlockWorker": 14,
+      "unlockValue": 300
+    },
+    {
+      "upgradeName": "SONSUZ DÖNER (Sonsuzluk Ocağı x2)",
+      "type": 4,
+      "cost": 1.1e+39,
+      "effectAmount": 2.0,
+      "targetWorkerIndex": 15,
+      "unlockKind": 1,
+      "unlockWorker": 15,
+      "unlockValue": 300
     }
   ]
 }

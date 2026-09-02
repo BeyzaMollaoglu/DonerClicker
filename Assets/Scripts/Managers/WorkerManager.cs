@@ -43,6 +43,15 @@ public class WorkerManager : MonoBehaviour
         return first * (System.Math.Pow(GROWTH, count) - 1) / (GROWTH - 1);
     }
 
+    /// <summary>Tum iscilerin seviye toplami - toplam-seviye kilometre taslari icin.</summary>
+    public int TotalLevels()
+    {
+        if (workerList == null) return 0;
+        int s = 0;
+        foreach (var w in workerList) s += w.level;
+        return s;
+    }
+
     public void SetBuyAmount(int amount)
     {
         buyAmount = Mathf.Max(1, amount);
@@ -82,6 +91,9 @@ public class WorkerManager : MonoBehaviour
         }
         GameManager.Instance.RecalculateStats();
         RefreshAffordability();
+
+        // Kayittan gelen seviyeler upgrade kilitlerini acmis olabilir
+        if (UpgradeManager.Instance != null) UpgradeManager.Instance.RefreshUnlocks();
     }
 
     private void BuyWorker(int index)
@@ -95,6 +107,9 @@ public class WorkerManager : MonoBehaviour
             worker.level += n;
             UpdateWorkerUI(worker);
             GameManager.Instance.RecalculateStats();
+
+            // Yeni seviye yeni upgrade kilidi acmis olabilir
+            if (UpgradeManager.Instance != null) UpgradeManager.Instance.RefreshUnlocks();
         }
     }
 

@@ -104,6 +104,10 @@ public class UITabManager : MonoBehaviour
         // Panel her acildiginda liste en basa donsun
         StartCoroutine(ResetScrollRoutine(panel));
 
+        // Gelistirmeler paneli acildi: sadece sekme rozetini sifirla.
+        // "YENI" etiketleri panel kapanana kadar dursun.
+        if (IsUpgradePanel(panel)) UpgradeManager.Instance.MarkAllSeen();
+
         panel.DOKill(); // Panel animasyonlarını çakışmaya karşı korur
         panel.anchoredPosition = new Vector2(0, -2500);
         panel.DOAnchorPos(Vector2.zero, 0.6f).SetEase(Ease.OutBack);
@@ -129,8 +133,17 @@ public class UITabManager : MonoBehaviour
         }
     }
 
+    private bool IsUpgradePanel(RectTransform panel)
+    {
+        var um = UpgradeManager.Instance;
+        return um != null && um.upgradeContent != null && um.upgradeContent.IsChildOf(panel);
+    }
+
     private void ClosePanel(RectTransform panel)
     {
+        // Panel kapandi - oyuncu kartlari gordu, "YENI" etiketleri kalkabilir
+        if (IsUpgradePanel(panel)) UpgradeManager.Instance.ClearNewLabels();
+
         if (btn_blocker != null) btn_blocker.gameObject.SetActive(false);
         
         panel.DOKill(); // Panel animasyonlarını çakışmaya karşı korur
