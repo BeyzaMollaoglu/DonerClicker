@@ -45,12 +45,25 @@ public class UIManager : MonoBehaviour
         if (offline_panel != null) offline_panel.gameObject.SetActive(false);
     }
 
-    float rateTick;
+    float  rateTick;
+    double targetDoner;      // gercek deger
+    double shownDoner;       // ekranda yazan deger - hedefe dogru yumusakca kayar
+    bool   counterReady;
 
     private void Update()
     {
-        // Boost geri sayimi saniyede bir tazelensin
         var gm = GameManager.Instance;
+
+        // Sayac: aninda ziplamak yerine hedefe dogru kaysin
+        if (counterReady && txt_doner_count != null && shownDoner != targetDoner)
+        {
+            double diff = targetDoner - shownDoner;
+            shownDoner += diff * Mathf.Clamp01(Time.unscaledDeltaTime * 14f);
+            if (System.Math.Abs(targetDoner - shownDoner) < 0.5) shownDoner = targetDoner;
+            txt_doner_count.text = FormatNumber(System.Math.Floor(shownDoner));
+        }
+
+        // Boost geri sayimi saniyede bir tazelensin
         if (gm == null || !gm.BoostActive) return;
         rateTick += Time.unscaledDeltaTime;
         if (rateTick >= 1f) { rateTick = 0f; UpdateRateText(gm.productionPerSecond); }
@@ -58,7 +71,15 @@ public class UIManager : MonoBehaviour
 
     public void UpdateTotalDonerText(double amount)
     {
-        if (txt_doner_count != null) txt_doner_count.text = FormatNumber(System.Math.Floor(amount));
+        targetDoner = amount;
+
+        // Ilk deger ve buyuk sicramalar (offline odulu, prestij) aninda yazilsin
+        if (!counterReady || System.Math.Abs(amount - shownDoner) > System.Math.Max(5000, amount * 0.30))
+        {
+            counterReady = true;
+            shownDoner = amount;
+            if (txt_doner_count != null) txt_doner_count.text = FormatNumber(System.Math.Floor(amount));
+        }
     }
 
     public void UpdateRateText(double perSecond)
@@ -140,6 +161,8 @@ public class UIManager : MonoBehaviour
         button_icon_doner.transform.localScale = Vector3.one * 0.9f;
         button_icon_doner.transform.DOScale(Vector3.one, 0.15f).SetEase(Ease.OutBack);
         SpawnFloatingText(clickAmount);
+
+        if (SliceFx.Instance != null) SliceFx.Instance.Burst(Input.mousePosition);
     }
 
     private void SpawnFloatingText(double amount)

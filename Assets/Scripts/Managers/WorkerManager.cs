@@ -30,6 +30,27 @@ public class WorkerManager : MonoBehaviour
     public Transform workerContent;
     [HideInInspector] public List<WorkerItem> workerList;
 
+    const double GROWTH = 1.15;
+
+    /// <summary>Kac tane birden alinacak: 1, 10 veya 100.</summary>
+    [HideInInspector] public int buyAmount = 1;
+
+    /// <summary>Mevcut seviyeden itibaren N seviyenin TOPLAM maliyeti (geometrik seri).</summary>
+    public static double CostFor(WorkerItem w, int count)
+    {
+        double first = w.baseCost * System.Math.Pow(GROWTH, w.level);
+        if (count <= 1) return first;
+        return first * (System.Math.Pow(GROWTH, count) - 1) / (GROWTH - 1);
+    }
+
+    public void SetBuyAmount(int amount)
+    {
+        buyAmount = Mathf.Max(1, amount);
+        if (workerList == null) return;
+        foreach (var w in workerList) UpdateWorkerUI(w);
+        RefreshAffordability();
+    }
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -66,11 +87,12 @@ public class WorkerManager : MonoBehaviour
     private void BuyWorker(int index)
     {
         WorkerItem worker = workerList[index];
-        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
+        int n = Mathf.Max(1, buyAmount);
+        worker.currentCost = CostFor(worker, n);
 
         if (GameManager.Instance.SpendDoner(worker.currentCost))
         {
-            worker.level++;
+            worker.level += n;
             UpdateWorkerUI(worker);
             GameManager.Instance.RecalculateStats();
         }
@@ -78,19 +100,24 @@ public class WorkerManager : MonoBehaviour
 
     public void UpdateWorkerUI(WorkerItem worker)
     {
-        worker.currentCost = worker.baseCost * Mathf.Pow(1.15f, worker.level);
+        int n = Mathf.Max(1, buyAmount);
+        worker.currentCost = CostFor(worker, n);
 
         double upgradeMultiplier = UpgradeManager.Instance != null
             ? UpgradeManager.Instance.GetWorkerMultiplier(worker.workerId) : 1.0;
         double boostPerWorker    = worker.productionBoost * upgradeMultiplier;
         double currentTotalBoost = worker.level * boostPerWorker;
-        double nextTotalBoost    = (worker.level + 1) * boostPerWorker;
+        double nextTotalBoost    = (worker.level + n) * boostPerWorker;
 
         if (worker.card != null)
         {
+            string sub = n == 1
+                ? $"Seviye {worker.level}"
+                : $"Seviye {worker.level} <color=#9CB84A>+{n}</color>";
+
             worker.card.Set(
                 worker.workerName,
-                $"Seviye {worker.level}",
+                sub,
                 $"{UIManager.FormatNumber(currentTotalBoost)}/sn   <color=#9CB84A>> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>",
                 $"{UIManager.FormatNumber(worker.currentCost)} dilim");
         }

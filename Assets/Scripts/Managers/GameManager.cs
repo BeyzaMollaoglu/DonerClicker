@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public double totalDoner = 0;
     public double clickPower = 1;
     public double productionPerSecond = 0;
-    public float  productionInterval = 1f;
 
     [Header("Prestige Sistemi (Melek Yatirimci)")]
     public double lifetimeDoner = 0;
@@ -35,7 +34,8 @@ public class GameManager : MonoBehaviour
 
     public UIManager uiManager;
 
-    bool lastBoostState = false;
+    bool  lastBoostState = false;
+    float uiTick;
 
     public static long NowUnix() => System.DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
@@ -69,7 +69,30 @@ public class GameManager : MonoBehaviour
         lastBoostState = BoostActive;
 
         StartCoroutine(OfflineRoutine(lastTicks));
-        StartCoroutine(AutoProductionLoop());
+    }
+
+    // Pasif uretim HER KAREDE birikir. Saniyede bir eklenirse sayac
+    // saniyede bir ziplayip duruyor gibi gorunuyor; kareye yayinca akici oluyor.
+    private void Update()
+    {
+        if (productionPerSecond > 0)
+        {
+            double gain = productionPerSecond * Time.deltaTime;
+            totalDoner    += gain;
+            lifetimeDoner += gain;
+            if (uiManager != null) uiManager.UpdateTotalDonerText(totalDoner);
+        }
+
+        // Pahali isler her karede degil, saniyede ~5 kez
+        uiTick += Time.deltaTime;
+        if (uiTick < 0.2f) return;
+        uiTick = 0f;
+
+        bool boosted = BoostActive;
+        if (boosted != lastBoostState) { lastBoostState = boosted; RecalculateStats(); }
+
+        UpdatePrestigeCalculations();
+        RefreshShopUI();
     }
 
     // Isci ve gelistirme Start'lari bittikten SONRA calismali, yoksa
@@ -112,19 +135,6 @@ public class GameManager : MonoBehaviour
         uiManager.PlayClickFeedback(clickPower);
     }
 
-    private IEnumerator AutoProductionLoop()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(productionInterval);
-
-            // Boost bittiyse uretimi yeniden hesapla
-            bool now = BoostActive;
-            if (now != lastBoostState) { lastBoostState = now; RecalculateStats(); }
-
-            if (productionPerSecond > 0) AddDoner(productionPerSecond * productionInterval);
-        }
-    }
 
     private void UpdatePrestigeCalculations()
     {
