@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public double passiveMultiplier = 1;
     [HideInInspector] public double clickPercentOfProduction = 0;
 
+    /// <summary>Ilk acilis rehberinin kaldigi adim. 99 = bitti. Bkz. Onboarding.cs</summary>
+    [HideInInspector] public int tutorialStep = 0;
+
     public UIManager uiManager;
 
     bool  lastBoostState = false;
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
             boostMultiplier = saveData.boostMultiplier > 1.0 ? saveData.boostMultiplier : 1.0;
             boostEndsAtUnix = saveData.boostEndsAtUnix;
             lastTicks       = saveData.lastSaveTicks;
+            tutorialStep    = saveData.tutorialStep;
         }
 
         UpdatePrestigeCalculations();

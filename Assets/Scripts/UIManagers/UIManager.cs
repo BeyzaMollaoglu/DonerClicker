@@ -50,17 +50,37 @@ public class UIManager : MonoBehaviour
     double shownDoner;       // ekranda yazan deger - hedefe dogru yumusakca kayar
     bool   counterReady;
 
+    // Sayac metnini her KAREDE yazmak pahali: her atamada yeni string uretilir
+    // ve TMP metni bastan olcer. Saniyede 30 kez yazmak gozle ayni gorunuyor
+    // ama maliyeti yariya indiriyor. Ayni metin tekrar yazilmaz.
+    float  countTick;
+    string lastCountText;
+
+    void SetCountText(string s)
+    {
+        if (txt_doner_count == null || s == lastCountText) return;
+        lastCountText = s;
+        txt_doner_count.text = s;
+    }
+
     private void Update()
     {
         var gm = GameManager.Instance;
 
-        // Sayac: aninda ziplamak yerine hedefe dogru kaysin
+        // Sayac: aninda ziplamak yerine hedefe dogru kaysin.
+        // Hesap her karede (akici olsun), ekrana yazma saniyede 30 kez.
         if (counterReady && txt_doner_count != null && shownDoner != targetDoner)
         {
             double diff = targetDoner - shownDoner;
             shownDoner += diff * Mathf.Clamp01(Time.unscaledDeltaTime * 14f);
             if (System.Math.Abs(targetDoner - shownDoner) < 0.5) shownDoner = targetDoner;
-            txt_doner_count.text = FormatNumber(System.Math.Floor(shownDoner));
+
+            countTick += Time.unscaledDeltaTime;
+            if (countTick >= 0.033f)
+            {
+                countTick = 0f;
+                SetCountText(FormatNumber(System.Math.Floor(shownDoner)));
+            }
         }
 
         // Boost geri sayimi saniyede bir tazelensin
@@ -78,7 +98,7 @@ public class UIManager : MonoBehaviour
         {
             counterReady = true;
             shownDoner = amount;
-            if (txt_doner_count != null) txt_doner_count.text = FormatNumber(System.Math.Floor(amount));
+            SetCountText(FormatNumber(System.Math.Floor(amount)));
         }
     }
 
@@ -87,19 +107,30 @@ public class UIManager : MonoBehaviour
         if (txt_doner_rate == null) return;
         if (perSecond <= 0) { txt_doner_rate.text = ""; return; }
 
-        string s = "+" + FormatNumber(perSecond) + "/sn";
-
-        // Aktif carpanlari ayni satirda goster
         var gm = GameManager.Instance;
-        if (gm != null)
-        {
-            if (gm.EventActive)
-                s += "   <color=#F0B441>" + gm.eventMultiplier.ToString("0.#") + "x " + ShortTime(gm.EventSecondsLeft) + "</color>";
-            if (gm.BoostActive)
-                s += "   <color=#E8622C>" + gm.boostMultiplier.ToString("0.#") + "x " + ShortTime(gm.BoostSecondsLeft) + "</color>";
-        }
+        bool boosted = gm != null && (gm.BoostActive || gm.EventActive);
 
-        txt_doner_rate.text = s;
+        string rate = "+" + FormatNumber(perSecond) + "/sn";
+
+        if (!boosted) { txt_doner_rate.text = rate; return; }
+
+        // ONEMLI: perSecond'a carpanlar ZATEN uygulanmis geliyor.
+        // Carpani sayinin yanina esit agirlikta yazarsak "193 x 3 mu olacak"
+        // diye okunuyordu. Cozum: sayiyi ALTIN yapip carpani sessiz bir not
+        // olarak arkasina koymak - altin renk "bu hiz suanda artirilmis"
+        // sinyalini veriyor, not da neden/ne kadar sureyle oldugunu soyluyor.
+        double mult = gm.ActiveBoost;
+
+        // Iki boost ayni anda aktifse ikisini de yazmak satiri sisiriyor.
+        // Toplam carpani ve ILK BITECEK olanin suresini gostermek hem kisa
+        // hem dogru: "su an x21'sin, 45 saniye sonra bu degisecek".
+        int left = int.MaxValue;
+        if (gm.EventActive) left = System.Math.Min(left, gm.EventSecondsLeft);
+        if (gm.BoostActive) left = System.Math.Min(left, gm.BoostSecondsLeft);
+
+        txt_doner_rate.text =
+            $"<color=#F0B441>{rate}</color>" +
+            $"   <size=85%><color=#A38A6E>×{mult:0.#}  ·  {ShortTime(left)}</color></size>";
     }
 
     /// <summary>Saniyeyi "3sa 42dk" gibi kisa metne cevirir.</summary>
@@ -189,8 +220,8 @@ public class UIManager : MonoBehaviour
 
         if (txt_prestige_info != null)
             txt_prestige_info.text = pendingGolden > 0
-                ? $"Reset atarsan <color=#F0B441>+{FormatNumber(pendingGolden)} Altın Maşa</color> kazanırsın.\n<color=#A38A6E>Dilimler, işçiler ve geliştirmeler sıfırlanır;\naşağıdaki kalıcı yükseltmeler kalır.</color>"
-                : $"<color=#A38A6E>Reset için henüz yeterli üretim yok.\nToplam ürettiğin dilim arttıkça Altın Maşa kazanırsın.</color>";
+                ? $"Prestij yaparsan <color=#F0B441>+{FormatNumber(pendingGolden)} Altın Maşa</color> kazanırsın.\n<color=#A38A6E>Dilimler, işçiler ve geliştirmeler sıfırlanır;\naşağıdaki kalıcı yükseltmeler kalır.</color>"
+                : $"<color=#A38A6E>Prestij için henüz yeterli üretim yok.\nToplam ürettiğin dilim arttıkça Altın Maşa kazanırsın.</color>";
     }
     
     public void PlayClickFeedback(double clickAmount)

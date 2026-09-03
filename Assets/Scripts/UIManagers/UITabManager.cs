@@ -33,6 +33,9 @@ public class UITabManager : MonoBehaviour
     public Color activeColor = new Color(0.2f, 0.7f, 0.1f);
     public Color inactiveColor = new Color(0.1f, 0.4f, 0.8f);
 
+    /// <summary>Su an acik bir panel var mi (onboarding ipucu gizlensin diye).</summary>
+    public bool AnyPanelOpen { get { return activePanel != null; } }
+
     private int currentTabIndex = -1;
     private float originalHeight; 
 

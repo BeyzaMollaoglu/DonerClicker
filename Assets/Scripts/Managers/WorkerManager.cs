@@ -52,6 +52,21 @@ public class WorkerManager : MonoBehaviour
         return s;
     }
 
+    /// <summary>
+    /// Hic alinmamis (seviye 0) ama artik parasi yeten isci sayisi.
+    /// "Yeni bir isci acildi" bildirimi icin - her seviye icin degil,
+    /// sadece ilk kez alinabilir hale gelenler, yoksa rozet surekli yanar.
+    /// </summary>
+    public int NewAffordableCount()
+    {
+        if (workerList == null || GameManager.Instance == null) return 0;
+        double money = GameManager.Instance.totalDoner;
+        int n = 0;
+        foreach (var w in workerList)
+            if (w.level == 0 && money >= CostFor(w, 1)) n++;
+        return n;
+    }
+
     public void SetBuyAmount(int amount)
     {
         buyAmount = Mathf.Max(1, amount);

@@ -14,6 +14,9 @@ public class GameSaveData
     public List<bool> upgradePurchased = new List<bool>();
     public List<int>  prestigeLevels   = new List<int>();
 
+    /// <summary>Ilk acilis rehberi hangi adimda. 99 = bitti.</summary>
+    public int tutorialStep;
+
     // Cikis zamani - offline kazanc icin (UTC tick)
     public long lastSaveTicks;
 
@@ -72,6 +75,7 @@ public class SaveManager : MonoBehaviour
         data.lastSaveTicks   = System.DateTime.UtcNow.Ticks;
         data.boostMultiplier = GameManager.Instance.boostMultiplier;
         data.boostEndsAtUnix = GameManager.Instance.boostEndsAtUnix;
+        data.tutorialStep    = GameManager.Instance.tutorialStep;
         data.version         = SAVE_VERSION;
 
         if (WorkerManager.Instance != null && WorkerManager.Instance.workerList != null)
@@ -119,6 +123,7 @@ public class SaveManager : MonoBehaviour
         data.prestigePoints   = GameManager.Instance.prestigePoints;
         data.prestigeSpent   = GameManager.Instance.prestigeSpent;
         data.totalDoner    = 0;
+        data.tutorialStep  = Onboarding.STEP_DONE;   // prestij sonrasi rehber tekrar cikmasin
         data.lastSaveTicks = System.DateTime.UtcNow.Ticks;
         data.version       = SAVE_VERSION;
 

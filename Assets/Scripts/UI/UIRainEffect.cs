@@ -13,13 +13,15 @@ public class UIRainEffect : MonoBehaviour
     [Tooltip("Düşecek rastgele döner parçalarını buraya sürükleyin")]
     public Sprite[] donerSprites; // Döner array'ini buraya taşıdık
 
-    [Header("Zamanlama (Az az yağması için)")]
-    public float minSpawnDelay = 1.5f;
-    public float maxSpawnDelay = 3.5f;
+    // DIKKAT: Bu dort deger her karede SetIntensity() tarafindan yeniden
+    // hesaplanir - Inspector'dan degistirmek HICBIR ISE YARAMAZ.
+    // Gercek ayarlar asagidaki slow* / fast* alanlarinda.
+    [HideInInspector] public float minSpawnDelay = 1.5f;
+    [HideInInspector] public float maxSpawnDelay = 3.5f;
+    [HideInInspector] public float minFallDuration = 8f;
+    [HideInInspector] public float maxFallDuration = 14f;
 
-    [Header("Düşüş Hızı ve Animasyon")]
-    public float minFallDuration = 8f;
-    public float maxFallDuration = 14f;
+    [Header("Düşüş Animasyonu")]
     
     [Tooltip("Düşerken kendi etrafında yavaşça dönsün mü?")]
     public bool addRotation = true; 

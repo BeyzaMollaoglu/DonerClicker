@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 /// <summary>
 /// Liste kartinin gorunumu. Manager'lar metin yazmak yerine bu component'i cagirir.
@@ -45,6 +46,10 @@ public class CardView : MonoBehaviour
     {
         int state = ok ? 1 : 0;
         if (state == lastState) return;
+
+        // Sadece "alinamaz -> alinabilir" gecisinde yan. lastState -1 iken
+        // (kart yeni dogdu) yanmamali, yoksa panel her acildiginda toplu yanip soner.
+        bool justBecameAffordable = ok && lastState == 0;
         lastState = state;
 
         if (imgBorder != null) imgBorder.color = ok ? BorderOn : BorderOff;
@@ -53,6 +58,28 @@ public class CardView : MonoBehaviour
         if (txtName   != null) txtName.color   = ok ? TextOn   : TextOff;
         if (txtDetail != null) txtDetail.color = ok ? TextOn   : TextOff;
         if (txtPrice  != null) txtPrice.color  = ok ? BorderOn : TextOff;
+
+        if (justBecameAffordable) Pulse();
+    }
+
+    /// <summary>
+    /// "Artik bunu alabilirsin" bildirimi. Layout Group scale'i yok saydigi icin
+    /// (ChildScaleWidth/Height = 0) liste kaymaz, sadece kart hafifce zipla.
+    /// </summary>
+    void Pulse()
+    {
+        RectTransform rt = transform as RectTransform;
+        if (rt == null) return;
+        rt.DOKill();
+        rt.localScale = Vector3.one;
+        rt.DOPunchScale(Vector3.one * 0.05f, 0.45f, 7, 0.7f)
+          .OnComplete(() => { if (rt != null) rt.localScale = Vector3.one; });
+    }
+
+    void OnDestroy()
+    {
+        RectTransform rt = transform as RectTransform;
+        if (rt != null) rt.DOKill();
     }
 
     /// <summary>Satin alinmis geliştirme icin sonuk gorunum.</summary>

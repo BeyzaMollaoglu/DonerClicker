@@ -28,6 +28,7 @@ public class DonerProgression : MonoBehaviour
     public Color meatFullColor = new Color(1f, 0.88f, 0.76f);
 
     float tick;
+    float age;
     float shown = -1f;
 
     void Start()
@@ -35,12 +36,17 @@ public class DonerProgression : MonoBehaviour
         Apply(Target(), true);
     }
 
+    // GameManager uretimi ilk KAREDEN SONRA hesapliyor (OfflineRoutine'de
+    // "yield return null" var). Start'ta okursak uretim 0 gorunuyor ve
+    // yumusak gecis 0'dan basladigi icin dogru yogunluga ulasmasi ~45 saniye
+    // suruyordu. Ilk 2 saniye anlik oturt, sonrasinda yumusak gec.
     void Update()
     {
+        age  += Time.deltaTime;
         tick += Time.deltaTime;
         if (tick < 0.5f) return;
         tick = 0f;
-        Apply(Target(), false);
+        Apply(Target(), age < 2f);
     }
 
     /// <summary>

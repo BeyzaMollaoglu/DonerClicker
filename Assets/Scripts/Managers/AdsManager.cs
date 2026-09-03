@@ -23,6 +23,8 @@ public class AdsManager : MonoBehaviour
     public Button           btn_watch_ad;
     public TextMeshProUGUI  txt_ad_offer;
     public TextMeshProUGUI  txt_ad_status;
+    [Tooltip("Izle butonunun uzerindeki yazi - carpan degisince guncellenir.")]
+    public TextMeshProUGUI  txt_btn_watch_ad;
 
     float tick;
 
@@ -44,8 +46,15 @@ public class AdsManager : MonoBehaviour
     /// <summary>Teklif metnini tazeler - prestij kalemi alindiginda cagrilir.</summary>
     public void RefreshOffer()
     {
+        // Carpani buyuk ve altin yaz: sekmedeki rozet de ayni sayiyi gosteriyor,
+        // oyuncu "reklam izle" degil "3x kap" diye okusun.
         if (txt_ad_offer != null)
-            txt_ad_offer.text = $"{boostHours:0.#} saat boyunca\n<color=#F0B441>{CurrentMultiplier:0.#}x pasif uretim</color>";
+            txt_ad_offer.text =
+                $"<size=200%><color=#F0B441>×{CurrentMultiplier:0.#}</color></size>\n" +
+                $"ÜRETİM HIZI\n<size=70%>{boostHours:0.#} saat boyunca - bedava</size>";
+
+        if (txt_btn_watch_ad != null)
+            txt_btn_watch_ad.text = $"×{CurrentMultiplier:0.#} AL";
     }
 
     private void Update()
@@ -63,7 +72,7 @@ public class AdsManager : MonoBehaviour
         //   if (rewardedAd != null && rewardedAd.CanShowAd())
         //       rewardedAd.Show((Reward r) => GrantReward());
         //   else
-        //       txt_ad_status.text = "Reklam hazir degil, birazdan tekrar dene.";
+        //       txt_ad_status.text = "Reklam hazır değil, birazdan tekrar dene.";
         //   return;
         // ========================================================
 
@@ -87,8 +96,8 @@ public class AdsManager : MonoBehaviour
         if (txt_ad_status != null)
         {
             txt_ad_status.text = active
-                ? $"<color=#F0B441>{gm.boostMultiplier:0.#}x aktif</color>  -  {UIManager.ShortTime(gm.BoostSecondsLeft)} kaldi"
-                : "<color=#A38A6E>Su an aktif boost yok</color>";
+                ? $"<color=#F0B441>×{gm.boostMultiplier:0.#} çalışıyor</color>  -  {UIManager.ShortTime(gm.BoostSecondsLeft)} kaldı"
+                : "<color=#9CB84A>Ödülün hazır - kısa bir video, anında hız</color>";
         }
 
         // Boost surerken tekrar izlemeye kapali: sure sifirlanmasin

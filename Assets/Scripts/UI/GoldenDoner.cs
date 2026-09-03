@@ -87,7 +87,7 @@ public class GoldenDoner : MonoBehaviour
             {
                 float secs = (float)(stormSeconds * rw);
                 gm.GrantEventBoost(stormMultiplier, secs);
-                ShowText($"<color=#F0B441>{stormMultiplier:0.#}x ÜRETİM!</color>\n{secs:0} saniye");
+                ShowText($"<color=#F0B441>×{stormMultiplier:0.#} ÜRETİM!</color>\n{secs:0} saniye");
             }
             else
             {

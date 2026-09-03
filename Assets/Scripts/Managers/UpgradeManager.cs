@@ -135,6 +135,38 @@ public class UpgradeManager : MonoBehaviour
         if (changed) { SortCards(); RefreshAffordability(); }
     }
 
+    /// <summary>Oyuncunun SU AN parasinin yettigi, alinmamis gelistirme sayisi.</summary>
+    public int AffordableCount()
+    {
+        if (upgradeList == null || GameManager.Instance == null) return 0;
+        double money = GameManager.Instance.totalDoner;
+        int n = 0;
+        foreach (var u in upgradeList)
+            if (!u.isPurchased && IsUnlocked(u) && money >= u.cost) n++;
+        return n;
+    }
+
+    /// <summary>Gelistirmeler paneli acildi mi - rehber "gordu" saysin diye.</summary>
+    [HideInInspector] public bool panelSeen = false;
+
+    /// <summary>
+    /// Sekme rozetinde gosterilecek sayi: kilidi acik, alinmamis ve
+    /// (ya yeni acilmis ya da PARASI OLAN) gelistirmeler.
+    /// Oyuncu paneli acmadan da "alabilecegim bir sey var" diye anlasin.
+    /// </summary>
+    public int AlertCount()
+    {
+        if (upgradeList == null || GameManager.Instance == null) return 0;
+        double money = GameManager.Instance.totalDoner;
+        int n = 0;
+        foreach (var u in upgradeList)
+        {
+            if (u.isPurchased || !IsUnlocked(u)) continue;
+            if (u.isUnseen || money >= u.cost) n++;
+        }
+        return n;
+    }
+
     /// <summary>Oyuncunun henuz gormedigi, kilidi yeni acilmis upgrade sayisi.</summary>
     public int NewCount()
     {
@@ -150,6 +182,7 @@ public class UpgradeManager : MonoBehaviour
     /// </summary>
     public void MarkAllSeen()
     {
+        panelSeen = true;
         if (upgradeList == null) return;
         foreach (var u in upgradeList) u.isUnseen = false;
     }
