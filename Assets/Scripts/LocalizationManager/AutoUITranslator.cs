@@ -8,14 +8,20 @@ public class AutoUITranslator : MonoBehaviour
 
     private void Start()
     {
-        TMP_Text[] allTexts = Resources.FindObjectsOfTypeAll<TMP_Text>();
-
+        // Sadece sahnede var olan yazıları bul (Gizli prefabları değil)
+        TMP_Text[] allTexts = FindObjectsByType<TMP_Text>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         foreach (TMP_Text txt in allTexts)
         {
-            if (txt.gameObject.scene.isLoaded && !string.IsNullOrWhiteSpace(txt.text))
+            if (txt != null && !string.IsNullOrWhiteSpace(txt.text))
             {
                 string cleanText = txt.text.Trim(); 
-                originalTexts[txt] = cleanText; 
+                
+                // HAYAT KURTARAN KISIM: Sadece sözlüğe eklediğimiz sabit kelimeleri hafızaya al!
+                // Böylece işçi seviyelerine, paralara veya silinen uçuşan yazılara bulaşmaz.
+                if (LocalizationManager.Instance.HasKey(cleanText))
+                {
+                    originalTexts[txt] = cleanText; 
+                }
             }
         }
         UpdateAllTexts();
@@ -40,6 +46,7 @@ public class AutoUITranslator : MonoBehaviour
             TMP_Text txt = kvp.Key;
             string originalText = kvp.Value;
 
+            // Yazı objesi gerçekten hala sahnede duruyorsa çevir
             if (txt != null)
             {
                 txt.text = LocalizationManager.Instance.GetLocalizedValue(originalText);

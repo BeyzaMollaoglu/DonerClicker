@@ -363,6 +363,12 @@ public class LocalizationManager : MonoBehaviour
         return key; // Anahtar bulunamazsa hatayı fark etmek için anahtarı döndür
     }
 
+    // Kelime sözlükte var mı diye kontrol eden metot
+    public bool HasKey(string key)
+    {
+        return localizedTexts != null && localizedTexts.ContainsKey(key);
+    }
+
     public void SetLanguage(Language newLanguage)
     {
         currentLanguage = newLanguage;
