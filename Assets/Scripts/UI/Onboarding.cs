@@ -5,14 +5,6 @@ using DG.Tweening;
 /// <summary>
 /// Ilk acilis rehberi. Oyuncu ekranda bir doner gorup "bu ne" deyip
 /// kapatmasin diye kucuk adimlarla elinden tutar, sonra bir daha gorunmez.
-///
-/// Bilerek modal DEGIL: oyunu durdurmuyor, dokunmayi engellemiyor, buton yok.
-/// Sadece alt tarafta bir ipucu serit ve ilgili sekme ikonunun nabzi.
-/// Her adim oyuncu isi yapinca kendiliginden kapaniyor.
-///
-/// Bir adim "sirasi gelmis" olabilir ama GOSTERILMEYEBILIR: mesela
-/// gelistirme ipucu, parasi yetene kadar gizli bekler. Boylece oyuncu
-/// bos panele yonlendirilmez.
 /// </summary>
 public class Onboarding : MonoBehaviour
 {
@@ -37,15 +29,16 @@ public class Onboarding : MonoBehaviour
     public UITabManager tabManager;
 
     [Header("Sure sinirlari (saniye)")]
-    [Tooltip("Uretim ipucu bu kadar sonra kendiliginden gecer.")]
     public float produceSeconds = 12f;
-    [Tooltip("Gelistirme / prestij ipucu ilgilenilmezse bu kadar sonra kapanir.")]
     public float ignoreSeconds = 45f;
 
     float tick;
-    float stepAge;                 // ipucu KAC SANIYEDIR EKRANDA (gizliyken islemez)
+    float stepAge;                 
     int   shownStep = -1;
     RectTransform pulsing;
+
+    private void OnEnable() { LocalizationManager.OnLanguageChanged += OnLanguageUpdated; }
+    private void OnDisable() { LocalizationManager.OnLanguageChanged -= OnLanguageUpdated; }
 
     void Start()
     {
@@ -71,10 +64,6 @@ public class Onboarding : MonoBehaviour
         set { if (GameManager.Instance != null) GameManager.Instance.tutorialStep = value; }
     }
 
-    /// <summary>
-    /// Dongu icinde: devam eden bir oyuncunun kaydi yuklendiginde butun
-    /// adimlar TEK tikta gecilsin, ipucu bir an bile parlamasin.
-    /// </summary>
     void Advance()
     {
         int before = Step;
@@ -97,56 +86,53 @@ public class Onboarding : MonoBehaviour
         switch (Step)
         {
             case STEP_TAP:
-                // Ilk isciyi alacak parayi kestiyse gorevi anladi demektir
                 if (gm.totalDoner >= WorkerManager.CostFor(wm.workerList[0], 1)) Step = STEP_WORKER;
                 break;
-
             case STEP_WORKER:
                 if (wm.TotalLevels() > 0) Step = STEP_PRODUCE;
                 break;
-
             case STEP_PRODUCE:
-                // Alinacak bir gelistirme cikar cikmaz sonraki ipucuna gec
                 if (um != null && um.AffordableCount() > 0) { Step = STEP_UPGRADE; break; }
                 if (stepAge > produceSeconds) Step = STEP_UPGRADE;
                 break;
-
             case STEP_UPGRADE:
                 if (um == null || um.upgradeList == null) { Step = STEP_PRESTIGE; break; }
                 foreach (var u in um.upgradeList)
                     if (u.isPurchased) { Step = STEP_PRESTIGE; break; }
 
-                // Panele bakti - yerini ogrendi, artik dirtmeyelim
                 if (Step == STEP_UPGRADE && um.panelSeen) Step = STEP_PRESTIGE;
                 if (Step == STEP_UPGRADE && stepAge > ignoreSeconds) Step = STEP_PRESTIGE;
                 break;
-
             case STEP_PRESTIGE:
-                // Prestij attiysa isi anladi
                 if (gm.prestigePoints + gm.prestigeSpent > 0) Step = STEP_DONE;
                 else if (stepAge > ignoreSeconds) Step = STEP_DONE;
                 break;
         }
     }
 
-    /// <summary>Bu adimin ipucu SU AN gosterilmeli mi (sirasi gelmis olsa bile)?</summary>
     bool ReadyToShow(int s)
     {
         var gm = GameManager.Instance;
         switch (s)
         {
             case STEP_UPGRADE:
-                // Parasi yetmiyorsa bos panele yonlendirme
                 var um = UpgradeManager.Instance;
                 return um != null && um.AffordableCount() > 0;
-
             case STEP_PRESTIGE:
-                // Ilk prestij hakki dogana kadar sessiz bekle (saatler surebilir)
                 return gm != null && gm.pendingPrestige > 0;
         }
         return true;
     }
 
+    private void OnLanguageUpdated() 
+    { 
+        if (shownStep >= 0 && tipRoot != null && tipRoot.gameObject.activeSelf) 
+        {
+            ApplyTextForStep(shownStep);
+        }
+    }
+
+    // İŞTE EKSİK OLAN APPLY METODU BURADA:
     void Apply()
     {
         int s = Step;
@@ -164,32 +150,33 @@ public class Onboarding : MonoBehaviour
 
         StopPulse();
 
-        // Bu adima YENI girdik: onceki panel ziyaretleri sayilmasin
         if (s == STEP_UPGRADE && UpgradeManager.Instance != null)
             UpgradeManager.Instance.panelSeen = false;
 
+        // Dil metotlarını çağırdığımız yer
+        ApplyTextForStep(s);
+    }
+
+    private void ApplyTextForStep(int s)
+    {
         switch (s)
         {
             case STEP_TAP:
-                SetText("Ortadaki <color=#F0B441>dönere dokun</color> ve dilimlemeye başla.");
+                SetText(LocalizationManager.Instance.GetLocalizedValue("onb_tap"));
                 break;
-
             case STEP_WORKER:
-                SetText("Dilimlerin birikti! Alttaki <color=#F0B441>İŞÇİLER</color> sekmesinden\nilk ustanı işe al - senin yerine kessin.");
+                SetText(LocalizationManager.Instance.GetLocalizedValue("onb_worker"));
                 StartPulse(workerTabIcon);
                 break;
-
             case STEP_PRODUCE:
-                SetText("Ustan çalışıyor: artık sen durunca da dilim geliyor.\nKesmeye devam et, biriktikçe yeni usta al.");
+                SetText(LocalizationManager.Instance.GetLocalizedValue("onb_produce"));
                 break;
-
             case STEP_UPGRADE:
-                SetText("Alabileceğin bir <color=#F0B441>geliştirme</color> var!\nAlttaki GELİŞTİRMELER sekmesine bak.");
+                SetText(LocalizationManager.Instance.GetLocalizedValue("onb_upgrade"));
                 StartPulse(upgradeTabIcon);
                 break;
-
             case STEP_PRESTIGE:
-                SetText("Artık <color=#F0B441>PRESTİJ</color> atabilirsin! Dilimlerin ve ustaların\nsıfırlanır ama kalıcı <color=#F0B441>Altın Maşa</color> kazanırsın.");
+                SetText(LocalizationManager.Instance.GetLocalizedValue("onb_prestige"));
                 StartPulse(prestigeTabIcon);
                 break;
         }

@@ -56,6 +56,13 @@ public class UIManager : MonoBehaviour
     float  countTick;
     string lastCountText;
 
+    private int lastCurrentGolden;
+    private int lastPendingGolden;
+
+    private void OnEnable() { LocalizationManager.OnLanguageChanged += OnLanguageUpdated; }
+    private void OnDisable() { LocalizationManager.OnLanguageChanged -= OnLanguageUpdated; }
+    private void OnLanguageUpdated() { UpdatePrestigeUI(lastCurrentGolden, lastPendingGolden); }
+
     void SetCountText(string s)
     {
         if (txt_doner_count == null || s == lastCountText) return;
@@ -102,6 +109,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
+// Mevcut metotları bunlarla değiştir:
     public void UpdateRateText(double perSecond)
     {
         if (txt_doner_rate == null) return;
@@ -110,69 +118,53 @@ public class UIManager : MonoBehaviour
         var gm = GameManager.Instance;
         bool boosted = gm != null && (gm.BoostActive || gm.EventActive);
 
-        string rate = "+" + FormatNumber(perSecond) + "/sn";
+        string rateSuffix = LocalizationManager.Instance.GetLocalizedValue("rate_per_sec");
+        string rate = "+" + FormatNumber(perSecond) + rateSuffix;
 
         if (!boosted) { txt_doner_rate.text = rate; return; }
 
-        // ONEMLI: perSecond'a carpanlar ZATEN uygulanmis geliyor.
-        // Carpani sayinin yanina esit agirlikta yazarsak "193 x 3 mu olacak"
-        // diye okunuyordu. Cozum: sayiyi ALTIN yapip carpani sessiz bir not
-        // olarak arkasina koymak - altin renk "bu hiz suanda artirilmis"
-        // sinyalini veriyor, not da neden/ne kadar sureyle oldugunu soyluyor.
-        double mult = gm.ActiveBoost;
-
-        // Iki boost ayni anda aktifse ikisini de yazmak satiri sisiriyor.
-        // Toplam carpani ve ILK BITECEK olanin suresini gostermek hem kisa
-        // hem dogru: "su an x21'sin, 45 saniye sonra bu degisecek".
         int left = int.MaxValue;
         if (gm.EventActive) left = System.Math.Min(left, gm.EventSecondsLeft);
         if (gm.BoostActive) left = System.Math.Min(left, gm.BoostSecondsLeft);
 
-        txt_doner_rate.text =
-            $"<color=#F0B441>{rate}</color>" +
-            $"   <size=85%><color=#A38A6E>×{mult:0.#}  ·  {ShortTime(left)}</color></size>";
+        txt_doner_rate.text = $"<color=#F0B441>{rate}</color>   <size=85%><color=#A38A6E>×{gm.ActiveBoost:0.#}  ·  {ShortTime(left)}</color></size>";
     }
 
     /// <summary>Saniyeyi "3sa 42dk" gibi kisa metne cevirir.</summary>
     public static string ShortTime(double seconds)
     {
-        int s = Mathf.Max(0, Mathf.RoundToInt((float)seconds));
-        int h = s / 3600, m = (s % 3600) / 60;
-        if (h > 0) return h + "sa " + m + "dk";
-        if (m > 0) return m + "dk";
-        return s + "sn";
+        int s = Mathf.Max(0, Mathf.RoundToInt((float)seconds)), h = s / 3600, m = (s % 3600) / 60;
+        string strH = LocalizationManager.Instance.GetLocalizedValue("time_unit_sa"), strM = LocalizationManager.Instance.GetLocalizedValue("time_unit_dk"), strS = LocalizationManager.Instance.GetLocalizedValue("time_unit_sn");
+        if (h > 0) return h + strH + " " + m + strM;
+        if (m > 0) return m + strM;
+        return s + strS;
     }
 
     /// <summary>Saniyeyi "4 saat 12 dakika" gibi uzun metne cevirir.</summary>
     public static string LongTime(double seconds)
     {
-        int s = Mathf.Max(0, Mathf.RoundToInt((float)seconds));
-        int h = s / 3600, m = (s % 3600) / 60;
-        if (h > 0 && m > 0) return h + " saat " + m + " dakika";
-        if (h > 0)          return h + " saat";
-        if (m > 0)          return m + " dakika";
-        return s + " saniye";
+        int s = Mathf.Max(0, Mathf.RoundToInt((float)seconds)), h = s / 3600, m = (s % 3600) / 60;
+        string strH = LocalizationManager.Instance.GetLocalizedValue("time_unit_saat"), strM = LocalizationManager.Instance.GetLocalizedValue("time_unit_dakika"), strS = LocalizationManager.Instance.GetLocalizedValue("time_unit_saniye");
+        if (h > 0 && m > 0) return h + " " + strH + " " + m + " " + strM;
+        if (h > 0) return h + " " + strH;
+        if (m > 0) return m + " " + strM;
+        return s + " " + strS;
     }
 
     /// <summary>Oyuna donuste "yokken sunu kazandin" penceresini acar.</summary>
     public void ShowOfflineReward(double amount, double seconds, bool capped)
     {
         if (offline_panel == null) return;
-
         if (txt_offline_time != null)
-            txt_offline_time.text = capped
-                ? LongTime(seconds) + " boyunca calisti\n<color=#A38A6E>(en fazla bu kadar birikir)</color>"
-                : LongTime(seconds) + " boyunca calisti";
-
+            txt_offline_time.text = string.Format(LocalizationManager.Instance.GetLocalizedValue(capped ? "offline_worked_capped" : "offline_worked"), LongTime(seconds));
         if (txt_offline_amount != null)
-            txt_offline_amount.text = "+" + FormatNumber(amount) + " dilim";
+            txt_offline_amount.text = string.Format(LocalizationManager.Instance.GetLocalizedValue("offline_slices"), FormatNumber(amount));
 
         offline_panel.gameObject.SetActive(true);
         offline_panel.localScale = Vector3.one * 0.85f;
         offline_panel.DOKill();
         offline_panel.DOScale(Vector3.one, 0.35f).SetEase(Ease.OutBack);
     }
-
     /// <summary>Altin Doner odulu / kademe atlama gibi anlik bildirimler icin buyuk yazi.</summary>
     public void ShowEventToast(string message, Vector2 anchoredPos)
     {
@@ -210,18 +202,13 @@ public class UIManager : MonoBehaviour
             .OnComplete(() => offline_panel.gameObject.SetActive(false));
     }
 
-    public void UpdatePrestigeUI(int currentGolden, int pendingGolden)   // Altin Masa
+    public void UpdatePrestigeUI(int currentGolden, int pendingGolden)
     {
-        if (txt_prestige_chip != null)
-            txt_prestige_chip.text = FormatNumber(currentGolden);
-
-        // Puan yoksa buton sonuk dursun - bosuna basip "neden olmadi" dedirtmesin
+        lastCurrentGolden = currentGolden; lastPendingGolden = pendingGolden;
+        if (txt_prestige_chip != null) txt_prestige_chip.text = FormatNumber(currentGolden);
         if (btn_reset != null) btn_reset.interactable = pendingGolden > 0;
-
         if (txt_prestige_info != null)
-            txt_prestige_info.text = pendingGolden > 0
-                ? $"Prestij yaparsan <color=#F0B441>+{FormatNumber(pendingGolden)} Altın Maşa</color> kazanırsın.\n<color=#A38A6E>Dilimler, işçiler ve geliştirmeler sıfırlanır;\naşağıdaki kalıcı yükseltmeler kalır.</color>"
-                : $"<color=#A38A6E>Prestij için henüz yeterli üretim yok.\nToplam ürettiğin dilim arttıkça Altın Maşa kazanırsın.</color>";
+            txt_prestige_info.text = pendingGolden > 0 ? string.Format(LocalizationManager.Instance.GetLocalizedValue("prestige_ready"), FormatNumber(pendingGolden)) : LocalizationManager.Instance.GetLocalizedValue("prestige_not_ready");
     }
     
     public void PlayClickFeedback(double clickAmount)

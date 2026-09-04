@@ -124,6 +124,14 @@ public class PrestigeManager : MonoBehaviour
 
     // ---------------------------------------------------------------- arayuz
 
+    private void OnEnable() { LocalizationManager.OnLanguageChanged += OnLanguageUpdated; }
+    private void OnDisable() { LocalizationManager.OnLanguageChanged -= OnLanguageUpdated; }
+    
+    private void OnLanguageUpdated()
+    {
+        RefreshAll(); // Dil değiştiğinde tüm kartların metinlerini anında baştan çizer
+    }
+
     private void CreateCard(int index)
     {
         PrestigeItem it = items[index];
@@ -137,19 +145,28 @@ public class PrestigeManager : MonoBehaviour
     {
         if (it.card == null) return;
 
+        // JSON'dan gelen ismi ve açıklamayı çeviriciden geçiriyoruz
+        string localizedName = LocalizationManager.Instance.GetLocalizedValue(it.pname);
+        string localizedDesc = LocalizationManager.Instance.GetLocalizedValue(it.pdesc);
+
         if (IsMaxed(it))
         {
-            it.card.Set(it.pname, $"Seviye {it.level} / {it.maxLevel}", it.pdesc, "TAM");
+            string maxLevelStr = string.Format(LocalizationManager.Instance.GetLocalizedValue("pr_level_max"), it.level, it.maxLevel);
+            string maxBadge = LocalizationManager.Instance.GetLocalizedValue("pr_maxed");
+            
+            it.card.Set(localizedName, maxLevelStr, localizedDesc, maxBadge);
             it.card.SetPurchased();
             if (it.buttonComponent != null) it.buttonComponent.interactable = false;
             return;
         }
 
         string sub = it.level > 0
-            ? $"Seviye {it.level} <color=#9CB84A>+1</color>  /  {it.maxLevel}"
-            : $"Seviye 0  /  {it.maxLevel}";
+            ? string.Format(LocalizationManager.Instance.GetLocalizedValue("pr_level_add"), it.level, it.maxLevel)
+            : string.Format(LocalizationManager.Instance.GetLocalizedValue("pr_level_zero"), it.maxLevel);
 
-        it.card.Set(it.pname, sub, it.pdesc, $"{CostOf(it)} maşa");
+        string costStr = string.Format(LocalizationManager.Instance.GetLocalizedValue("pr_cost"), CostOf(it));
+
+        it.card.Set(localizedName, sub, localizedDesc, costStr);
         if (it.buttonComponent != null) it.buttonComponent.interactable = true;
     }
 

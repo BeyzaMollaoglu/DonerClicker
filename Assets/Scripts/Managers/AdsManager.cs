@@ -28,6 +28,9 @@ public class AdsManager : MonoBehaviour
 
     float tick;
 
+    private void OnEnable() { LocalizationManager.OnLanguageChanged += UpdateTextsOnLanguageChange; }
+    private void OnDisable() { LocalizationManager.OnLanguageChanged -= UpdateTextsOnLanguageChange; }
+    private void UpdateTextsOnLanguageChange() { RefreshOffer(); Refresh(); }
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -46,15 +49,14 @@ public class AdsManager : MonoBehaviour
     /// <summary>Teklif metnini tazeler - prestij kalemi alindiginda cagrilir.</summary>
     public void RefreshOffer()
     {
-        // Carpani buyuk ve altin yaz: sekmedeki rozet de ayni sayiyi gosteriyor,
-        // oyuncu "reklam izle" degil "3x kap" diye okusun.
+        string title = LocalizationManager.Instance.GetLocalizedValue("ad_offer_title");
+        string desc = string.Format(LocalizationManager.Instance.GetLocalizedValue("ad_offer_desc"), boostHours.ToString("0.#"));
+
         if (txt_ad_offer != null)
-            txt_ad_offer.text =
-                $"<size=200%><color=#F0B441>×{CurrentMultiplier:0.#}</color></size>\n" +
-                $"ÜRETİM HIZI\n<size=70%>{boostHours:0.#} saat boyunca - bedava</size>";
+            txt_ad_offer.text = $"<size=200%><color=#F0B441>×{CurrentMultiplier:0.#}</color></size>\n{title}\n<size=70%>{desc}</size>";
 
         if (txt_btn_watch_ad != null)
-            txt_btn_watch_ad.text = $"×{CurrentMultiplier:0.#} AL";
+            txt_btn_watch_ad.text = string.Format(LocalizationManager.Instance.GetLocalizedValue("ad_btn_get"), CurrentMultiplier.ToString("0.#"));
     }
 
     private void Update()
@@ -90,17 +92,14 @@ public class AdsManager : MonoBehaviour
     {
         var gm = GameManager.Instance;
         if (gm == null) return;
-
         bool active = gm.BoostActive;
 
         if (txt_ad_status != null)
         {
             txt_ad_status.text = active
-                ? $"<color=#F0B441>×{gm.boostMultiplier:0.#} çalışıyor</color>  -  {UIManager.ShortTime(gm.BoostSecondsLeft)} kaldı"
-                : "<color=#9CB84A>Ödülün hazır - kısa bir video, anında hız</color>";
+                ? string.Format(LocalizationManager.Instance.GetLocalizedValue("ad_status_active"), gm.boostMultiplier.ToString("0.#"), UIManager.ShortTime(gm.BoostSecondsLeft))
+                : LocalizationManager.Instance.GetLocalizedValue("ad_status_ready");
         }
-
-        // Boost surerken tekrar izlemeye kapali: sure sifirlanmasin
         if (btn_watch_ad != null) btn_watch_ad.interactable = !active;
     }
 

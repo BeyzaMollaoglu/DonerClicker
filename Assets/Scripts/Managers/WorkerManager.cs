@@ -82,6 +82,15 @@ public class WorkerManager : MonoBehaviour
         if (jsonFile != null) workerList = JsonUtility.FromJson<WorkerDataWrapper>(jsonFile.text).workers;
     }
 
+    private void OnEnable() { LocalizationManager.OnLanguageChanged += OnLanguageUpdated; }
+    private void OnDisable() { LocalizationManager.OnLanguageChanged -= OnLanguageUpdated; }
+    
+    private void OnLanguageUpdated()
+    {
+        if (workerList == null) return;
+        foreach (var w in workerList) UpdateWorkerUI(w);
+    }
+
     void Start()
     {
         GameSaveData saveData = SaveManager.Instance.LoadGame();
@@ -150,23 +159,24 @@ public class WorkerManager : MonoBehaviour
         double currentTotalBoost = worker.level * boostPerWorker;
         double nextTotalBoost    = (worker.level + n) * boostPerWorker;
 
+        // İşçinin ismini JSON'dan geldiği gibi (Türkçe) çeviriciye sokuyoruz
+        string localizedName = LocalizationManager.Instance.GetLocalizedValue(worker.workerName);
+
         if (worker.card != null)
         {
             string sub = n == 1
-                ? $"Seviye {worker.level}"
-                : $"Seviye {worker.level} <color=#9CB84A>+{n}</color>";
+                ? string.Format(LocalizationManager.Instance.GetLocalizedValue("worker_level"), worker.level)
+                : string.Format(LocalizationManager.Instance.GetLocalizedValue("worker_level_multi"), worker.level, n);
 
-            worker.card.Set(
-                worker.workerName,
-                sub,
-                $"{UIManager.FormatNumber(currentTotalBoost)}/sn   <color=#9CB84A>> {UIManager.FormatNumber(nextTotalBoost)}/sn</color>",
-                $"{UIManager.FormatNumber(worker.currentCost)} dilim");
+            string prodStr = string.Format(LocalizationManager.Instance.GetLocalizedValue("worker_prod_arrow"), UIManager.FormatNumber(currentTotalBoost), UIManager.FormatNumber(nextTotalBoost));
+            string costStr = string.Format(LocalizationManager.Instance.GetLocalizedValue("worker_cost"), UIManager.FormatNumber(worker.currentCost));
+
+            worker.card.Set(localizedName, sub, prodStr, costStr);
         }
         else if (worker.buttonText != null)
         {
-            worker.buttonText.text = $"{worker.workerName}\nSeviye: {worker.level}\n" +
-                $"Üretim: {UIManager.FormatNumber(currentTotalBoost)}/sn\n" +
-                $"Fiyat: {UIManager.FormatNumber(worker.currentCost)} dilim";
+            worker.buttonText.text = string.Format(LocalizationManager.Instance.GetLocalizedValue("worker_fallback"), 
+                localizedName, worker.level, UIManager.FormatNumber(currentTotalBoost), UIManager.FormatNumber(worker.currentCost));
         }
     }
 

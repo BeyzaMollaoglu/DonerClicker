@@ -223,43 +223,60 @@ public class UpgradeManager : MonoBehaviour
             visible[i].buttonComponent.transform.SetSiblingIndex(i);
     }
 
+    private void OnEnable() { LocalizationManager.OnLanguageChanged += OnLanguageUpdated; }
+    private void OnDisable() { LocalizationManager.OnLanguageChanged -= OnLanguageUpdated; }
+
+    private void OnLanguageUpdated()
+    {
+        if (upgradeList == null) return;
+        foreach (var u in upgradeList) if (u.card != null) UpdateUpgradeUI(u);
+    }
+
     private string EffectLabel(UpgradeItem item)
     {
         if (item.type == UpgradeType.ClickPercentOfProduction)
-            return $"Tıklama: üretimin +%{item.effectAmount * 100:0.##}'i";
+            return string.Format(LocalizationManager.Instance.GetLocalizedValue("upg_effect_click_percent"), (item.effectAmount * 100).ToString("0.##"));
         string sym = (item.type == UpgradeType.ClickPowerAdd || item.type == UpgradeType.PassiveProductionAdd) ? "+" : "x";
-        return $"Güç: {sym}{item.effectAmount:0.##}";
+        return string.Format(LocalizationManager.Instance.GetLocalizedValue("upg_effect_power"), sym, item.effectAmount.ToString("0.##"));
     }
 
     private string TargetLabel(UpgradeItem item)
     {
-        if (item.type == UpgradeType.ClickPercentOfProduction) return "Tıklama gücü";
-        if (item.type == UpgradeType.ClickPowerMultiplier || item.type == UpgradeType.ClickPowerAdd) return "Tıklama gücü";
-        if (item.type == UpgradeType.PassiveProductionMultiplier) return "Tüm üretim";
+        if (item.type == UpgradeType.ClickPercentOfProduction || item.type == UpgradeType.ClickPowerMultiplier || item.type == UpgradeType.ClickPowerAdd)
+            return LocalizationManager.Instance.GetLocalizedValue("upg_target_click");
+        if (item.type == UpgradeType.PassiveProductionMultiplier)
+            return LocalizationManager.Instance.GetLocalizedValue("upg_target_all");
         if (item.targetWorkerIndex < 0) return "";
+        
         var wm = WorkerManager.Instance;
-        if (wm == null || wm.workerList == null || item.targetWorkerIndex >= wm.workerList.Count) return "";
-        return wm.workerList[item.targetWorkerIndex].workerName;
+        // DEĞİŞİKLİK: Hedef işçinin adını çeviriciden geçirerek alıyoruz
+        return (wm != null && wm.workerList != null && item.targetWorkerIndex < wm.workerList.Count) 
+            ? LocalizationManager.Instance.GetLocalizedValue(wm.workerList[item.targetWorkerIndex].workerName) 
+            : "";
     }
 
     private void UpdateUpgradeUI(UpgradeItem item)
     {
         if (item.card == null) return;
+        
+        // DEĞİŞİKLİK: Geliştirmenin (Upgrade) kendi adını çeviriciden geçiriyoruz
+        string localizedUpgName = LocalizationManager.Instance.GetLocalizedValue(item.upgradeName);
 
         if (item.isPurchased)
         {
-            item.card.Set(item.upgradeName, "Satın alındı", EffectLabel(item), "ALINDI");
+            item.card.Set(localizedUpgName, LocalizationManager.Instance.GetLocalizedValue("upg_purchased"), EffectLabel(item), LocalizationManager.Instance.GetLocalizedValue("upg_bought"));
             item.card.SetPurchased();
             item.buttonComponent.interactable = false;
         }
         else
         {
-            string title = item.isNew
-                ? $"<color=#9CB84A>YENİ</color>  {item.upgradeName}"
-                : item.upgradeName;
-
-            item.card.Set(title, EffectLabel(item), TargetLabel(item),
-                          $"{UIManager.FormatNumber(item.cost)} dilim");
+            string title = item.isNew 
+                ? $"<color=#9CB84A>{LocalizationManager.Instance.GetLocalizedValue("upg_new")}</color>  {localizedUpgName}" 
+                : localizedUpgName;
+            
+            string costStr = string.Format(LocalizationManager.Instance.GetLocalizedValue("upg_cost"), UIManager.FormatNumber(item.cost));
+            
+            item.card.Set(title, EffectLabel(item), TargetLabel(item), costStr);
             item.buttonComponent.interactable = true;
         }
     }
