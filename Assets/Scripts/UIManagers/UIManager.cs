@@ -61,7 +61,17 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable() { LocalizationManager.OnLanguageChanged += OnLanguageUpdated; }
     private void OnDisable() { LocalizationManager.OnLanguageChanged -= OnLanguageUpdated; }
-    private void OnLanguageUpdated() { UpdatePrestigeUI(lastCurrentGolden, lastPendingGolden); }
+    private void OnLanguageUpdated() 
+    { 
+        // 1. Prestij panelindeki yazıları tazele (Mevcutta olan buydu)
+        UpdatePrestigeUI(lastCurrentGolden, lastPendingGolden); 
+        
+        // 2. EĞER GameManager varsa, en üstteki "Saniyelik Üretim" (/sn veya /sec) yazısını da ANINDA tazele!
+        if (GameManager.Instance != null)
+        {
+            UpdateRateText(GameManager.Instance.productionPerSecond);
+        }
+    }
 
     void SetCountText(string s)
     {

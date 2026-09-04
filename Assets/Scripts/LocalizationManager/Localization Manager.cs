@@ -339,6 +339,9 @@ public class LocalizationManager : MonoBehaviour
         // --- Boost Panel (UI) SABİT METİNLERİ ---
         AddText("HIZLANDIRMA", "HIZLANDIRMA", "BOOST");
 
+        // --- Ayarlar Panel (UI) SABİT METİNLERİ ---
+        AddText("DİL", "DİL", "LANGUAGE");
+
         // --- OFFLINE KAZANÇ (TEKRAR HOŞ GELDİN) EKRANI ---
         AddText("TEKRAR HOŞ GELDİN", "TEKRAR HOŞ GELDİN", "WELCOME BACK");
         AddText("TAMAM", "TAMAM", "COLLECT");

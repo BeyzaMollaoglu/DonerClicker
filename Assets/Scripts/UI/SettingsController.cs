@@ -10,7 +10,10 @@ public class SettingsController : MonoBehaviour
     [Header("Butonlar")]
     public Button btn_openSettings;    // Ayarları açan çark butonu
     public Button btn_closeSettings;   // Ayarları kapatan X butonu
-    public Button btn_toggleLanguage;  // Dil değiştirme butonu
+    
+    [Header("Dil Butonları")]
+    public Button btn_languageTR;      // Türkçe yapma butonu
+    public Button btn_languageEN;      // İngilizce yapma butonu
 
     private void Start()
     {
@@ -25,8 +28,12 @@ public class SettingsController : MonoBehaviour
         if (btn_closeSettings != null)
             btn_closeSettings.onClick.AddListener(CloseSettingsPanel);
 
-        if (btn_toggleLanguage != null)
-            btn_toggleLanguage.onClick.AddListener(ToggleLanguage);
+        // Yeni dil butonlarını bağlıyoruz
+        if (btn_languageTR != null)
+            btn_languageTR.onClick.AddListener(SetLanguageTurkish);
+
+        if (btn_languageEN != null)
+            btn_languageEN.onClick.AddListener(SetLanguageEnglish);
     }
 
     public void OpenSettingsPanel()
@@ -51,16 +58,20 @@ public class SettingsController : MonoBehaviour
             .OnComplete(() => settingsPanel.gameObject.SetActive(false));
     }
 
-    public void ToggleLanguage()
+    // --- YENİ DİL KONTROL METOTLARI ---
+    public void SetLanguageTurkish()
     {
-        // Dil yöneticisi üzerinden kontrol ve değişim yapıyoruz
-        if (LocalizationManager.Instance.currentLanguage == LocalizationManager.Language.Turkish)
-        {
-            LocalizationManager.Instance.SetLanguage(LocalizationManager.Language.English);
-        }
-        else
+        if (LocalizationManager.Instance != null)
         {
             LocalizationManager.Instance.SetLanguage(LocalizationManager.Language.Turkish);
+        }
+    }
+
+    public void SetLanguageEnglish()
+    {
+        if (LocalizationManager.Instance != null)
+        {
+            LocalizationManager.Instance.SetLanguage(LocalizationManager.Language.English);
         }
     }
 
@@ -69,6 +80,7 @@ public class SettingsController : MonoBehaviour
         // Hafıza sızıntısı olmaması için obje yok olduğunda listener'ları siliyoruz
         if (btn_openSettings != null) btn_openSettings.onClick.RemoveAllListeners();
         if (btn_closeSettings != null) btn_closeSettings.onClick.RemoveAllListeners();
-        if (btn_toggleLanguage != null) btn_toggleLanguage.onClick.RemoveAllListeners();
+        if (btn_languageTR != null) btn_languageTR.onClick.RemoveAllListeners();
+        if (btn_languageEN != null) btn_languageEN.onClick.RemoveAllListeners();
     }
 }
