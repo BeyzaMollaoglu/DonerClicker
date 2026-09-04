@@ -73,7 +73,7 @@ public class LocalizationManager : MonoBehaviour
         AddText("upg_target_all", "Tüm üretim", "All production");
         AddText("upg_effect_click_percent", "Tıklama: üretimin +%{0}'i", "Click: +{0}% of production");
         AddText("upg_effect_power", "Güç: {0}{1}", "Power: {0}{1}");
-        AddText("upg_cost", "{0} dilimler", "{0} slices");
+        AddText("upg_cost", "{0} dilim", "{0} slices");
 
         // --- ONBOARDING ---
         AddText("onb_tap", "Ortadaki <color=#F0B441>dönere dokun</color> ve dilimlemeye başla.", "Tap the <color=#F0B441>doner</color> in the center to start slicing.");
@@ -317,15 +317,31 @@ public class LocalizationManager : MonoBehaviour
 
 
         // --- TAB (UI) SABİT METİNLERİ ---
-        AddText("txt_tab_workers", "İŞÇİLER", "WORKERS");
-        AddText("txt_tab_prestige", "PRESTİJ", "PRESTIGE");
-        AddText("txt_settings_button", "AYARLAR", "SETTINGS");
-        AddText("txt_tab_clicker", "KES", "CLICKER");
-        AddText("txt_tab_upgrades", "GELİŞTİR", "UPGRADE");
-        AddText("txt_tab_ads", "HIZLANDIR", "SPEED UP");
+        AddText("İŞÇİLER", "İŞÇİLER", "WORKERS");
+        AddText("PRESTİJ", "PRESTİJ", "PRESTIGE");
+        AddText("AYARLAR", "AYARLAR", "SETTINGS");
+        AddText("KES", "KES", "CLICKER");
+        AddText("GELİŞTİR", "GELİŞTİR", "UPGRADE");
+        AddText("HIZLANDIR", "HIZLANDIR", "BOOST");
 
-        // --- Panel (UI) SABİT METİNLERİ ---
+        // --- Prestij Panel (UI) SABİT METİNLERİ ---
+        AddText("PRESTİJ YAP ve ALTIN MAŞA AL", "PRESTİJ YAP ve ALTIN MAŞA AL", "PRESTIGE & GET GOLDEN TONGS");
+        AddText("ALTIN MAŞA MAĞAZASI", "ALTIN MAŞA MAĞAZASI", "GOLDEN TONGS SHOP");
+        AddText("pr_level_max", "Seviye {0} / {1}", "Level {0} / {1}");
+        AddText("pr_level_add", "Seviye {0} <color=#9CB84A>+1</color>  /  {1}", "Level {0} <color=#9CB84A>+1</color>  /  {1}");
+        AddText("pr_level_zero", "Seviye 0  /  {0}", "Level 0  /  {0}");
+        AddText("pr_maxed", "TAM", "MAX");
+        AddText("pr_cost", "{0} maşa", "{0} tongs");
 
+        // --- Upgrades Panel (UI) SABİT METİNLERİ ---
+        AddText("GELİŞTİRMELER", "GELİŞTİRMELER", "UPGRADES");
+
+        // --- Boost Panel (UI) SABİT METİNLERİ ---
+        AddText("HIZLANDIRMA", "HIZLANDIRMA", "BOOST");
+
+        // --- OFFLINE KAZANÇ (TEKRAR HOŞ GELDİN) EKRANI ---
+        AddText("TEKRAR HOŞ GELDİN", "TEKRAR HOŞ GELDİN", "WELCOME BACK");
+        AddText("TAMAM", "TAMAM", "COLLECT");
     }
 
     private void AddText(string key, string trText, string enText)
