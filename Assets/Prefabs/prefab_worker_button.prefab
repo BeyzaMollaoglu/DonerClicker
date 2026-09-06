@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1567313833551668988}
   - component: {fileID: 8793535833403746820}
   - component: {fileID: 5100000000000000033}
+  - component: {fileID: -5106210727298805385}
   m_Layer: 5
   m_Name: prefab_worker_button
   m_TagString: Untagged
@@ -147,6 +148,19 @@ MonoBehaviour:
   txtSub: {fileID: 5100000000000000020}
   txtDetail: {fileID: 5100000000000000024}
   txtPrice: {fileID: 5100000000000000032}
+--- !u!114 &-5106210727298805385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4650903383566460028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25e8628eb27ce92488cd32f4c534e3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonSound
+  soundType: 1
 --- !u!1 &5100000000000000001
 GameObject:
   m_ObjectHideFlags: 0
@@ -438,7 +452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stajyer Çırak
+  m_text: "Stajyer \xC7\u0131rak"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fa75dfdab09a19c47bd4b3f66c3169c4, type: 2}
   m_sharedMaterial: {fileID: 2464249970354287355, guid: fa75dfdab09a19c47bd4b3f66c3169c4, type: 2}
