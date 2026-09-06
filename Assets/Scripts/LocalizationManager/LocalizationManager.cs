@@ -341,6 +341,8 @@ public class LocalizationManager : MonoBehaviour
 
         // --- Ayarlar Panel (UI) SABİT METİNLERİ ---
         AddText("DİL", "DİL", "LANGUAGE");
+        AddText("SES", "SES", "SOUND");
+        AddText("MÜZİK", "MÜZİK", "MUSIC");
 
         // --- OFFLINE KAZANÇ (TEKRAR HOŞ GELDİN) EKRANI ---
         AddText("TEKRAR HOŞ GELDİN", "TEKRAR HOŞ GELDİN", "WELCOME BACK");
@@ -354,7 +356,17 @@ public class LocalizationManager : MonoBehaviour
             { Language.Turkish, trText },
             { Language.English, enText }
         };
-        localizedTexts.Add(key, langDict);
+
+        // DIKKAT: Burada Dictionary.Add() KULLANMA.
+        // Add(), ayni anahtar ikinci kez eklenirse exception firlatir ve
+        // InitializeDictionary() oracikta kesilir - o satirdan SONRAKI butun
+        // ceviriler sozluge hic girmez. Sonuc: oyunun bir kismi cevrilir,
+        // bir kismi Turkce kalir ve sebebi hic belli olmaz.
+        // Indeksleyici ile yazinca tekrar eden anahtar sadece ustune yazar.
+        if (localizedTexts.ContainsKey(key))
+            Debug.LogWarning($"[Localization] Tekrar eden anahtar: \"{key}\" - sonuncusu gecerli.");
+
+        localizedTexts[key] = langDict;
     }
 
     public string GetLocalizedValue(string key)
