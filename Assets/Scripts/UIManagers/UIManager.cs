@@ -90,10 +90,20 @@ public class UIManager : MonoBehaviour
         {
             double diff = targetDoner - shownDoner;
             shownDoner += diff * Mathf.Clamp01(Time.unscaledDeltaTime * 14f);
-            if (System.Math.Abs(targetDoner - shownDoner) < 0.5) shownDoner = targetDoner;
+
+            // Hedefe oturdugumuz KARE mutlaka ekrana yazilmali. Yoksa o karede
+            // kisitlama yuzunden yazi atlanip, sonraki karede "shownDoner ==
+            // targetDoner" oldugu icin blok hic calismiyor ve sayac son degeri
+            // hic gostermiyordu (15 tiklamada 14 gorunmesinin sebebi buydu).
+            bool settled = false;
+            if (System.Math.Abs(targetDoner - shownDoner) < 0.5)
+            {
+                shownDoner = targetDoner;
+                settled = true;
+            }
 
             countTick += Time.unscaledDeltaTime;
-            if (countTick >= 0.033f)
+            if (settled || countTick >= 0.033f)
             {
                 countTick = 0f;
                 SetCountText(FormatNumber(System.Math.Floor(shownDoner)));

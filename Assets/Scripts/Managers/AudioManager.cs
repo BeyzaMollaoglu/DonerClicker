@@ -71,6 +71,10 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource == null) return;
 
+        // Ayarlar panelindeki ses dugmesi: kapaliysa hic calma.
+        // (Muzik ayri; SoundSettings.MusicSource uzerinden susturuluyor.)
+        if (!SoundSettings.SfxOn) return;
+
         AudioClip clipToPlay = type switch
         {
             SoundType.TabClick => tabClickSound,

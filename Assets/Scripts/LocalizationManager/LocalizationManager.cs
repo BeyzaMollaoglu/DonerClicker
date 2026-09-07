@@ -75,6 +75,29 @@ public class LocalizationManager : MonoBehaviour
         AddText("upg_effect_power", "Güç: {0}{1}", "Power: {0}{1}");
         AddText("upg_cost", "{0} dilim", "{0} slices");
 
+        // --- REHBER (TUTORIAL) KARTLARI ---
+        AddText("tut_welcome_title", "DÜKKÂN SENİN", "THE SHOP IS YOURS");
+        AddText("tut_welcome_body", "Köşedeki küçük dönerci artık senin.\n\nKes, sat, usta tut - mahallenin en büyüğü ol.", "The little doner shop on the corner is yours now.\n\nSlice, sell, hire chefs - become the biggest in town.");
+        AddText("tut_welcome_btn", "BAŞLA", "START");
+
+        AddText("tut_tap_title", "KESMEYE BAŞLA", "START SLICING");
+        AddText("tut_tap_body", "Dönere dokun, her dokunuş bir dilim.\n\nKesmeye devam et - ilk usta için {0} dilim kaldı.", "Tap the doner, every tap is a slice.\n\nKeep slicing - {0} more to go for your first chef.");
+
+        AddText("tut_worker_title", "İLK USTANI TUT", "HIRE YOUR FIRST CHEF");
+        AddText("tut_worker_body", "Paran birikti. Bu sekmeden bir usta tut, senin yerine kessin.", "You've saved up. Hire a chef from this tab and let them slice for you.");
+
+        AddText("tut_produce_title", "ARTIK KENDİ KENDİNE", "IT RUNS ITSELF NOW");
+        AddText("tut_produce_body", "Sayaç sen durunca da artıyor - uygulamayı kapatsan bile ustaların çalışmaya devam eder.\n\nSen de kesmeyi bırakma, ilk geliştirmen açılmak üzere.", "The counter keeps rising without you - your chefs keep working even when the app is closed.\n\nDon't stop slicing though, your first upgrade is about to unlock.");
+
+        AddText("tut_upgrade_title", "GELİŞTİRME AÇILDI", "UPGRADE UNLOCKED");
+        AddText("tut_upgrade_body", "Paran ilk geliştirmene yetti! Bu sekmeden al - her geliştirme üretimini kalıcı olarak büyütür.", "You can afford your first upgrade! Grab it from this tab - each one permanently grows your production.");
+
+        AddText("tut_ok", "TAMAM", "OK");
+
+        AddText("tut_prestige_title", "YENİDEN BAŞLA, DAHA GÜÇLÜ", "START OVER, STRONGER");
+        AddText("tut_prestige_body", "Prestij yaparsan dilimlerin ve ustaların sıfırlanır - ama Altın Maşa kazanırsın.\n\nOnlarla aldığın kalıcı yükseltmeler her turda seni daha hızlı büyütür.", "Prestige resets your slices and chefs - but earns you Golden Tongs.\n\nThe permanent upgrades you buy with them make every run faster.");
+        AddText("tut_prestige_btn", "ANLADIM", "GOT IT");
+
         // --- ONBOARDING ---
         AddText("onb_tap", "Ortadaki <color=#F0B441>dönere dokun</color> ve dilimlemeye başla.", "Tap the <color=#F0B441>doner</color> in the center to start slicing.");
         AddText("onb_worker", "Dilimlerin birikti! Alttaki <color=#F0B441>İŞÇİLER</color> sekmesinden\nilk ustanı işe al - senin yerine kessin.", "Slices accumulated! Hire your first chef from the <color=#F0B441>WORKERS</color> tab below.");
