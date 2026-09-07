@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 87349457a14b10948abed5ea70c01fce
+guid: db4e90741b6d95f40b3136f00d7a55de
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7308880930815115044
-    second: star_flash_alpha_0
+      213: -8026502447135186118
+    second: bg_glow_2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,17 +96,43 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: star_flash_alpha_0
+      name: bg_glow_2_0
       rect:
         serializedVersion: 2
-        x: 136
-        y: 136
-        width: 1776
-        height: 1776
+        x: 0
+        y: 0
+        width: 1600
+        height: 1600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd0832d7483a19a90800000000000000
-      internalID: -7308880930815115044
+      spriteID: a3324b1fc822c9090800000000000000
+      internalID: -8026502447135186118
       vertices: []
       indices: 
       edges: []
@@ -135,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      star_flash_alpha_0: -7308880930815115044
+      bg_glow_2_0: -8026502447135186118
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

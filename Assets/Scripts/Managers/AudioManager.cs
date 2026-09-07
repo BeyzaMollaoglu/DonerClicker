@@ -7,7 +7,8 @@ public enum SoundType
 {
     TabClick,
     Buy,
-    DonerClick
+    DonerClick,
+    Celebrate
 }
 
 // Inspector'da görünecek olan özel atama yapımız
@@ -29,6 +30,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip tabClickSound;
     public AudioClip buySound;
     public AudioClip donerClickSound;
+
+    public AudioClip CelebrateSound;
 
     [Header("Özel Ses Atamaları (Buraya Ekle)")]
     public List<CustomButtonSound> ozelButonlar = new List<CustomButtonSound>();
@@ -80,6 +83,7 @@ public class AudioManager : MonoBehaviour
             SoundType.TabClick => tabClickSound,
             SoundType.Buy => buySound,
             SoundType.DonerClick => donerClickSound,
+            SoundType.Celebrate => CelebrateSound,
             _ => null
         };
 
