@@ -66,11 +66,15 @@ public class GameManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        // Unity mobilde varsayilan 30 FPS'e sabitler. Tiklama oyununda
+        // 60 FPS dokunus hissini belirgin sekilde degistiriyor.
+        Application.targetFrameRate = 60;
     }
 
     private void Start()
     {
-        GameSaveData saveData = SaveManager.Instance.LoadGame();
+        GameSaveData saveData = SaveManager.LoadData();
         long lastTicks = 0;
         if (saveData != null)
         {
@@ -123,7 +127,9 @@ public class GameManager : MonoBehaviour
         yield return null;
         RecalculateStats();
 
-        if (lastTicks <= 0) yield break;
+        // Bozuk / makul olmayan zaman damgasi DateTime kurucusunu patlatir ve
+        // coroutine sessizce olur. Araligi onceden dogruluyoruz.
+        if (lastTicks <= 0 || lastTicks > System.DateTime.MaxValue.Ticks) yield break;
 
         System.DateTime last = new System.DateTime(lastTicks, System.DateTimeKind.Utc);
         double away = (System.DateTime.UtcNow - last).TotalSeconds;

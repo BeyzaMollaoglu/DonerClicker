@@ -25,6 +25,9 @@ public class DebugPanel : MonoBehaviour
 #endif
     }
 
+    // Yayin build'inde OnGUI hic derlenmesin. Bos bir OnGUI bile Unity'nin
+    // IMGUI sistemini her karede calistirir; telefonda bedava degil.
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
     void OnGUI()
     {
         if (!Visible) return;
@@ -35,6 +38,7 @@ public class DebugPanel : MonoBehaviour
 
         if (open) win = GUI.Window(9911, win, Draw, "Test Paneli");
     }
+#endif
 
     void AddMoney(double amount)
     {

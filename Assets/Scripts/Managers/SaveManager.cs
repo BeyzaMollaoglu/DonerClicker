@@ -89,8 +89,20 @@ public class SaveManager : MonoBehaviour
         if (PrestigeManager.Instance != null)
             data.prestigeLevels = PrestigeManager.Instance.Levels();
 
-        PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
-        PlayerPrefs.Save();
+        Write(data);
+    }
+
+    static void Write(GameSaveData data)
+    {
+        try
+        {
+            PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
+            PlayerPrefs.Save();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning("[Save] Kayit yazilamadi: " + e.Message);
+        }
     }
 
     /// <summary>Instance hazir olmadan da okunabilsin diye statik. (PrestigeManager Awake'te cagiriyor.)</summary>
@@ -98,7 +110,21 @@ public class SaveManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("DonerSave")) return null;
 
-        GameSaveData data = JsonUtility.FromJson<GameSaveData>(PlayerPrefs.GetString("DonerSave"));
+        // BOZUK KAYIT OYUNU KILITLEMESIN.
+        // JsonUtility bozuk bir metinde exception atar; bu Start() icinde
+        // yakalanmazsa oyun hic acilmaz ve oyuncunun tek caresi uygulama
+        // verisini silmek olur. Bozuksa sessizce sifirdan basliyoruz.
+        GameSaveData data;
+        try
+        {
+            data = JsonUtility.FromJson<GameSaveData>(PlayerPrefs.GetString("DonerSave"));
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogWarning("[Save] Kayit okunamadi, sifirlaniyor: " + e.Message);
+            ClearData();
+            return null;
+        }
         if (data == null) return null;
 
         if (data.version != SAVE_VERSION)
@@ -130,9 +156,7 @@ public class SaveManager : MonoBehaviour
         if (PrestigeManager.Instance != null)
             data.prestigeLevels = PrestigeManager.Instance.Levels();
 
-        PlayerPrefs.SetString("DonerSave", JsonUtility.ToJson(data));
-        PlayerPrefs.Save();
-        Debug.Log("Prestige atildi, yeni kayit olusturuldu.");
+        Write(data);
     }
 
     public void ClearSave() { ClearData(); }
