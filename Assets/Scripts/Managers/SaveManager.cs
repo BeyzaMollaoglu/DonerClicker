@@ -24,6 +24,19 @@ public class GameSaveData
     public double boostMultiplier;
     public long   boostEndsAtUnix;
 
+    // ---- ISTATISTIKLER ----
+    // SAVE_VERSION BILEREK ARTIRILMADI: JsonUtility eksik alanlari varsayilan
+    // (0) okur, yani bu alanlar eski kayitlari bozmadan ekleniyor.
+    public long   totalClicks;
+    public int    prestigeCount;
+    public double playSeconds;
+    public double offlineEarnedTotal;
+    public int    goldenCaught;
+    public double runStartLifetime;
+
+    /// <summary>Acilmis basarimlarin kimlikleri.</summary>
+    public List<string> achievements = new List<string>();
+
     // Ekonomi degistiginde eski kayit gecersiz olsun
     public int version;
 }
@@ -77,6 +90,10 @@ public class SaveManager : MonoBehaviour
         data.boostEndsAtUnix = GameManager.Instance.boostEndsAtUnix;
         data.tutorialStep    = GameManager.Instance.tutorialStep;
         data.version         = SAVE_VERSION;
+
+        CopyStats(data);
+        if (AchievementManager.Instance != null)
+            data.achievements = AchievementManager.Instance.UnlockedIds();
 
         if (WorkerManager.Instance != null && WorkerManager.Instance.workerList != null)
             foreach (var worker in WorkerManager.Instance.workerList)
@@ -138,6 +155,19 @@ public class SaveManager : MonoBehaviour
 
     public GameSaveData LoadGame() { return LoadData(); }
 
+    /// <summary>Istatistik sayaclari prestijde de silinmez, kariyer boyudur.</summary>
+    static void CopyStats(GameSaveData data)
+    {
+        var gm = GameManager.Instance;
+        if (gm == null) return;
+        data.totalClicks        = gm.totalClicks;
+        data.prestigeCount      = gm.prestigeCount;
+        data.playSeconds        = gm.playSeconds;
+        data.offlineEarnedTotal = gm.offlineEarnedTotal;
+        data.goldenCaught       = gm.goldenCaught;
+        data.runStartLifetime   = gm.runStartLifetime;
+    }
+
     /// <summary>
     /// Prestij: dilim / isci / gelistirme sifirlanir,
     /// Altin Masa ve magazada alinanlar KALIR.
@@ -152,6 +182,11 @@ public class SaveManager : MonoBehaviour
         data.tutorialStep  = Onboarding.STEP_DONE;   // prestij sonrasi rehber tekrar cikmasin
         data.lastSaveTicks = System.DateTime.UtcNow.Ticks;
         data.version       = SAVE_VERSION;
+
+        // Istatistikler ve basarimlar prestijde SIFIRLANMAZ.
+        CopyStats(data);
+        if (AchievementManager.Instance != null)
+            data.achievements = AchievementManager.Instance.UnlockedIds();
 
         if (PrestigeManager.Instance != null)
             data.prestigeLevels = PrestigeManager.Instance.Levels();

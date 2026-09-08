@@ -233,6 +233,7 @@ public class Onboarding : MonoBehaviour
         int s = Step;
         bool hidden = s == STEP_DONE
                    || (tabManager != null && tabManager.AnyPanelOpen)
+                   || AchievementPanel.IsOpen
                    || !ReadyToShow(s);
 
         if (hidden)

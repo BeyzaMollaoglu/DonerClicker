@@ -75,6 +75,12 @@ public class LocalizationManager : MonoBehaviour
         AddText("upg_effect_power", "Güç: {0}{1}", "Power: {0}{1}");
         AddText("upg_cost", "{0} dilim", "{0} slices");
 
+        // --- BASARIMLAR ---
+        AddText("ach_title", "BAŞARIMLAR  {0}/{1}", "ACHIEVEMENTS  {0}/{1}");
+        AddText("ach_fame", "MAHALLE ŞÖHRETİ:  <color=#F0B441>+%{0} üretim</color>\n<size=70%>{1} başarımdan geliyor</size>", "NEIGHBOURHOOD FAME:  <color=#F0B441>+{0}% production</color>\n<size=70%>from {1} achievements</size>");
+        AddText("ach_hidden_desc", "Gizli başarım - nasıl açıldığını kendin keşfet.", "Hidden achievement - find out for yourself.");
+        AddText("ach_unlocked", "BAŞARIM AÇILDI", "ACHIEVEMENT UNLOCKED");
+
         // --- REHBER (TUTORIAL) KARTLARI ---
         AddText("tut_welcome_title", "DÜKKÂN SENİN", "THE SHOP IS YOURS");
         AddText("tut_welcome_body", "Köşedeki küçük dönerci artık senin.\n\nKes, sat, usta tut - mahallenin en büyüğü ol.", "The little doner shop on the corner is yours now.\n\nSlice, sell, hire chefs - become the biggest in town.");

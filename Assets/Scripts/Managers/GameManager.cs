@@ -45,6 +45,21 @@ public class GameManager : MonoBehaviour
     /// <summary>Ilk acilis rehberinin kaldigi adim. 99 = bitti. Bkz. Onboarding.cs</summary>
     [HideInInspector] public int tutorialStep = 0;
 
+    // ---- ISTATISTIKLER ----
+    // Hem basarimlar hem istatistik ekrani bunlari okuyor.
+    [HideInInspector] public long   totalClicks;          // kariyer boyunca toplam dokunus
+    [HideInInspector] public int    prestigeCount;        // kac kere prestij atildi
+    [HideInInspector] public double playSeconds;          // toplam oynama suresi
+    [HideInInspector] public double offlineEarnedTotal;   // cevrimdisi toplanan toplam dilim
+    [HideInInspector] public int    goldenCaught;         // yakalanan Altin Doner sayisi
+    [HideInInspector] public double runStartLifetime;     // bu turun basindaki kariyer toplami
+
+    /// <summary>Bu prestij turunda kesilen dilim.</summary>
+    public double RunDoner => lifetimeDoner - runStartLifetime;
+
+    /// <summary>Bugune kadar kazanilan toplam Altin Masa (kesedeki + harcanmis).</summary>
+    public int PrestigeEarnedTotal => prestigePoints + prestigeSpent;
+
     public UIManager uiManager;
 
     bool  lastBoostState = false;
@@ -86,6 +101,13 @@ public class GameManager : MonoBehaviour
             boostEndsAtUnix = saveData.boostEndsAtUnix;
             lastTicks       = saveData.lastSaveTicks;
             tutorialStep    = saveData.tutorialStep;
+
+            totalClicks        = saveData.totalClicks;
+            prestigeCount      = saveData.prestigeCount;
+            playSeconds        = saveData.playSeconds;
+            offlineEarnedTotal = saveData.offlineEarnedTotal;
+            goldenCaught       = saveData.goldenCaught;
+            runStartLifetime   = saveData.runStartLifetime;
         }
 
         UpdatePrestigeCalculations();
@@ -107,6 +129,8 @@ public class GameManager : MonoBehaviour
             lifetimeDoner += gain;
             if (uiManager != null) uiManager.UpdateTotalDonerText(totalDoner);
         }
+
+        playSeconds += Time.deltaTime;
 
         // Pahali isler her karede degil, saniyede ~5 kez
         uiTick += Time.deltaTime;
@@ -142,6 +166,7 @@ public class GameManager : MonoBehaviour
 
         if (earned <= 0) yield break;
 
+        offlineEarnedTotal += earned;
         AddDoner(earned);
         if (uiManager != null) uiManager.ShowOfflineReward(earned, counted, capped);
     }
@@ -158,6 +183,7 @@ public class GameManager : MonoBehaviour
 
     public void OnDonerClicked()
     {
+        totalClicks++;
         AddDoner(clickPower);
         uiManager.PlayClickFeedback(clickPower);
     }
@@ -190,8 +216,12 @@ public class GameManager : MonoBehaviour
         // Prestij bonusu artik puan sayisindan degil, magazada ALINANLARDAN geliyor.
         double globalPrestigeMultiplier = PrestigeManager.GlobalMult();
 
+        // SOHRET: acilan her basarim uretimi kalici olarak biraz buyutur.
+        // Sinirli ve bilinir: 62 odullu basarim x %0.4 = en fazla %24.8.
+        double fame = AchievementManager.FameMultiplier();
+
         productionPerSecond = (basePassiveProduction + workerProduction)
-                            * passiveMultiplier * globalPrestigeMultiplier * ActiveBoost;
+                            * passiveMultiplier * globalPrestigeMultiplier * fame * ActiveBoost;
 
         // Tiklama gucu = sabit taban (carpanlarla buyur) + uretimin bir yuzdesi.
         // YUZDE TERIMI clickMultiplier ILE CARPILMAZ - ikisi carpilirsa tek tiklama
@@ -249,7 +279,9 @@ public class GameManager : MonoBehaviour
     {
         if (pendingPrestige > 0)
         {
-            prestigePoints += pendingPrestige;
+            prestigePoints  += pendingPrestige;
+            prestigeCount++;
+            runStartLifetime = lifetimeDoner;   // yeni tur burada basliyor
             SaveManager.Instance.PrestigeSave();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }

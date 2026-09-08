@@ -1,0 +1,668 @@
+{
+ "achievements": [
+  {
+   "id": "car_1000",
+   "kind": 0,
+   "value": 1000.0,
+   "nameTr": "Ekmek Parası",
+   "nameEn": "Bread Money",
+   "descTr": "Kariyerinde toplam 1K dilim kes.",
+   "descEn": "Slice 1K doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_100000",
+   "kind": 0,
+   "value": 100000.0,
+   "nameTr": "Mahallenin Dilinde",
+   "nameEn": "Talk of the Street",
+   "descTr": "Kariyerinde toplam 100K dilim kes.",
+   "descEn": "Slice 100K doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_1e+06",
+   "kind": 0,
+   "value": 1000000.0,
+   "nameTr": "Tabela Astık",
+   "nameEn": "We Got a Sign",
+   "descTr": "Kariyerinde toplam 1M dilim kes.",
+   "descEn": "Slice 1M doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_1e+08",
+   "kind": 0,
+   "value": 100000000.0,
+   "nameTr": "Kuyruk Var",
+   "nameEn": "There's a Queue",
+   "descTr": "Kariyerinde toplam 100M dilim kes.",
+   "descEn": "Slice 100M doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_1e+10",
+   "kind": 0,
+   "value": 10000000000.0,
+   "nameTr": "Şube Açtık",
+   "nameEn": "We Opened a Branch",
+   "descTr": "Kariyerinde toplam 10B dilim kes.",
+   "descEn": "Slice 10B doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_1e+13",
+   "kind": 0,
+   "value": 10000000000000.0,
+   "nameTr": "Döner İmparatoru",
+   "nameEn": "Doner Emperor",
+   "descTr": "Kariyerinde toplam 10T dilim kes.",
+   "descEn": "Slice 10T doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_1e+16",
+   "kind": 0,
+   "value": 1e+16,
+   "nameTr": "Ulusal Marka",
+   "nameEn": "National Brand",
+   "descTr": "Kariyerinde toplam 10Qa dilim kes.",
+   "descEn": "Slice 10Qa doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_1e+19",
+   "kind": 0,
+   "value": 1e+19,
+   "nameTr": "Kıtalar Arası",
+   "nameEn": "Intercontinental",
+   "descTr": "Kariyerinde toplam 10Qi dilim kes.",
+   "descEn": "Slice 10Qi doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "car_1e+23",
+   "kind": 0,
+   "value": 1e+23,
+   "nameTr": "Efsane",
+   "nameEn": "Legend",
+   "descTr": "Kariyerinde toplam 100Sx dilim kes.",
+   "descEn": "Slice 100Sx doner in your career.",
+   "hidden": 0
+  },
+  {
+   "id": "run_1e+06",
+   "kind": 1,
+   "value": 1000000.0,
+   "nameTr": "Temiz Başlangıç",
+   "nameEn": "Clean Start",
+   "descTr": "Tek turda 1M dilim kes.",
+   "descEn": "Slice 1M doner in a single run.",
+   "hidden": 0
+  },
+  {
+   "id": "run_1e+12",
+   "kind": 1,
+   "value": 1000000000000.0,
+   "nameTr": "Hızlı Tur",
+   "nameEn": "Fast Run",
+   "descTr": "Tek turda 1T dilim kes.",
+   "descEn": "Slice 1T doner in a single run.",
+   "hidden": 0
+  },
+  {
+   "id": "run_1e+18",
+   "kind": 1,
+   "value": 1e+18,
+   "nameTr": "Rekor Tur",
+   "nameEn": "Record Run",
+   "descTr": "Tek turda 1Qi dilim kes.",
+   "descEn": "Slice 1Qi doner in a single run.",
+   "hidden": 0
+  },
+  {
+   "id": "hiz_1",
+   "kind": 2,
+   "value": 1,
+   "nameTr": "Ocak Yandı",
+   "nameEn": "Fire's Lit",
+   "descTr": "Saniyede 1 dilim üretime ulaş.",
+   "descEn": "Reach 1 doner per second.",
+   "hidden": 0
+  },
+  {
+   "id": "hiz_10",
+   "kind": 2,
+   "value": 10,
+   "nameTr": "Tezgah Isındı",
+   "nameEn": "Grill's Warm",
+   "descTr": "Saniyede 10 dilim üretime ulaş.",
+   "descEn": "Reach 10 doner per second.",
+   "hidden": 0
+  },
+  {
+   "id": "hiz_100",
+   "kind": 2,
+   "value": 100,
+   "nameTr": "Öğle Yoğunluğu",
+   "nameEn": "Lunch Rush",
+   "descTr": "Saniyede 100 dilim üretime ulaş.",
+   "descEn": "Reach 100 doner per second.",
+   "hidden": 0
+  },
+  {
+   "id": "hiz_10000",
+   "kind": 2,
+   "value": 10000.0,
+   "nameTr": "Durmak Yok",
+   "nameEn": "No Stopping",
+   "descTr": "Saniyede 10K dilim üretime ulaş.",
+   "descEn": "Reach 10K doner per second.",
+   "hidden": 0
+  },
+  {
+   "id": "hiz_1e+06",
+   "kind": 2,
+   "value": 1000000.0,
+   "nameTr": "Bant Sistemi",
+   "nameEn": "Assembly Line",
+   "descTr": "Saniyede 1M dilim üretime ulaş.",
+   "descEn": "Reach 1M doner per second.",
+   "hidden": 0
+  },
+  {
+   "id": "hiz_1e+09",
+   "kind": 2,
+   "value": 1000000000.0,
+   "nameTr": "Sanayi Ölçeği",
+   "nameEn": "Industrial Scale",
+   "descTr": "Saniyede 1B dilim üretime ulaş.",
+   "descEn": "Reach 1B doner per second.",
+   "hidden": 0
+  },
+  {
+   "id": "hiz_1e+12",
+   "kind": 2,
+   "value": 1000000000000.0,
+   "nameTr": "Fizik Kanunları Esniyor",
+   "nameEn": "Physics Bends",
+   "descTr": "Saniyede 1T dilim üretime ulaş.",
+   "descEn": "Reach 1T doner per second.",
+   "hidden": 0
+  },
+  {
+   "id": "tik_100",
+   "kind": 3,
+   "value": 100,
+   "nameTr": "Isınma Turu",
+   "nameEn": "Warm-Up",
+   "descTr": "Toplam 100 kere dönere dokun.",
+   "descEn": "Tap the doner 100 times.",
+   "hidden": 0
+  },
+  {
+   "id": "tik_1000",
+   "kind": 3,
+   "value": 1000,
+   "nameTr": "Bilek Gücü",
+   "nameEn": "Wrist Power",
+   "descTr": "Toplam 1K kere dönere dokun.",
+   "descEn": "Tap the doner 1K times.",
+   "hidden": 0
+  },
+  {
+   "id": "tik_10000",
+   "kind": 3,
+   "value": 10000,
+   "nameTr": "Nasır",
+   "nameEn": "Calluses",
+   "descTr": "Toplam 10K kere dönere dokun.",
+   "descEn": "Tap the doner 10K times.",
+   "hidden": 0
+  },
+  {
+   "id": "tik_50000",
+   "kind": 3,
+   "value": 50000,
+   "nameTr": "Bıçak Elin Uzantısı",
+   "nameEn": "Blade Is an Extension",
+   "descTr": "Toplam 50K kere dönere dokun.",
+   "descEn": "Tap the doner 50K times.",
+   "hidden": 0
+  },
+  {
+   "id": "tik_200000",
+   "kind": 3,
+   "value": 200000,
+   "nameTr": "Parmak Efsanesi",
+   "nameEn": "Finger Legend",
+   "descTr": "Toplam 200K kere dönere dokun.",
+   "descEn": "Tap the doner 200K times.",
+   "hidden": 0
+  },
+  {
+   "id": "tik_1000000",
+   "kind": 3,
+   "value": 1000000,
+   "nameTr": "Bir Milyon Dokunuş",
+   "nameEn": "One Million Taps",
+   "descTr": "Toplam 1M kere dönere dokun.",
+   "descEn": "Tap the doner 1M times.",
+   "hidden": 0
+  },
+  {
+   "id": "ces_1",
+   "kind": 12,
+   "value": 1,
+   "nameTr": "İlk Eleman",
+   "nameEn": "First Hire",
+   "descTr": "1 farklı usta çeşidi tut.",
+   "descEn": "Own 1 different chef types.",
+   "hidden": 0
+  },
+  {
+   "id": "ces_5",
+   "kind": 12,
+   "value": 5,
+   "nameTr": "Küçük Ekip",
+   "nameEn": "Small Crew",
+   "descTr": "5 farklı usta çeşidi tut.",
+   "descEn": "Own 5 different chef types.",
+   "hidden": 0
+  },
+  {
+   "id": "ces_10",
+   "kind": 12,
+   "value": 10,
+   "nameTr": "Kalabalık Mutfak",
+   "nameEn": "Busy Kitchen",
+   "descTr": "10 farklı usta çeşidi tut.",
+   "descEn": "Own 10 different chef types.",
+   "hidden": 0
+  },
+  {
+   "id": "ces_16",
+   "kind": 12,
+   "value": 16,
+   "nameTr": "Tam Kadro",
+   "nameEn": "Full Roster",
+   "descTr": "16 farklı usta çeşidi tut.",
+   "descEn": "Own 16 different chef types.",
+   "hidden": 0
+  },
+  {
+   "id": "usta_0_100",
+   "kind": 4,
+   "value": 100,
+   "worker": 0,
+   "nameTr": "Çırak Fabrikası",
+   "nameEn": "Apprentice Factory",
+   "descTr": "Stajyer Çırak'ı 100. seviyeye çıkar.",
+   "descEn": "Get Stajyer Çırak to level 100.",
+   "hidden": 0
+  },
+  {
+   "id": "usta_2_50",
+   "kind": 4,
+   "value": 50,
+   "worker": 2,
+   "nameTr": "Usta Okulu",
+   "nameEn": "School of Masters",
+   "descTr": "Döner Ustası'nı 50. seviyeye çıkar.",
+   "descEn": "Get Döner Ustası to level 50.",
+   "hidden": 0
+  },
+  {
+   "id": "usta_6_25",
+   "kind": 4,
+   "value": 25,
+   "worker": 6,
+   "nameTr": "Zincir Kurdun",
+   "nameEn": "You Built a Chain",
+   "descTr": "Franchise Ağı'nı 25. seviyeye çıkar.",
+   "descEn": "Get Franchise Ağı to level 25.",
+   "hidden": 0
+  },
+  {
+   "id": "usta_15_1",
+   "kind": 4,
+   "value": 1,
+   "worker": 15,
+   "nameTr": "Sonsuzluğa Dokundun",
+   "nameEn": "You Touched Infinity",
+   "descTr": "Sonsuzluk Ocağı'nı aç.",
+   "descEn": "Unlock Sonsuzluk Ocağı.",
+   "hidden": 0
+  },
+  {
+   "id": "sev_25",
+   "kind": 5,
+   "value": 25,
+   "nameTr": "Kadro Şişiyor",
+   "nameEn": "Roster Grows",
+   "descTr": "Ustaların toplam seviyesi 25 olsun.",
+   "descEn": "Reach 25 total chef levels.",
+   "hidden": 0
+  },
+  {
+   "id": "sev_100",
+   "kind": 5,
+   "value": 100,
+   "nameTr": "Yüz Seviye",
+   "nameEn": "A Hundred Levels",
+   "descTr": "Ustaların toplam seviyesi 100 olsun.",
+   "descEn": "Reach 100 total chef levels.",
+   "hidden": 0
+  },
+  {
+   "id": "sev_250",
+   "kind": 5,
+   "value": 250,
+   "nameTr": "Ciddi İşletme",
+   "nameEn": "Serious Business",
+   "descTr": "Ustaların toplam seviyesi 250 olsun.",
+   "descEn": "Reach 250 total chef levels.",
+   "hidden": 0
+  },
+  {
+   "id": "sev_500",
+   "kind": 5,
+   "value": 500,
+   "nameTr": "Dev Kadro",
+   "nameEn": "Huge Roster",
+   "descTr": "Ustaların toplam seviyesi 500 olsun.",
+   "descEn": "Reach 500 total chef levels.",
+   "hidden": 0
+  },
+  {
+   "id": "sev_1000",
+   "kind": 5,
+   "value": 1000,
+   "nameTr": "Bin Seviye",
+   "nameEn": "A Thousand Levels",
+   "descTr": "Ustaların toplam seviyesi 1000 olsun.",
+   "descEn": "Reach 1000 total chef levels.",
+   "hidden": 0
+  },
+  {
+   "id": "gel_1",
+   "kind": 6,
+   "value": 1,
+   "nameTr": "İlk Yatırım",
+   "nameEn": "First Investment",
+   "descTr": "1 geliştirme satın al.",
+   "descEn": "Buy 1 upgrades.",
+   "hidden": 0
+  },
+  {
+   "id": "gel_10",
+   "kind": 6,
+   "value": 10,
+   "nameTr": "Mutfak Yenilendi",
+   "nameEn": "Kitchen Renovated",
+   "descTr": "10 geliştirme satın al.",
+   "descEn": "Buy 10 upgrades.",
+   "hidden": 0
+  },
+  {
+   "id": "gel_40",
+   "kind": 6,
+   "value": 40,
+   "nameTr": "Ekipman Delisi",
+   "nameEn": "Gear Addict",
+   "descTr": "40 geliştirme satın al.",
+   "descEn": "Buy 40 upgrades.",
+   "hidden": 0
+  },
+  {
+   "id": "gel_100",
+   "kind": 6,
+   "value": 100,
+   "nameTr": "Yüz Geliştirme",
+   "nameEn": "A Hundred Upgrades",
+   "descTr": "100 geliştirme satın al.",
+   "descEn": "Buy 100 upgrades.",
+   "hidden": 0
+  },
+  {
+   "id": "gel_176",
+   "kind": 6,
+   "value": 176,
+   "nameTr": "Alınacak Bir Şey Kalmadı",
+   "nameEn": "Nothing Left to Buy",
+   "descTr": "176 geliştirme satın al.",
+   "descEn": "Buy 176 upgrades.",
+   "hidden": 0
+  },
+  {
+   "id": "pre_1",
+   "kind": 7,
+   "value": 1,
+   "nameTr": "Sıfırdan",
+   "nameEn": "From Scratch",
+   "descTr": "1 kere prestij yap.",
+   "descEn": "Prestige 1 times.",
+   "hidden": 0
+  },
+  {
+   "id": "pre_3",
+   "kind": 7,
+   "value": 3,
+   "nameTr": "Alışkanlık",
+   "nameEn": "A Habit",
+   "descTr": "3 kere prestij yap.",
+   "descEn": "Prestige 3 times.",
+   "hidden": 0
+  },
+  {
+   "id": "pre_10",
+   "kind": 7,
+   "value": 10,
+   "nameTr": "Ustalaşma",
+   "nameEn": "Mastery",
+   "descTr": "10 kere prestij yap.",
+   "descEn": "Prestige 10 times.",
+   "hidden": 0
+  },
+  {
+   "id": "pre_25",
+   "kind": 7,
+   "value": 25,
+   "nameTr": "Sonsuz Döngü",
+   "nameEn": "Endless Loop",
+   "descTr": "25 kere prestij yap.",
+   "descEn": "Prestige 25 times.",
+   "hidden": 0
+  },
+  {
+   "id": "pre_50",
+   "kind": 7,
+   "value": 50,
+   "nameTr": "Zaman Kaybı Değil",
+   "nameEn": "Not a Waste of Time",
+   "descTr": "50 kere prestij yap.",
+   "descEn": "Prestige 50 times.",
+   "hidden": 0
+  },
+  {
+   "id": "masa_1",
+   "kind": 8,
+   "value": 1,
+   "nameTr": "İlk Maşa",
+   "nameEn": "First Tongs",
+   "descTr": "Toplam 1 Altın Maşa kazan.",
+   "descEn": "Earn 1 Golden Tongs in total.",
+   "hidden": 0
+  },
+  {
+   "id": "masa_25",
+   "kind": 8,
+   "value": 25,
+   "nameTr": "Maşa Koleksiyonu",
+   "nameEn": "Tong Collection",
+   "descTr": "Toplam 25 Altın Maşa kazan.",
+   "descEn": "Earn 25 Golden Tongs in total.",
+   "hidden": 0
+  },
+  {
+   "id": "masa_200",
+   "kind": 8,
+   "value": 200,
+   "nameTr": "Altın Çağ",
+   "nameEn": "Golden Age",
+   "descTr": "Toplam 200 Altın Maşa kazan.",
+   "descEn": "Earn 200 Golden Tongs in total.",
+   "hidden": 0
+  },
+  {
+   "id": "masa_1000",
+   "kind": 8,
+   "value": 1000,
+   "nameTr": "Maşa Hazinesi",
+   "nameEn": "Tong Treasury",
+   "descTr": "Toplam 1000 Altın Maşa kazan.",
+   "descEn": "Earn 1000 Golden Tongs in total.",
+   "hidden": 0
+  },
+  {
+   "id": "alt_1",
+   "kind": 9,
+   "value": 1,
+   "nameTr": "Gözüm Keskin",
+   "nameEn": "Sharp Eye",
+   "descTr": "1 Altın Döner yakala.",
+   "descEn": "Catch 1 Golden Doners.",
+   "hidden": 0
+  },
+  {
+   "id": "alt_25",
+   "kind": 9,
+   "value": 25,
+   "nameTr": "Refleks",
+   "nameEn": "Reflexes",
+   "descTr": "25 Altın Döner yakala.",
+   "descEn": "Catch 25 Golden Doners.",
+   "hidden": 0
+  },
+  {
+   "id": "alt_100",
+   "kind": 9,
+   "value": 100,
+   "nameTr": "Avcı",
+   "nameEn": "Hunter",
+   "descTr": "100 Altın Döner yakala.",
+   "descEn": "Catch 100 Golden Doners.",
+   "hidden": 0
+  },
+  {
+   "id": "alt_500",
+   "kind": 9,
+   "value": 500,
+   "nameTr": "Hiçbirini Kaçırmam",
+   "nameEn": "I Never Miss",
+   "descTr": "500 Altın Döner yakala.",
+   "descEn": "Catch 500 Golden Doners.",
+   "hidden": 0
+  },
+  {
+   "id": "cev_1e+06",
+   "kind": 10,
+   "value": 1000000.0,
+   "nameTr": "Uyurken de Çalışır",
+   "nameEn": "Works While You Sleep",
+   "descTr": "Çevrimdışıyken toplam 1M dilim kazan.",
+   "descEn": "Earn 1M doner while away.",
+   "hidden": 0
+  },
+  {
+   "id": "cev_1e+11",
+   "kind": 10,
+   "value": 100000000000.0,
+   "nameTr": "Gece Vardiyası",
+   "nameEn": "Night Shift",
+   "descTr": "Çevrimdışıyken toplam 100B dilim kazan.",
+   "descEn": "Earn 100B doner while away.",
+   "hidden": 0
+  },
+  {
+   "id": "cev_1e+16",
+   "kind": 10,
+   "value": 1e+16,
+   "nameTr": "Ben Yokken",
+   "nameEn": "While I Was Away",
+   "descTr": "Çevrimdışıyken toplam 10Qa dilim kazan.",
+   "descEn": "Earn 10Qa doner while away.",
+   "hidden": 0
+  },
+  {
+   "id": "sur_3600",
+   "kind": 11,
+   "value": 3600,
+   "nameTr": "Bir Saat",
+   "nameEn": "One Hour",
+   "descTr": "Toplam 1 saat oyna.",
+   "descEn": "Play for 1 hours in total.",
+   "hidden": 0
+  },
+  {
+   "id": "sur_36000",
+   "kind": 11,
+   "value": 36000,
+   "nameTr": "On Saat",
+   "nameEn": "Ten Hours",
+   "descTr": "Toplam 10 saat oyna.",
+   "descEn": "Play for 10 hours in total.",
+   "hidden": 0
+  },
+  {
+   "id": "sur_180000",
+   "kind": 11,
+   "value": 180000,
+   "nameTr": "Elli Saat",
+   "nameEn": "Fifty Hours",
+   "descTr": "Toplam 50 saat oyna.",
+   "descEn": "Play for 50 hours in total.",
+   "hidden": 0
+  },
+  {
+   "id": "giz_notap",
+   "kind": 20,
+   "value": 0,
+   "nameTr": "Hiç Dokunmadan",
+   "nameEn": "Without a Single Tap",
+   "descTr": "Tek bir dokunuş bile yapmadan ilk ustanı tut.",
+   "descEn": "Hire your first chef without tapping once.",
+   "hidden": 1
+  },
+  {
+   "id": "giz_sabir",
+   "kind": 21,
+   "value": 600,
+   "nameTr": "Sabırlı Müşteri",
+   "nameEn": "Patient Customer",
+   "descTr": "Oyunu açık bırakıp 10 dakika hiçbir şeye dokunma.",
+   "descEn": "Leave the game open for 10 minutes without touching anything.",
+   "hidden": 1
+  },
+  {
+   "id": "giz_gece",
+   "kind": 22,
+   "value": 0,
+   "nameTr": "Gece Yarısı Dönercisi",
+   "nameEn": "Midnight Kebab",
+   "descTr": "Gece 03.00 ile 05.00 arasında döner kes.",
+   "descEn": "Slice doner between 3 and 5 AM.",
+   "hidden": 1
+  },
+  {
+   "id": "giz_hepsi",
+   "kind": 23,
+   "value": 0,
+   "nameTr": "Koleksiyoncu",
+   "nameEn": "Completionist",
+   "descTr": "Gizli olmayan bütün başarımları aç.",
+   "descEn": "Unlock every non-hidden achievement.",
+   "hidden": 1
+  }
+ ]
+}

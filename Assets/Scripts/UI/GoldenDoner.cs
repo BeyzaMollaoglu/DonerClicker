@@ -81,6 +81,7 @@ public class GoldenDoner : MonoBehaviour
         {
             // Iki odulden biri: kisa sureli firtina ya da pesin dilim
             // "Comert Usta" prestij kalemi odulu buyutur: firtina uzar, pesin odul artar
+            gm.goldenCaught++;
             double rw = PrestigeManager.GoldenReward();
 
             if (Random.value < 0.5f)
