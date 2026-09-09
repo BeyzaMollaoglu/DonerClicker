@@ -1269,10 +1269,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   sfxSource: {fileID: 439764273}
-  tabClickSound: {fileID: 8300000, guid: 4201a1885ff896b4aba3e1c8b969ec8c, type: 3}
-  buySound: {fileID: 8300000, guid: c89713f8bc3366a4da2cb4da24aeb69f, type: 3}
-  donerClickSound: {fileID: 8300000, guid: a8ec6ac89fd4e20498ae3e02654acbb0, type: 3}
-  CelebrateSound: {fileID: 8300000, guid: 33607b0f25eadbd44b5d0098dabd8767, type: 3}
+  tabClickSound: {fileID: 8300000, guid: d11d6679c8fd32311b33cbbeaa17f1e1, type: 3}
+  buySound: {fileID: 8300000, guid: d6cb14afde3f57a572ad785ea9dc537b, type: 3}
+  donerClickSound: {fileID: 8300000, guid: 1dec965066b15aab2c797cf0c38bcad1, type: 3}
+  donerClickVariants:
+  - {fileID: 8300000, guid: 1dec965066b15aab2c797cf0c38bcad1, type: 3}
+  - {fileID: 8300000, guid: b23497a49e18bfde8e18117a9b0feec3, type: 3}
+  - {fileID: 8300000, guid: 8aa904cb926c67244566aa07119a93d8, type: 3}
+  - {fileID: 8300000, guid: d1c93d5302a92b42aae3f2a1bb46c4e6, type: 3}
+  CelebrateSound: {fileID: 8300000, guid: afdd6afc43f23075b815a1d40c54de42, type: 3}
   ozelButonlar:
   - buton: {fileID: 829461246}
     sesTuru: 2

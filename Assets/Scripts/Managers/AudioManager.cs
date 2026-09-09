@@ -31,10 +31,27 @@ public class AudioManager : MonoBehaviour
     public AudioClip buySound;
     public AudioClip donerClickSound;
 
+    [Tooltip("Doner kesme varyantlari. Doluysa donerClickSound yerine bunlar SIRAYLA calar - " +
+             "ayni sesin bininci kez tekrarladigi hissi kalkar.")]
+    public AudioClip[] donerClickVariants;
+    int variantIndex;
+
     public AudioClip CelebrateSound;
 
     [Header("Özel Ses Atamaları (Buraya Ekle)")]
     public List<CustomButtonSound> ozelButonlar = new List<CustomButtonSound>();
+
+    [Header("Canlilik - ayni sesin tekduze duyulmasini onler")]
+    [Tooltip("Her calista perde bu araliktan rastgele secilir. 1 = degisme yok.")]
+    public float pitchMin = 0.94f;
+    public float pitchMax = 1.07f;
+    [Tooltip("Her calista ses seviyesi bu araliktan rastgele secilir.")]
+    public float volumeMin = 0.85f;
+    public float volumeMax = 1.00f;
+    [Tooltip("Ayni tur ses en fazla bu siklikta calar (saniye). Ust uste binip kirilmasini onler.")]
+    public float minGap = 0.045f;
+
+    readonly Dictionary<int, float> lastPlayed = new Dictionary<int, float>();
 
     private void Awake()
     {
@@ -74,6 +91,18 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Kesme sesini SIRAYLA dondurur (rastgele degil: rastgelede ayni ses
+    /// arka arkaya iki kez gelebiliyor ve tekrar hissi geri geliyor).
+    /// </summary>
+    AudioClip NextDonerClip()
+    {
+        if (donerClickVariants == null || donerClickVariants.Length == 0) return donerClickSound;
+        AudioClip c = donerClickVariants[variantIndex % donerClickVariants.Length];
+        variantIndex++;
+        return c != null ? c : donerClickSound;
+    }
+
     public void PlaySound(SoundType type)
     {
         if (sfxSource == null) return;
@@ -86,14 +115,32 @@ public class AudioManager : MonoBehaviour
         {
             SoundType.TabClick => tabClickSound,
             SoundType.Buy => buySound,
-            SoundType.DonerClick => donerClickSound,
+            SoundType.DonerClick => NextDonerClip(),
             SoundType.Celebrate => CelebrateSound,
             _ => null
         };
 
-        if (clipToPlay != null)
+        if (clipToPlay == null) return;
+
+        // --- TIKLAMA OYUNUNDA SES NEDEN BOZUK DUYULUR ---
+        // Ayni klip saniyede 5-10 kez, HEP AYNI perdeden calininca kulak bunu
+        // ses degil "makineli tufek" gibi duyuyor. Her calista perdeyi ve
+        // sesi hafifce degistirmek, ayni dosyayla bile duyumu tamamen degistirir.
+        float p0 = sfxSource.pitch;
+        sfxSource.pitch = Random.Range(pitchMin, pitchMax);
+
+        // Ust uste binen sesler toplanip kirilma (clipping) yapiyordu.
+        // Ayni turden ses cok kisa arayla tekrar istenirse atlaniyor.
+        float now = Time.unscaledTime;
+        int   key = (int)type;
+        if (lastPlayed.TryGetValue(key, out float t) && now - t < minGap)
         {
-            sfxSource.PlayOneShot(clipToPlay);
+            sfxSource.pitch = p0;
+            return;
         }
+        lastPlayed[key] = now;
+
+        sfxSource.PlayOneShot(clipToPlay, Random.Range(volumeMin, volumeMax));
+        sfxSource.pitch = p0;
     }
 }

@@ -150,9 +150,12 @@ public class PrestigeManager : MonoBehaviour
     {
         if (it.card == null) return;
 
-        // JSON'dan gelen ismi ve açıklamayı çeviriciden geçiriyoruz
-        string localizedName = LocalizationManager.Instance.GetLocalizedValue(it.pname);
-        string localizedDesc = LocalizationManager.Instance.GetLocalizedValue(it.pdesc);
+        // Cevirici hazir degilse ham metni kullan - burada NRE atmak
+        // butun magazanin bos acilmasina yol aciyordu.
+        var loc = LocalizationManager.Instance;
+        string localizedName = loc != null ? loc.GetLocalizedValue(it.pname) : it.pname;
+        string localizedDesc = loc != null ? loc.GetLocalizedValue(it.pdesc) : it.pdesc;
+        if (loc == null) { it.card.Set(localizedName, "", localizedDesc, CostOf(it).ToString()); return; }
 
         if (IsMaxed(it))
         {

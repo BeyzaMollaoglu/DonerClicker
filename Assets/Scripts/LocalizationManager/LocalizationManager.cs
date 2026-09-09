@@ -15,18 +15,31 @@ public class LocalizationManager : MonoBehaviour
     // Çeviri veritabanı: Dictionary<KelimeAnahtarı, Dictionary<Dil, Çeviri>>
     private Dictionary<string, Dictionary<Language, string>> localizedTexts;
 
+    const string DIL_ANAHTARI = "opt_lang";
+
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            InitializeDictionary();
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        // DIKKAT - BURADA DontDestroyOnLoad KULLANMA.
+        //
+        // Bu bilesen Game_Manager objesinin uzerinde duruyor; o objede
+        // GameManager, WorkerManager, UpgradeManager, SaveManager,
+        // PrestigeManager, AchievementManager, AudioManager... hepsi var.
+        // DontDestroyOnLoad cagrildiginda prestij sonrasi sahne yeniden
+        // yuklenirken ESKI Game_Manager hayatta kaliyor, YENI olan ise
+        // "zaten bir tane var" deyip kendini yok ediyordu. Sonucta butun
+        // manager'lar eski sahneden kalma, yok edilmis arayuz nesnelerine
+        // bakiyordu: prestij magazasi bos aciliyor, aciklama yazilmiyor,
+        // kartlar hicbir yere olusturulamiyordu.
+        //
+        // Oyun tek sahne oldugu icin kalici olmasina gerek yok; dil tercihi
+        // PlayerPrefs'te saklaniyor ve her acilista geri yukleniyor.
+        if (Instance != null && Instance != this) { Destroy(this); return; }
+        Instance = this;
+
+        if (PlayerPrefs.HasKey(DIL_ANAHTARI))
+            currentLanguage = (Language)PlayerPrefs.GetInt(DIL_ANAHTARI);
+
+        InitializeDictionary();
     }
 
     private void InitializeDictionary()
@@ -444,6 +457,11 @@ public class LocalizationManager : MonoBehaviour
     public void SetLanguage(Language newLanguage)
     {
         currentLanguage = newLanguage;
+
+        // Sahne yeniden yuklendiginde (prestij) secim kaybolmasin.
+        PlayerPrefs.SetInt(DIL_ANAHTARI, (int)newLanguage);
+        PlayerPrefs.Save();
+
         // Dil değiştiğinde tüm dinleyicilere haber ver
         OnLanguageChanged?.Invoke(); 
     }
