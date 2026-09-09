@@ -4,12 +4,13 @@ using UnityEngine;
 [System.Serializable]
 public class AchievementItem
 {
-    public string id;
+    public string id;   // KAYITTA saklanir - degistirilirse eski kayitlardaki
+                        // o basarim kaybolur. Oyuncuya hic gorunmez.
     /// <summary>
     /// Kosul turu:
     ///  0 kariyer dilim      1 bu turdaki dilim    2 saniyelik uretim
     ///  3 toplam tiklama     4 belirli usta sv.    5 toplam usta sv.
-    ///  6 alinan gelistirme  7 prestij sayisi      8 toplam Altin Masa
+    ///  6 alinan gelistirme  7 prestij sayisi      8 toplam Altin Sikke
     ///  9 Altin Doner        10 cevrimdisi toplam  11 oynama suresi (sn)
     /// 12 farkli usta cesidi
     /// 20-23 ozel (gizli) kosullar - bkz. SpecialMet()

@@ -23,12 +23,12 @@ public class CardView : MonoBehaviour
 
     static readonly Color BorderOn  = new Color(0.941f, 0.706f, 0.255f);   // #F0B441 altin
     static readonly Color BorderOff = new Color(0.306f, 0.200f, 0.125f);   // #4E3320 sonuk cerceve
-    static readonly Color FillOn    = new Color(0.259f, 0.153f, 0.078f);   // #422714 kart zemini
-    static readonly Color FillOff   = new Color(0.165f, 0.102f, 0.071f);   // #2A1A12
+    static readonly Color FillOn    = new Color(0.239f, 0.165f, 0.102f);   // #3D2A1A - basarim panelindeki acik satirla ayni
+    static readonly Color FillOff   = new Color(0.180f, 0.129f, 0.098f);   // #2E2119 - basarim panelindeki kilitli satirla ayni
     static readonly Color IconOn    = new Color(0.851f, 0.380f, 0.169f);   // #D9612B ates
     static readonly Color IconOff   = new Color(0.298f, 0.204f, 0.141f);   // #4C3424
-    static readonly Color TextOn    = new Color(0.969f, 0.906f, 0.808f);   // #F7E7CE krem
-    static readonly Color TextOff   = new Color(0.639f, 0.541f, 0.431f);   // #A38A6E
+    static readonly Color TextOn    = new Color(1.000f, 0.914f, 0.769f);   // #FFE9C4 krem
+    static readonly Color TextOff   = new Color(0.659f, 0.580f, 0.510f);   // #A89482
     static readonly Color SubColor  = new Color(0.639f, 0.541f, 0.431f);
 
     int lastState = -1;   // -1 hic ayarlanmadi, 0 alinamaz, 1 alinabilir

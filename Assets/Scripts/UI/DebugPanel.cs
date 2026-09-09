@@ -79,7 +79,7 @@ public class DebugPanel : MonoBehaviour
             GUILayout.Label($"uretim     : {UIManager.FormatNumber(gm.productionPerSecond)}/sn");
             GUILayout.Label($"tik gucu   : {UIManager.FormatNumber(gm.clickPower)}");
             GUILayout.Label($"lifetime   : {UIManager.FormatNumber(gm.lifetimeDoner)}");
-            GUILayout.Label($"Altin Masa: {gm.prestigePoints} kese / {gm.prestigeSpent} harcandi  (bekleyen {gm.pendingPrestige})");
+            GUILayout.Label($"Altin Sikke: {gm.prestigePoints} kese / {gm.prestigeSpent} harcandi  (bekleyen {gm.pendingPrestige})");
             GUILayout.Label($"prestij carpani: x{PrestigeManager.GlobalMult():0.##}   tik x{PrestigeManager.ClickMult():0.##}");
             GUILayout.Label($"boost      : {(gm.BoostActive ? gm.boostMultiplier.ToString("0.#") + "x " + UIManager.ShortTime(gm.BoostSecondsLeft) : "yok")}");
         }
@@ -125,7 +125,7 @@ public class DebugPanel : MonoBehaviour
 
         // prestigeSpent'i de dusuruyoruz ki "kazanilan toplam" degismesin
         // ve bekleyen puan yanlis hesaplanmasin.
-        if (GUILayout.Button("+100 Altin Masa") && gm != null)
+        if (GUILayout.Button("+100 Altin Sikke") && gm != null)
         {
             gm.prestigePoints += 100;
             gm.prestigeSpent -= 100;

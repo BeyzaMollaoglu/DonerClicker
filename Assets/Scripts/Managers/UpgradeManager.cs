@@ -327,6 +327,10 @@ public class UpgradeManager : MonoBehaviour
 
         if (GameManager.Instance.SpendDoner(item.cost))
         {
+            // Ses SADECE islem gerceklestiginde (alinmis / parasi yetmeyen
+            // kartta ses cikmasin).
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySound(SoundType.Buy);
+
             item.isPurchased = true;
             ApplyUpgradeEffect(item);
             UpdateUpgradeUI(item);

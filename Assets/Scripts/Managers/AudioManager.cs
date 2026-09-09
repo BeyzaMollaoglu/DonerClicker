@@ -63,10 +63,14 @@ public class AudioManager : MonoBehaviour
         // 4. Eğer bir buton senin özel listende YOKSA, ona otomatik olarak standart sesi veriyoruz
         foreach (Button btn in tumButonlar)
         {
-            if (!islenenButonlar.Contains(btn))
-            {
-                btn.onClick.AddListener(() => PlaySound(SoundType.TabClick));
-            }
+            if (islenenButonlar.Contains(btn)) continue;
+
+            // LISTE KARTLARINI ATLA. Kartlarin sesini manager'lar caliyor ve
+            // sadece satin alma GERCEKLESTIGINDE caliyor; buraya dahil edilirse
+            // alinmis ya da parasi yetmeyen karta basinca da ses cikar.
+            if (btn.GetComponent<CardView>() != null) continue;
+
+            btn.onClick.AddListener(() => PlaySound(SoundType.TabClick));
         }
     }
 

@@ -14,7 +14,7 @@ public class TabBadge : MonoBehaviour
         Upgrades,
         /// <summary>Hic alinmamis ama artik parasi yeten isciler.</summary>
         Workers,
-        /// <summary>Reset atmaya degecek kadar Altin Masa birikti mi.</summary>
+        /// <summary>Reset atmaya degecek kadar Altin Sikke birikti mi.</summary>
         Prestige,
         /// <summary>Alinmayi bekleyen bedava reklam hizlandirmasi (carpani yazar).</summary>
         AdBoost

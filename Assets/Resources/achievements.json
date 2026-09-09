@@ -488,20 +488,20 @@
    "id": "masa_1",
    "kind": 8,
    "value": 1,
-   "nameTr": "İlk Maşa",
-   "nameEn": "First Tongs",
-   "descTr": "Toplam 1 Altın Maşa kazan.",
-   "descEn": "Earn 1 Golden Tongs in total.",
+   "nameTr": "İlk Sikke",
+   "nameEn": "First Coin",
+   "descTr": "Toplam 1 Altın Sikke kazan.",
+   "descEn": "Earn 1 Golden Coin in total.",
    "hidden": 0
   },
   {
    "id": "masa_25",
    "kind": 8,
    "value": 25,
-   "nameTr": "Maşa Koleksiyonu",
-   "nameEn": "Tong Collection",
-   "descTr": "Toplam 25 Altın Maşa kazan.",
-   "descEn": "Earn 25 Golden Tongs in total.",
+   "nameTr": "Sikke Koleksiyonu",
+   "nameEn": "Coin Collection",
+   "descTr": "Toplam 25 Altın Sikke kazan.",
+   "descEn": "Earn 25 Golden Coins in total.",
    "hidden": 0
   },
   {
@@ -510,18 +510,18 @@
    "value": 200,
    "nameTr": "Altın Çağ",
    "nameEn": "Golden Age",
-   "descTr": "Toplam 200 Altın Maşa kazan.",
-   "descEn": "Earn 200 Golden Tongs in total.",
+   "descTr": "Toplam 200 Altın Sikke kazan.",
+   "descEn": "Earn 200 Golden Coins in total.",
    "hidden": 0
   },
   {
    "id": "masa_1000",
    "kind": 8,
    "value": 1000,
-   "nameTr": "Maşa Hazinesi",
-   "nameEn": "Tong Treasury",
-   "descTr": "Toplam 1000 Altın Maşa kazan.",
-   "descEn": "Earn 1000 Golden Tongs in total.",
+   "nameTr": "Sikke Hazinesi",
+   "nameEn": "Coin Treasury",
+   "descTr": "Toplam 1000 Altın Sikke kazan.",
+   "descEn": "Earn 1000 Golden Coins in total.",
    "hidden": 0
   },
   {

@@ -11,14 +11,14 @@ public class GameManager : MonoBehaviour
     public double clickPower = 1;
     public double productionPerSecond = 0;
 
-    [Header("Prestij: ALTIN MASA (kalici para)")]
+    [Header("Prestij: ALTIN SIKKE (kalici para)")]
     public double lifetimeDoner = 0;
-    [Tooltip("Harcanabilir Altin Masa. Prestij magazasinda harcanir.")]
+    [Tooltip("Harcanabilir Altin Sikke. Prestij magazasinda harcanir.")]
     public int    prestigePoints = 0;
-    [Tooltip("Magazada harcanmis toplam Altin Masa - bekleyen puan hesabi icin.")]
+    [Tooltip("Magazada harcanmis toplam Altin Sikke - bekleyen puan hesabi icin.")]
     public int    prestigeSpent = 0;
     public int    pendingPrestige = 0;
-    [Tooltip("Altin Masa = kupkok(lifetime / bu deger)")]
+    [Tooltip("Altin Sikke = kupkok(lifetime / bu deger)")]
     public double prestigeDivisor = 1e12;
 
     [Header("Offline Kazanc")]
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     /// <summary>Bu prestij turunda kesilen dilim.</summary>
     public double RunDoner => lifetimeDoner - runStartLifetime;
 
-    /// <summary>Bugune kadar kazanilan toplam Altin Masa (kesedeki + harcanmis).</summary>
+    /// <summary>Bugune kadar kazanilan toplam Altin Sikke (kesedeki + harcanmis).</summary>
     public int PrestigeEarnedTotal => prestigePoints + prestigeSpent;
 
     public UIManager uiManager;

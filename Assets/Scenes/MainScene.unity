@@ -520,7 +520,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.122, g: 0.071, b: 0.043, a: 1}
+  m_Color: {r: 0.231, g: 0.153, b: 0.082, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.169, g: 0.102, b: 0.067, a: 1}
+  m_Color: {r: 0.078, g: 0.055, b: 0.035, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2244,7 +2244,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.122, g: 0.071, b: 0.043, a: 1}
+  m_Color: {r: 0.231, g: 0.153, b: 0.082, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2714,7 +2714,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.169, g: 0.102, b: 0.067, a: 1}
+  m_Color: {r: 0.078, g: 0.055, b: 0.035, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2791,7 +2791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.122, g: 0.071, b: 0.043, a: 1}
+  m_Color: {r: 0.231, g: 0.153, b: 0.082, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3261,7 +3261,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.169, g: 0.102, b: 0.067, a: 1}
+  m_Color: {r: 0.078, g: 0.055, b: 0.035, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3338,7 +3338,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.122, g: 0.071, b: 0.043, a: 1}
+  m_Color: {r: 0.231, g: 0.153, b: 0.082, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4228,8 +4228,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -126}
-  m_SizeDelta: {x: 320, y: 108}
+  m_AnchoredPosition: {x: 0, y: -122}
+  m_SizeDelta: {x: 320, y: 88}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &792000015
 CanvasRenderer:
@@ -4378,8 +4378,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 22, y: 0}
-  m_SizeDelta: {x: 84, y: 84}
+  m_AnchoredPosition: {x: 18, y: 0}
+  m_SizeDelta: {x: 64, y: 64}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &792000023
 CanvasRenderer:
@@ -4409,7 +4409,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 2e08530bf823dcdbdf0cfa076278ae22, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -5365,7 +5365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.169, g: 0.102, b: 0.067, a: 1}
+  m_Color: {r: 0.078, g: 0.055, b: 0.035, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5976,7 +5976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.122, g: 0.071, b: 0.043, a: 1}
+  m_Color: {r: 0.231, g: 0.153, b: 0.082, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8845,8 +8845,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 860, y: 180}
+  m_AnchoredPosition: {x: 0, y: -220}
+  m_SizeDelta: {x: 860, y: 104}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &922583324
 MonoBehaviour:
@@ -8895,12 +8895,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 38
+  m_fontSize: 30
   m_fontSizeBase: 46
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 38
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 22
+  m_fontSizeMax: 30
   m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -8914,7 +8914,7 @@ MonoBehaviour:
   m_charWidthMaxAdj: 0
   m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
+  m_overflowMode: 1
   m_linkedTextComponent: {fileID: 0}
   parentLinkedComponent: {fileID: 0}
   m_enableKerning: 0
@@ -9135,7 +9135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.169, g: 0.102, b: 0.067, a: 1}
+  m_Color: {r: 0.078, g: 0.055, b: 0.035, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9197,8 +9197,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -313}
-  m_SizeDelta: {x: -48, y: -674}
+  m_AnchoredPosition: {x: 0, y: -240}
+  m_SizeDelta: {x: -48, y: -528}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &981000003
 MonoBehaviour:
@@ -9706,8 +9706,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -586}
-  m_SizeDelta: {x: 840, y: 50}
+  m_AnchoredPosition: {x: 0, y: -448}
+  m_SizeDelta: {x: 840, y: 44}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &981000063
 MonoBehaviour:
@@ -9729,7 +9729,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "ALTIN MA\u015EA MA\u011EAZASI"
+  m_text: "ALTIN S\u0130KKE MA\u011EAZASI"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7c856dc1512e004449b597fc5d89b341, type: 2}
   m_sharedMaterial: {fileID: 3384057655339414118, guid: 6bcff1218fc6bbf488312fd256b59466, type: 2}
@@ -9822,6 +9822,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PrestigeManager
   cardPrefab: {fileID: 4650903383566460028, guid: aea7e81f4b601cd4287086155c89f09b, type: 3}
+  itemIcons:
+  - {fileID: 21300000, guid: 65ae32415fcc0c59a06747dfca9eb6fe, type: 3}
+  - {fileID: 21300000, guid: 854a61baa0a7b329001e0d78d185c89d, type: 3}
+  - {fileID: 21300000, guid: 8dd4b8ce0e59ab2823e206e98e61b33b, type: 3}
+  - {fileID: 21300000, guid: 86daeaf8e9825e4a381d3939849128b7, type: 3}
+  - {fileID: 21300000, guid: 1011958fa455c8cce80d75abcd7243f1, type: 3}
+  - {fileID: 21300000, guid: 77dede51e356ffae3afb8d5803a0a39f, type: 3}
+  - {fileID: 21300000, guid: 8485b5c8d43d1351101e92cf62348bbf, type: 3}
+  - {fileID: 21300000, guid: 3fec292d8c78dce39388ddd1330f2841, type: 3}
+  - {fileID: 21300000, guid: 5b9ef535e9eeae346381300379c59321, type: 3}
+  - {fileID: 21300000, guid: 4a697d222c39a31fd8d9b1edaf94763b, type: 3}
+  - {fileID: 21300000, guid: d29ffcc576bd25cf35776b39e871ee0f, type: 3}
+  - {fileID: 21300000, guid: 09ae4228b912ac71c522ea2ef58b98de, type: 3}
   content: {fileID: 981000022}
   items: []
 --- !u!223 &982000001
@@ -13257,7 +13270,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "PREST\u0130J YAP ve ALTIN MA\u015EA AL"
+  m_text: "PREST\u0130J YAP"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6bcff1218fc6bbf488312fd256b59466, type: 2}
   m_sharedMaterial: {fileID: 3384057655339414118, guid: 6bcff1218fc6bbf488312fd256b59466, type: 2}
@@ -13284,7 +13297,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 44
+  m_fontSize: 40
   m_fontSizeBase: 44
   m_fontWeight: 400
   m_enableAutoSizing: 0
@@ -16667,8 +16680,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -448}
-  m_SizeDelta: {x: 660, y: 120}
+  m_AnchoredPosition: {x: 0, y: -338}
+  m_SizeDelta: {x: 660, y: 96}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &2065269687
 MonoBehaviour:

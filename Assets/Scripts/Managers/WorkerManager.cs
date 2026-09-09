@@ -155,6 +155,10 @@ public class WorkerManager : MonoBehaviour
 
         if (GameManager.Instance.SpendDoner(worker.currentCost))
         {
+            // Ses SADECE islem gerceklestiginde. Karttaki UIButtonSound
+            // her tiklamada caliyordu, parasi yetmese bile.
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySound(SoundType.Buy);
+
             worker.level += n;
             UpdateWorkerUI(worker);
             GameManager.Instance.RecalculateStats();

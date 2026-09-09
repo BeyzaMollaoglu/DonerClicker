@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Prestij parasi (ALTIN MASA) otomatik bonus vermez, HARCANIR.
+/// Prestij parasi (ALTIN SIKKE) otomatik bonus vermez, HARCANIR.
 /// NOT: ekranda beliren "Altin Doner" bundan ayri bir seydir - o gecici odul verir.
 ///
 /// Neden: otomatik "+%3 / puan" sistemi kacak yapiyordu. Bonus puana,
@@ -43,6 +43,9 @@ public class PrestigeManager : MonoBehaviour
 
     [Header("Magaza")]
     public GameObject cardPrefab;
+
+    [Tooltip("Prestij kalemi ikonlari - prestige.json sirasiyla ayni olmali (12 adet).")]
+    public Sprite[] itemIcons;
     public Transform  content;
 
     [HideInInspector] public List<PrestigeItem> items;
@@ -138,6 +141,8 @@ public class PrestigeManager : MonoBehaviour
         GameObject obj = Instantiate(cardPrefab, content);
         it.buttonComponent = obj.GetComponent<Button>();
         it.card            = obj.GetComponent<CardView>();
+        if (it.card != null && itemIcons != null && index < itemIcons.Length)
+            it.card.SetIcon(itemIcons[index]);
         if (it.buttonComponent != null) it.buttonComponent.onClick.AddListener(() => Buy(index));
     }
 
@@ -201,6 +206,10 @@ public class PrestigeManager : MonoBehaviour
         gm.prestigePoints -= cost;
         gm.prestigeSpent += cost;
         it.level++;
+
+        // Ses SADECE islem gerceklestiginde.
+            if (AudioManager.Instance != null) AudioManager.Instance.PlaySound(SoundType.Buy);
+
 
         gm.RecalculateStats();
         gm.RefreshPrestigeUI();

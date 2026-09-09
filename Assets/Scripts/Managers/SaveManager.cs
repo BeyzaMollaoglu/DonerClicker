@@ -7,7 +7,7 @@ public class GameSaveData
     public double totalDoner;
     public double lifetimeDoner;
     public int prestigePoints;
-    /// <summary>Magazada harcanmis toplam Altin Masa - bekleyen puan hesabi icin.</summary>
+    /// <summary>Magazada harcanmis toplam Altin Sikke - bekleyen puan hesabi icin.</summary>
     public int prestigeSpent;
 
     public List<int> workerLevels = new List<int>();
@@ -170,7 +170,7 @@ public class SaveManager : MonoBehaviour
 
     /// <summary>
     /// Prestij: dilim / isci / gelistirme sifirlanir,
-    /// Altin Masa ve magazada alinanlar KALIR.
+    /// Altin Sikke ve magazada alinanlar KALIR.
     /// </summary>
     public void PrestigeSave()
     {

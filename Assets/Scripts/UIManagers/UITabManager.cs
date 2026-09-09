@@ -155,9 +155,17 @@ public class UITabManager : MonoBehaviour
         // "YENI" etiketleri panel kapanana kadar dursun.
         if (IsUpgradePanel(panel)) UpgradeManager.Instance.MarkAllSeen();
 
-        panel.DOKill(); // Panel animasyonlarını çakışmaya karşı korur
-        panel.anchoredPosition = new Vector2(0, -2500);
-        panel.DOAnchorPos(Vector2.zero, 0.6f).SetEase(Ease.OutBack);
+        // ACILIS ANIMASYONU
+        // Onceden panel ekranin 2500 birim altindan kayarak geliyordu; basarim,
+        // istatistik ve ayarlar panelleri ise buyuyerek aciliyordu - oyunda iki
+        // ayri his vardi. Hepsi ayni olsun diye buyume animasyonuna gecildi.
+        //
+        // Ek fayda: kaydirma animasyonu paneli her acilista anchoredPosition
+        // (0,0)'a cekiyordu, yani panellere verdigim dikey konum (y+30)
+        // calisma aninda eziliyordu. Olcek animasyonu konuma hic dokunmuyor.
+        panel.DOKill();
+        panel.localScale = Vector3.one * 0.85f;
+        panel.DOScale(Vector3.one, 0.35f).SetEase(Ease.OutBack);
     }
 
     // Panelin icindeki ScrollRect'i en uste alir.
@@ -193,10 +201,11 @@ public class UITabManager : MonoBehaviour
 
         if (btn_blocker != null) btn_blocker.gameObject.SetActive(false);
         
-        panel.DOKill(); // Panel animasyonlarını çakışmaya karşı korur
-        panel.DOAnchorPos(new Vector2(0, -2500), 0.5f).SetEase(Ease.InBack).OnComplete(() =>
+        panel.DOKill();
+        panel.DOScale(Vector3.one * 0.85f, 0.2f).SetEase(Ease.InBack).OnComplete(() =>
         {
             panel.gameObject.SetActive(false);
+            panel.localScale = Vector3.one;   // bir dahaki acilisa temiz baslasin
             if (activePanel == panel) activePanel = null;
         });
     }

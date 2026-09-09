@@ -55,8 +55,8 @@ public class LocalizationManager : MonoBehaviour
         AddText("offline_slices", "+{0} dilim", "+{0} slices");
         
         // PRESTİJ (Önceki mesajda eklemiştik ama yoksa diye tekrar koyuyorum)
-        AddText("prestige_ready", "Prestij yaparsan <color=#F0B441>+{0} Altın Maşa</color> kazanırsın.\n<color=#A38A6E>Dilimler, işçiler ve geliştirmeler sıfırlanır;\naşağıdaki kalıcı yükseltmeler kalır.</color>", "If you prestige, you will gain <color=#F0B441>+{0} Golden Tongs</color>.\n<color=#A38A6E>Slices, workers, and upgrades will reset;\npermanent upgrades below will remain.</color>");
-        AddText("prestige_not_ready", "<color=#A38A6E>Prestij için henüz yeterli üretim yok.\nToplam ürettiğin dilim arttıkça Altın Maşa kazanırsın.</color>", "<color=#A38A6E>Not enough production for prestige yet.\nYou will earn Golden Tongs as your total slices increase.</color>");
+        AddText("prestige_ready", "Prestij yaparsan <color=#F0B441>+{0} Altın Sikke</color> kazanırsın.\n<color=#A38A6E>Dilimler, işçiler ve geliştirmeler sıfırlanır;\naşağıdaki kalıcı yükseltmeler kalır.</color>", "If you prestige, you will gain <color=#F0B441>+{0} Golden Coins</color>.\n<color=#A38A6E>Slices, workers, and upgrades will reset;\npermanent upgrades below will remain.</color>");
+        AddText("prestige_not_ready", "<color=#A38A6E>Prestij için henüz yeterli üretim yok.\nToplam ürettiğin dilim arttıkça Altın Sikke kazanırsın.</color>", "<color=#A38A6E>Not enough production for prestige yet.\nYou will earn Golden Coins as your total slices increase.</color>");
 
         // --- WORKER MANAGER METİNLERİ ---
         AddText("worker_level", "Seviye {0}", "Level {0}");
@@ -94,9 +94,9 @@ public class LocalizationManager : MonoBehaviour
         AddText("stat_upgrades", "Alınan geliştirme", "Upgrades bought");
         AddText("stat_head_prestige", "PRESTİJ", "PRESTIGE");
         AddText("stat_prestige_count", "Prestij sayısı", "Times prestiged");
-        AddText("stat_tongs_total", "Kazanılan Altın Maşa", "Golden Tongs earned");
-        AddText("stat_tongs_purse", "Kesedeki maşa", "Tongs in purse");
-        AddText("stat_tongs_spent", "Harcanan maşa", "Tongs spent");
+        AddText("stat_coins_total", "Kazanılan Altın Sikke", "Golden Coins earned");
+        AddText("stat_coins_purse", "Kesedeki sikke", "Coins in purse");
+        AddText("stat_coins_spent", "Harcanan sikke", "Coins spent");
         AddText("stat_head_ach", "BAŞARIM", "ACHIEVEMENTS");
         AddText("stat_ach", "Açılan başarım", "Unlocked");
         AddText("stat_fame", "Mahalle şöhreti", "Neighbourhood fame");
@@ -127,7 +127,7 @@ public class LocalizationManager : MonoBehaviour
         AddText("tut_ok", "TAMAM", "OK");
 
         AddText("tut_prestige_title", "YENİDEN BAŞLA, DAHA GÜÇLÜ", "START OVER, STRONGER");
-        AddText("tut_prestige_body", "Prestij yaparsan dilimlerin ve ustaların sıfırlanır - ama Altın Maşa kazanırsın.\n\nOnlarla aldığın kalıcı yükseltmeler her turda seni daha hızlı büyütür.", "Prestige resets your slices and chefs - but earns you Golden Tongs.\n\nThe permanent upgrades you buy with them make every run faster.");
+        AddText("tut_prestige_body", "Prestij yaparsan dilimlerin ve ustaların sıfırlanır - ama Altın Sikke kazanırsın.\n\nOnlarla aldığın kalıcı yükseltmeler her turda seni daha hızlı büyütür.", "Prestige resets your slices and chefs - but earns you Golden Coins.\n\nThe permanent upgrades you buy with them make every run faster.");
         AddText("tut_prestige_btn", "ANLADIM", "GOT IT");
 
         // --- ONBOARDING ---
@@ -135,7 +135,7 @@ public class LocalizationManager : MonoBehaviour
         AddText("onb_worker", "Dilimlerin birikti! Alttaki <color=#F0B441>İŞÇİLER</color> sekmesinden\nilk ustanı işe al - senin yerine kessin.", "Slices accumulated! Hire your first chef from the <color=#F0B441>WORKERS</color> tab below.");
         AddText("onb_produce", "Ustan çalışıyor: artık sen durunca da dilim geliyor.\nKesmeye devam et, biriktikçe yeni usta al.", "Chef is working: you now get slices automatically.\nKeep slicing and hire more chefs.");
         AddText("onb_upgrade", "Alabileceğin bir <color=#F0B441>geliştirme</color> var!\nAlttaki GELİŞTİRMELER sekmesine bak.", "You have an available <color=#F0B441>upgrade</color>!\nCheck the UPGRADES tab below.");
-        AddText("onb_prestige", "Artık <color=#F0B441>PRESTİJ</color> atabilirsin! Dilimlerin ve ustaların\nsıfırlanır ama kalıcı <color=#F0B441>Altın Maşa</color> kazanırsın.", "You can now <color=#F0B441>PRESTIGE</color>! Slices and chefs will reset, but you will earn permanent <color=#F0B441>Golden Tongs</color>.");
+        AddText("onb_prestige", "Artık <color=#F0B441>PRESTİJ</color> atabilirsin! Dilimlerin ve ustaların\nsıfırlanır ama kalıcı <color=#F0B441>Altın Sikke</color> kazanırsın.", "You can now <color=#F0B441>PRESTIGE</color>! Slices and chefs will reset, but you will earn permanent <color=#F0B441>Golden Coins</color>.");
    
         // --- WORKERS (İŞÇİLER) ÇEVİRİLERİ ---
         AddText("Stajyer Çırak", "Stajyer Çırak", "Intern Apprentice");
@@ -381,13 +381,14 @@ public class LocalizationManager : MonoBehaviour
         AddText("HIZLANDIR", "HIZLANDIR", "BOOST");
 
         // --- Prestij Panel (UI) SABİT METİNLERİ ---
-        AddText("PRESTİJ YAP ve ALTIN MAŞA AL", "PRESTİJ YAP ve ALTIN MAŞA AL", "PRESTIGE & GET GOLDEN TONGS");
-        AddText("ALTIN MAŞA MAĞAZASI", "ALTIN MAŞA MAĞAZASI", "GOLDEN TONGS SHOP");
+        AddText("PRESTİJ YAP ve ALTIN SİKKE AL", "PRESTİJ YAP ve ALTIN SİKKE AL", "PRESTIGE & GET GOLDEN COINS");
+        AddText("PRESTİJ YAP", "PRESTİJ YAP", "PRESTIGE");
+        AddText("ALTIN SİKKE MAĞAZASI", "ALTIN SİKKE MAĞAZASI", "GOLDEN COIN SHOP");
         AddText("pr_level_max", "Seviye {0} / {1}", "Level {0} / {1}");
         AddText("pr_level_add", "Seviye {0} <color=#9CB84A>+1</color>  /  {1}", "Level {0} <color=#9CB84A>+1</color>  /  {1}");
         AddText("pr_level_zero", "Seviye 0  /  {0}", "Level 0  /  {0}");
         AddText("pr_maxed", "TAM", "MAX");
-        AddText("pr_cost", "{0} maşa", "{0} tongs");
+        AddText("pr_cost", "{0} sikke", "{0} coins");
 
         // --- Upgrades Panel (UI) SABİT METİNLERİ ---
         AddText("GELİŞTİRMELER", "GELİŞTİRMELER", "UPGRADES");

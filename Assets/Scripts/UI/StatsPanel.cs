@@ -137,9 +137,9 @@ public class StatsPanel : MonoBehaviour
 
         Head(T("stat_head_prestige"));
         Row(T("stat_prestige_count"), gm.prestigeCount.ToString("N0"));
-        Row(T("stat_tongs_total"),    gm.PrestigeEarnedTotal.ToString("N0"));
-        Row(T("stat_tongs_purse"),    gm.prestigePoints.ToString("N0"));
-        Row(T("stat_tongs_spent"),    gm.prestigeSpent.ToString("N0"));
+        Row(T("stat_coins_total"),    gm.PrestigeEarnedTotal.ToString("N0"));
+        Row(T("stat_coins_purse"),    gm.prestigePoints.ToString("N0"));
+        Row(T("stat_coins_spent"),    gm.prestigeSpent.ToString("N0"));
 
         if (am != null)
         {
