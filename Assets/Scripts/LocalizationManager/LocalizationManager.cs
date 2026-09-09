@@ -75,6 +75,32 @@ public class LocalizationManager : MonoBehaviour
         AddText("upg_effect_power", "Güç: {0}{1}", "Power: {0}{1}");
         AddText("upg_cost", "{0} dilim", "{0} slices");
 
+        // --- ISTATISTIKLER ---
+        AddText("stat_title", "İSTATİSTİKLER", "STATISTICS");
+        AddText("stat_head_production", "ÜRETİM", "PRODUCTION");
+        AddText("stat_lifetime", "Kariyer boyunca kesilen", "Sliced in career");
+        AddText("stat_current", "Kasadaki dilim", "Doner in hand");
+        AddText("stat_run", "Bu turda kesilen", "Sliced this run");
+        AddText("stat_rate", "Üretim hızı", "Production rate");
+        AddText("stat_per_sec", "/sn", "/sec");
+        AddText("stat_clickpower", "Dokunuş başına", "Per tap");
+        AddText("stat_head_effort", "EMEK", "EFFORT");
+        AddText("stat_clicks", "Toplam dokunuş", "Total taps");
+        AddText("stat_playtime", "Oynama süresi", "Time played");
+        AddText("stat_offline", "Çevrimdışı kazanç", "Earned while away");
+        AddText("stat_golden", "Yakalanan Altın Döner", "Golden Doners caught");
+        AddText("stat_head_shop", "DÜKKÂN", "THE SHOP");
+        AddText("stat_worker_levels", "Usta toplam seviye", "Total chef levels");
+        AddText("stat_upgrades", "Alınan geliştirme", "Upgrades bought");
+        AddText("stat_head_prestige", "PRESTİJ", "PRESTIGE");
+        AddText("stat_prestige_count", "Prestij sayısı", "Times prestiged");
+        AddText("stat_tongs_total", "Kazanılan Altın Maşa", "Golden Tongs earned");
+        AddText("stat_tongs_purse", "Kesedeki maşa", "Tongs in purse");
+        AddText("stat_tongs_spent", "Harcanan maşa", "Tongs spent");
+        AddText("stat_head_ach", "BAŞARIM", "ACHIEVEMENTS");
+        AddText("stat_ach", "Açılan başarım", "Unlocked");
+        AddText("stat_fame", "Mahalle şöhreti", "Neighbourhood fame");
+
         // --- BASARIMLAR ---
         AddText("ach_title", "BAŞARIMLAR  {0}/{1}", "ACHIEVEMENTS  {0}/{1}");
         AddText("ach_fame", "MAHALLE ŞÖHRETİ:  <color=#F0B441>+%{0} üretim</color>\n<size=70%>{1} başarımdan geliyor</size>", "NEIGHBOURHOOD FAME:  <color=#F0B441>+{0}% production</color>\n<size=70%>from {1} achievements</size>");
@@ -350,6 +376,7 @@ public class LocalizationManager : MonoBehaviour
         AddText("PRESTİJ", "PRESTİJ", "PRESTIGE");
         AddText("AYARLAR", "AYARLAR", "SETTINGS");
         AddText("KES", "KES", "CLICKER");
+        AddText("DÖNER", "DÖNER", "DONER");
         AddText("GELİŞTİR", "GELİŞTİR", "UPGRADE");
         AddText("HIZLANDIR", "HIZLANDIR", "BOOST");
 

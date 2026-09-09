@@ -25,6 +25,8 @@ public class AchievementPanel : MonoBehaviour
     public Button btn_open;
     public Button btn_close;
     public Button btn_blocker;
+    [Tooltip("Bu panel acikken tiklanamaz olacak diger yan butonlar (cark, kupa, grafik).")]
+    public Button[] sideButtons;
 
     [Header("Sekme rozeti")]
     [Tooltip("Kupa butonunun uzerindeki sayac - yeni acilan basarim varsa gorunur.")]
@@ -133,6 +135,7 @@ public class AchievementPanel : MonoBehaviour
     {
         if (panel == null) return;
         IsOpen = true;
+        ModalGuard.Enter(sideButtons);
         newSinceSeen = 0;
         RefreshBadge();
         Rebuild();
@@ -152,6 +155,7 @@ public class AchievementPanel : MonoBehaviour
     {
         if (panel == null) return;
         IsOpen = false;
+        ModalGuard.Exit(sideButtons);
         if (btn_blocker != null)
         {
             btn_blocker.onClick.RemoveListener(Close);

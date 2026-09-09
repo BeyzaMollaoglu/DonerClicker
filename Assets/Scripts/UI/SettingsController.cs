@@ -25,6 +25,8 @@ public class SettingsController : MonoBehaviour
     [Header("Panel dışına dokununca kapansın")]
     [Tooltip("Diğer panellerin kullandığı arka plan kapatıcı (blocker_button).")]
     public Button btn_blocker;
+    [Tooltip("Ayarlar acikken tiklanamaz olacak diger yan butonlar.")]
+    public Button[] sideButtons;
 
     static readonly Color OnCol  = new Color(0.941f, 0.706f, 0.255f);   // #F0B441
     static readonly Color OffCol = new Color(0.353f, 0.267f, 0.196f);   // sönük
@@ -80,6 +82,7 @@ public class SettingsController : MonoBehaviour
         if (settingsPanel == null) return;
 
         settingsPanel.gameObject.SetActive(true);
+        ModalGuard.Enter(sideButtons);
         RefreshAudioIcons();
 
         // Diğer paneller gibi: dışarı dokununca kapansın
@@ -98,6 +101,8 @@ public class SettingsController : MonoBehaviour
     public void CloseSettingsPanel()
     {
         if (settingsPanel == null) return;
+
+        ModalGuard.Exit(sideButtons);
 
         // Kapatıcıyı bize ait dinleyiciden arındırıp gizle.
         // UITabManager'ın kendi dinleyicisi kalır ama açık panel yokken zararsız.

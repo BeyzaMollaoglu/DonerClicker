@@ -33,6 +33,17 @@ public class CardView : MonoBehaviour
 
     int lastState = -1;   // -1 hic ayarlanmadi, 0 alinamaz, 1 alinabilir
 
+    /// <summary>
+    /// Kartin ikonunu ayarlar. Renk SetAffordable tarafindan yonetiliyor,
+    /// burada sadece sprite degisiyor.
+    /// </summary>
+    public void SetIcon(Sprite icon)
+    {
+        if (imgIcon == null) return;
+        imgIcon.sprite = icon;
+        imgIcon.enabled = icon != null;
+    }
+
     public void Set(string title, string sub, string detail, string price)
     {
         if (txtName   != null) txtName.text   = title;

@@ -26,6 +26,21 @@ public class WorkerManager : MonoBehaviour
 {
     public static WorkerManager Instance;
 
+    [Tooltip("Usta ikonlari - workers.json sirasiyla ayni olmali (16 adet).")]
+    public Sprite[] workerIcons;
+
+    /// <summary>
+    /// Bir ustanin ikonu. UpgradeManager de kullaniyor: 176 gelistirmenin
+    /// 144'u belirli bir ustayi guclendirdigi icin o ustanin ikonunu tasiyor.
+    /// Boylece 192 ayri ikon cizmek yerine 19 ikon yetiyor.
+    /// </summary>
+    public Sprite IconFor(int workerIndex)
+    {
+        if (workerIcons == null) return null;
+        if (workerIndex < 0 || workerIndex >= workerIcons.Length) return null;
+        return workerIcons[workerIndex];
+    }
+
     public GameObject workerButtonPrefab;
     public Transform workerContent;
     [HideInInspector] public List<WorkerItem> workerList;
@@ -122,6 +137,7 @@ public class WorkerManager : MonoBehaviour
             worker.buttonText      = newBtnObj.GetComponentInChildren<TextMeshProUGUI>();
 
             worker.buttonComponent.onClick.AddListener(() => BuyWorker(index));
+            if (worker.card != null) worker.card.SetIcon(IconFor(index));
             UpdateWorkerUI(worker);
         }
         GameManager.Instance.RecalculateStats();

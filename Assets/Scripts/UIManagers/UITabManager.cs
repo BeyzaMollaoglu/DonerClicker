@@ -14,6 +14,9 @@ public class TabItem
     public Image backgroundImage; 
     public TextMeshProUGUI tabText; 
     public RectTransform linkedPanel; 
+
+    [Tooltip("Bu sekmenin kimlik rengi. Bos (siyah) birakilirsa UITabManager'daki genel renkler kullanilir.")]
+    public Color tabColor = Color.clear;
 }
 
 public class UITabManager : MonoBehaviour 
@@ -33,11 +36,52 @@ public class UITabManager : MonoBehaviour
     public Color activeColor = new Color(0.2f, 0.7f, 0.1f);
     public Color inactiveColor = new Color(0.1f, 0.4f, 0.8f);
 
+    [Tooltip("Sekme kendi rengini kullaniyorken pasif haldeki karartma orani.")]
+    [Range(0.15f, 1f)] public float inactiveDim = 0.40f;
+
+    /// <summary>
+    /// Sekmenin o anki zemin rengi.
+    ///
+    /// Onceden BUTUN sekmeler ayni iki rengi paylasiyordu; alt cubuk tek parca
+    /// kahverengi bir serit gibi duruyordu. Artik her sekmenin kendi kimlik
+    /// rengi var (prestij mor, gelistirme mavi, kes altin, isciler yesil,
+    /// reklam pul biberi) ve pasifken ayni rengin koyusu kullaniliyor -
+    /// boylece sekme kapaliyken de ne oldugu belli oluyor.
+    /// </summary>
+    Color ColorFor(TabItem tab, bool isActive)
+    {
+        if (tab.tabColor.a <= 0f) return isActive ? activeColor : inactiveColor;
+        if (isActive) return tab.tabColor;
+        return new Color(tab.tabColor.r * inactiveDim,
+                         tab.tabColor.g * inactiveDim,
+                         tab.tabColor.b * inactiveDim, 1f);
+    }
+
     /// <summary>Su an acik bir panel var mi (onboarding ipucu gizlensin diye).</summary>
     public bool AnyPanelOpen { get { return activePanel != null; } }
 
+    public static UITabManager Instance;
+
     private int currentTabIndex = -1;
     private float originalHeight; 
+
+    private void Awake() { if (Instance == null) Instance = this; }
+
+    /// <summary>
+    /// Basarim / istatistik / ayarlar gibi SEKME OLMAYAN bir panel acikken
+    /// alt sekmeler tiklanabiliyordu; oyuncu panelin arkasindaki sekmeye basip
+    /// iki paneli ust uste acabiliyordu.
+    ///
+    /// Button.interactable yerine bilesenin kendisini kapatiyoruz: interactable
+    /// ColorTint gecisini tetikleyip sekmeleri soluklastirirdi, bu ise gorunumu
+    /// hic degistirmeden sadece tiklamayi kesiyor.
+    /// </summary>
+    public void SetTabsClickable(bool on)
+    {
+        if (tabs == null) return;
+        foreach (var t in tabs)
+            if (t != null && t.tabButton != null) t.tabButton.enabled = on;
+    }
 
     private IEnumerator Start()
     {
@@ -86,7 +130,7 @@ public class UITabManager : MonoBehaviour
                 tab.buttonRect.sizeDelta = new Vector2(tab.buttonRect.sizeDelta.x, isActive ? originalHeight + activeHeightExtension : originalHeight);
             }
             
-            if (tab.backgroundImage != null) tab.backgroundImage.color = isActive ? activeColor : inactiveColor;
+            if (tab.backgroundImage != null) tab.backgroundImage.color = ColorFor(tab, isActive);
             
             if (tab.tabText != null)
             {
@@ -186,7 +230,7 @@ public class UITabManager : MonoBehaviour
                 if (tab.backgroundImage != null) 
                 { 
                     tab.backgroundImage.DOKill(); 
-                    tab.backgroundImage.DOColor(activeColor, animationDuration); 
+                    tab.backgroundImage.DOColor(ColorFor(tab, true), animationDuration); 
                 }
                 if (tab.tabText != null) 
                 { 
@@ -205,7 +249,7 @@ public class UITabManager : MonoBehaviour
                 if (tab.backgroundImage != null) 
                 { 
                     tab.backgroundImage.DOKill();
-                    tab.backgroundImage.DOColor(inactiveColor, animationDuration); 
+                    tab.backgroundImage.DOColor(ColorFor(tab, false), animationDuration); 
                 }
                 if (tab.tabText != null) 
                 { 
@@ -233,7 +277,7 @@ public class UITabManager : MonoBehaviour
             else
             {
                 if (tab.buttonRect != null) { tab.buttonRect.DOKill(); tab.buttonRect.DOSizeDelta(new Vector2(tab.buttonRect.sizeDelta.x, originalHeight), animationDuration).SetEase(Ease.OutQuad); }
-                if (tab.backgroundImage != null) { tab.backgroundImage.DOKill(); tab.backgroundImage.DOColor(inactiveColor, animationDuration); }
+                if (tab.backgroundImage != null) { tab.backgroundImage.DOKill(); tab.backgroundImage.DOColor(ColorFor(tab, false), animationDuration); }
                 if (tab.tabText != null) { tab.tabText.DOKill(); tab.tabText.DOFade(0f, animationDuration).OnComplete(() => { if (currentTabIndex != tabs.IndexOf(tab)) tab.tabText.gameObject.SetActive(false); }); }
             }
         }

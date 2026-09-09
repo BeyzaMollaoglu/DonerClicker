@@ -44,6 +44,14 @@ public class UpgradeManager : MonoBehaviour
 {
     public static UpgradeManager Instance;
     public GameObject upgradeButtonPrefab;
+
+    [Header("Ikonlar")]
+    [Tooltip("Tiklama carpani gelistirmeleri icin ikon.")]
+    public Sprite iconClick;
+    [Tooltip("Global uretim carpani gelistirmeleri icin ikon.")]
+    public Sprite iconGlobal;
+    [Tooltip("Tiklama = uretimin yuzdesi gelistirmeleri icin ikon.")]
+    public Sprite iconPercent;
     public Transform upgradeContent;
     [HideInInspector] public List<UpgradeItem> upgradeList;
 
@@ -205,7 +213,38 @@ public class UpgradeManager : MonoBehaviour
         item.card           = obj.GetComponent<CardView>();
         item.buttonText     = obj.GetComponentInChildren<TextMeshProUGUI>();
         item.buttonComponent.onClick.AddListener(() => BuyUpgrade(index));
+        if (item.card != null) item.card.SetIcon(IconFor(item));
         UpdateUpgradeUI(item);
+    }
+
+    /// <summary>
+    /// Gelistirmenin ikonu.
+    ///
+    /// 176 gelistirmenin 144'u BELIRLI BIR USTAYI guclendiriyor; onlar o
+    /// ustanin ikonunu tasiyor, boylece kart listesinde "bu hangi ustaya
+    /// yariyor" bir bakista anlasiliyor. Geri kalanlar tipine gore
+    /// uc genel ikondan birini aliyor.
+    /// </summary>
+    Sprite IconFor(UpgradeItem item)
+    {
+        if (item.type == UpgradeType.SpecificWorkerMultiplier)
+        {
+            var wm = WorkerManager.Instance;
+            if (wm != null)
+            {
+                Sprite s = wm.IconFor(item.targetWorkerIndex);
+                if (s != null) return s;
+            }
+            return iconGlobal;
+        }
+
+        switch (item.type)
+        {
+            case UpgradeType.ClickPowerAdd:
+            case UpgradeType.ClickPowerMultiplier:        return iconClick;
+            case UpgradeType.ClickPercentOfProduction:    return iconPercent;
+        }
+        return iconGlobal;
     }
 
     /// <summary>Ucuzdan pahaliya sirala, alinmislari en alta at.</summary>
