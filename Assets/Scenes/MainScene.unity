@@ -2137,6 +2137,7 @@ RectTransform:
   - {fileID: 1986136657}
   - {fileID: 85433051}
   - {fileID: 1375655758}
+  - {fileID: 1438072188}
   - {fileID: 815000004}
   m_Father: {fileID: 1171544819}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16828,7 +16829,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 710477455}
-  - {fileID: 1438072188}
   - {fileID: 860000002}
   - {fileID: 900000002}
   - {fileID: 1070203781}
@@ -17816,7 +17816,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1171544819}
+  m_Father: {fileID: 710477455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18545,11 +18545,9 @@ MonoBehaviour:
   - {fileID: -1886283864096202879, guid: 5a0ef2715e6b8894589a0350fa97a5b2, type: 3}
   - {fileID: -1263644154171009663, guid: c6bb7b0aef49d43439892e6f492c67f7, type: 3}
   - {fileID: 2576208751250496217, guid: e0cfbed588e8e734085ebabf343dd5f1, type: 3}
-  minSpawnDelay: 0.5
-  maxSpawnDelay: 2
-  minFallDuration: 8
-  maxFallDuration: 14
-  addRotation: 1
+  currentIntensity: 0
+  clickIncrement: 0.05
+  decayRate: 0.15
   slowMinSpawnDelay: 7
   slowMaxSpawnDelay: 15
   slowMinFallDuration: 12
@@ -18558,6 +18556,7 @@ MonoBehaviour:
   fastMaxSpawnDelay: 0.16
   fastMinFallDuration: 1.4
   fastMaxFallDuration: 2.6
+  addRotation: 1
   maxAlive: 90
 --- !u!114 &1584315613
 MonoBehaviour:
